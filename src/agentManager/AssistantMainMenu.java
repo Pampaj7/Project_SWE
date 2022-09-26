@@ -2,25 +2,25 @@ package agentManager;
 
 import java.util.Scanner;
 
-public final class AgentMainMenu implements Menu {
+public final class AssistantMainMenu implements Menu {
 
     @Override
     public void showMenu() {
 
-        Agent activeAgent = (Agent) Program.getInstance().getActiveUser();
+        Assistant activeAssistant = (Assistant) Program.getInstance().getActiveUser();
         Scanner in = new Scanner(System.in);
-        System.out.println("Hello "+activeAgent.getName()+"!");
+        System.out.println("Ciao "+ activeAssistant.getName()+"!");
 
         boolean quit = false;
         int menuItem;
         do {
-            System.out.println("Menu option:");
-            System.out.println("1. View catalog");
-            System.out.println("2. Historical Order");
-            System.out.println("3. Create Order");
+            System.out.println("Opzioni del menù:");
+            System.out.println("1. Vedi l'inventario");
+            System.out.println("2. Operazioni recenti");
+            System.out.println("3. Nuova operazione per un cliente");
             System.out.println("9. Logout");
-            System.out.println("0. Quit");
-            System.out.print("Choose menu item: ");
+            System.out.println("0. Esci");
+            System.out.print("Scelta del menù: ");
 
             try {
                 menuItem = Integer.parseInt(in.next());
@@ -30,14 +30,14 @@ public final class AgentMainMenu implements Menu {
 
             switch (menuItem) {
                 case 1:
-                    activeAgent.viewCatalog();
+                    activeAssistant.viewInventory();
                     break;
                 case 2:
-                    Program.getInstance().setMenu(new AgentHistoricalOrderMenu());
+                    Program.getInstance().setMenu(new AssistantHistoricalOrderMenu());
                     quit = true;
                     break;
                 case 3:
-                    Program.getInstance().setMenu(new AgentCreateOrderMenu());
+                    Program.getInstance().setMenu(new AssistantCreateOrderMenu());
                     quit = true;
                     break;
                 case 9:
@@ -49,7 +49,7 @@ public final class AgentMainMenu implements Menu {
                     Program.getInstance().close();
                     break;
                 default:
-                    System.err.println("Invalid choice.");
+                    System.err.println("Scelta non valida!");
             }
         } while (!quit);
     }

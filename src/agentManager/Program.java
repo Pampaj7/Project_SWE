@@ -14,9 +14,9 @@ public final class Program {
     private User activeUser;
     private final ArrayList<User> users;
     private final ArrayList<Article> articles;
-    private final ArrayList<Catalog> catalogs;
+    private final ArrayList<Inventory> catalogs;
     private final ArrayList<Customer> customers;
-    private final ArrayList<Order> orders;
+    private final ArrayList<Operation> orders;
     private final NotificationCenter notCenter;
     private static Program instance;
     private Menu menu;
@@ -50,7 +50,7 @@ public final class Program {
         return articles;
     }
 
-    public ArrayList<Catalog> getCatalogs() {
+    public ArrayList<Inventory> getCatalogs() {
         return catalogs;
     }
 
@@ -58,7 +58,7 @@ public final class Program {
         return customers;
     }
 
-    public ArrayList<Order> getOrders() {
+    public ArrayList<Operation> getOrders() {
         return orders;
     }
 
@@ -106,21 +106,21 @@ public final class Program {
             return false;
         }
 
-        if (activeUser instanceof Administrator)
-            this.setMenu(new AdminMainMenu());
+        if (activeUser instanceof Dentist)
+            this.setMenu(new DentistMainMenu());
         else {
-            this.setMenu(new AgentMainMenu());
-            ((Agent) activeUser).attach(notCenter);
-            ((Agent) activeUser).attach(emailNot);
+            this.setMenu(new AssistantMainMenu());
+            ((Assistant) activeUser).attach(notCenter);
+            ((Assistant) activeUser).attach(emailNot);
         }
 
         return true;
     }
 
     public void logout() {
-        if (activeUser instanceof Agent) {
-            ((Agent) activeUser).detach(notCenter);
-            ((Agent) activeUser).detach(emailNot);
+        if (activeUser instanceof Assistant) {
+            ((Assistant) activeUser).detach(notCenter);
+            ((Assistant) activeUser).detach(emailNot);
         }
         activeUser = null;
         this.setMenu(new LoginMenu());
@@ -189,7 +189,7 @@ public final class Program {
                     }
                 }
             }
-            catalogs.add(new Catalog(tmp, description, marketZone, id));
+            catalogs.add(new Inventory(tmp, description, marketZone, id));
         }
 
         rs = stmt.executeQuery("SELECT * FROM User;");
@@ -203,21 +203,21 @@ public final class Program {
             String email = rs.getString("email");
 
             if (type == 1) {
-                Catalog tmp = null;
-                for (Catalog i : catalogs) {
+                Inventory tmp = null;
+                for (Inventory i : catalogs) {
                     if (i.getId() == idCatalog) {
                         tmp = i;
                     }
                 }
 
                 if (tmp == null) {
-                    System.err.println("Catalog don't exist!");
+                    System.err.println("Inventory don't exist!");
                     break;
                 }
 
-                users.add(new Agent(name, passHash, commissionPercentage, tmp, email, id));
+                users.add(new Assistant(name, passHash, commissionPercentage, tmp, email, id));
             } else {
-                users.add(new Administrator(name, passHash, email, id));
+                users.add(new Dentist(name, passHash, email, id));
             }
         }
 
@@ -229,10 +229,10 @@ public final class Program {
             float total = rs.getFloat("Total");
             float commission = rs.getFloat("Commission");
 
-            Agent tmpAgent = null;
+            Assistant tmpAssistant = null;
             for (User i : users) {
                 if (i.getId() == idAgent) {
-                    tmpAgent = (Agent) i;
+                    tmpAssistant = (Assistant) i;
                     break;
                 }
             }
@@ -262,7 +262,7 @@ public final class Program {
                     }
                 }
             }
-            orders.add(new Order(total, commission, tmpAgent, tmp, tmpCustomer, id));
+            orders.add(new Operation(total, commission, tmpAssistant, tmp, tmpCustomer, id));
         }
 
     }
@@ -286,15 +286,15 @@ public final class Program {
         float perch;
         for (User user : users) {
             try {
-                if (!(user instanceof Agent)) {
+                if (!(user instanceof Assistant)) {
                     type = 0;
                     perch = 0;
                     sql = "INSERT INTO User (Id,Name,PasswordHash,Type,CommissionPerc,email) " + "VALUES (" + user.getId() + ", '" + user.getName() + "', '" + user.getPasswordHash() + "', " + type + ", " + perch + " ,'" + user.getEmail() + "');";
                 } else {
                     type = 1;
-                    Agent tmp = (Agent) user;
+                    Assistant tmp = (Assistant) user;
                     perch = tmp.getCommissionPercentage();
-                    sql = "INSERT INTO User (Id,Name,PasswordHash,Type,CommissionPerc,IdCatalog,email) " + "VALUES (" + user.getId() + ", '" + user.getName() + "', '" + user.getPasswordHash() + "', " + type + ", " + perch + " ," + tmp.getCatalog().getId() + " ,'" + user.getEmail() + "');";
+                    sql = "INSERT INTO User (Id,Name,PasswordHash,Type,CommissionPerc,IdCatalog,email) " + "VALUES (" + user.getId() + ", '" + user.getName() + "', '" + user.getPasswordHash() + "', " + type + ", " + perch + " ," + tmp.getInventory().getId() + " ,'" + user.getEmail() + "');";
                 }
 
                 stmt = c.createStatement();
@@ -316,12 +316,12 @@ public final class Program {
             }
         }
 
-        for (Order order : orders) {
+        for (Operation operation : orders) {
             try {
-                if (order.getAgent() != null)
-                    sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,Commission) " + "VALUES (" + order.getId() + ", '" + order.getAgent().getId() + "', " + order.getClient().getId() + " ,'" + order.getTotal() + "', '" + order.getCommissionTot() + "');";
+                if (operation.getAgent() != null)
+                    sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,Commission) " + "VALUES (" + operation.getId() + ", '" + operation.getAgent().getId() + "', " + operation.getClient().getId() + " ,'" + operation.getTotal() + "', '" + operation.getCommissionTot() + "');";
                 else
-                    sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,Commission) " + "VALUES (" + order.getId() + ", '" + -1 + "', " + order.getClient().getId() + " ,'" + order.getTotal() + "', '" + order.getCommissionTot() + "');";
+                    sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,Commission) " + "VALUES (" + operation.getId() + ", '" + -1 + "', " + operation.getClient().getId() + " ,'" + operation.getTotal() + "', '" + operation.getCommissionTot() + "');";
                 stmt = c.createStatement();
                 stmt.executeUpdate(sql);
                 c.commit();
@@ -329,8 +329,8 @@ public final class Program {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
             }
             try {
-                for (Pair<Article, Integer> i : order.getRows()) {
-                    sql = "INSERT INTO OrderRow (idHead,idArticle,qta) " + "VALUES (" + order.getId() + ", " + i.getValue0().getId() + "," + i.getValue1() + ");";
+                for (Pair<Article, Integer> i : operation.getRows()) {
+                    sql = "INSERT INTO OrderRow (idHead,idArticle,qta) " + "VALUES (" + operation.getId() + ", " + i.getValue0().getId() + "," + i.getValue1() + ");";
                     stmt = c.createStatement();
                     stmt.executeUpdate(sql);
                     c.commit();
@@ -340,9 +340,9 @@ public final class Program {
             }
         }
 
-        for (Catalog catalog : catalogs) {
+        for (Inventory inventory : catalogs) {
             try {
-                sql = "INSERT INTO CatalogHead (idHead,Description,MarketZone) " + "VALUES (" + catalog.getId() + ", '" + catalog.getDescription() + "', '" + catalog.getMarketZone() + "');";
+                sql = "INSERT INTO CatalogHead (idHead,Description,MarketZone) " + "VALUES (" + inventory.getId() + ", '" + inventory.getDescription() + "', '" + inventory.getMarketZone() + "');";
                 stmt = c.createStatement();
                 stmt.executeUpdate(sql);
                 c.commit();
@@ -350,8 +350,8 @@ public final class Program {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
             }
             try {
-                for (Article article : catalog.getArticles()) {
-                    sql = "INSERT INTO CatalogRow (idHead,idArticle) " + "VALUES (" + catalog.getId() + ", " + article.getId() + ");";
+                for (Article article : inventory.getArticles()) {
+                    sql = "INSERT INTO CatalogRow (idHead,idArticle) " + "VALUES (" + inventory.getId() + ", " + article.getId() + ");";
                     stmt = c.createStatement();
                     stmt.executeUpdate(sql);
                     c.commit();

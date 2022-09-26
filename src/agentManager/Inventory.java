@@ -2,7 +2,7 @@ package agentManager;
 
 import java.util.ArrayList;
 
-public final class Catalog {
+public final class Inventory {
 
     private final int id;
     private final String description;
@@ -10,7 +10,7 @@ public final class Catalog {
     private static int lastID = 0;
     private final ArrayList<Article> articles;
 
-    public Catalog(ArrayList<Article> articles, String description , String marketZone) {
+    public Inventory(ArrayList<Article> articles, String description , String marketZone) {
         this.articles = articles;
         this.description = description;
         this.marketZone = marketZone;
@@ -18,7 +18,7 @@ public final class Catalog {
         this.id=lastID;
     }
 
-    public Catalog(ArrayList<Article> articles, String description , String marketZone, int id) {
+    public Inventory(ArrayList<Article> articles, String description , String marketZone, int id) {
         this.articles = articles;
         this.description = description;
         this.marketZone = marketZone;
@@ -42,8 +42,8 @@ public final class Catalog {
         return articles;
     }
 
-    public void printCatalog() {
-        System.out.println("Id: "+id+" Catalog: " + description +" MarketZone: " + marketZone);
+    public void printInventory() {
+        System.out.println("Id: "+id+" Inventario:  " + description +" Zona: " + marketZone);
         for(Article i : articles){
             i.display();
         }

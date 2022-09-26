@@ -64,7 +64,7 @@ public abstract class User {
         return lastID;
     }
 
-    public void createCustomer(String businessName, String country, String email){
+    public void createOperation(String businessName, String country, String email){
         Program.getInstance().getCustomers().add(new Customer(businessName,country,email));
         System.out.println("Created!");
     }
@@ -73,14 +73,14 @@ public abstract class User {
         System.out.println();
         System.out.println("----------------------------------");
         for(Customer c : Program.getInstance().getCustomers()){
-            System.out.println("CUSTOMERS -> ID: " + c.getId() + " Name: " + c.getBusinessName() + " Email: " + c.getEmail() + " Country: " + c.getCountry());
+            System.out.println("Cliente -> ID: " + c.getId() + " Nome: " + c.getBusinessName() + " Email: " + c.getEmail() + " Nazionalità: " + c.getCountry());
         }
         System.out.println("----------------------------------");
         System.out.println();
     }
 
-    public abstract void viewOrders();
+    public abstract void viewOperations();
 
-    public abstract void viewCatalog();
+    public abstract void viewInventory();
 
 }

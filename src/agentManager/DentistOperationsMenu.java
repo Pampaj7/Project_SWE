@@ -2,11 +2,11 @@ package agentManager;
 
 import java.util.Scanner;
 
-public final class AdminCustomersMenu implements Menu{
+public final class DentistOperationsMenu implements Menu{
 
     @Override
     public void showMenu() {
-        Administrator admin = (Administrator) Program.getInstance().getActiveUser();
+        Dentist admin = (Dentist) Program.getInstance().getActiveUser();
         Scanner in = new Scanner(System.in);
 
         boolean quit = false;
@@ -17,7 +17,7 @@ public final class AdminCustomersMenu implements Menu{
             admin.viewCustomers();
             System.out.println("1. Add Customers");
             System.out.println("2. Delete Customers");
-            System.out.println("3. View Order Client");
+            System.out.println("3. View Operation Client");
             System.out.println("9. Back");
             System.out.println("0. Quit");
             System.out.print("Choose menu item: ");
@@ -54,7 +54,7 @@ public final class AdminCustomersMenu implements Menu{
 
                 case 9:
                     quit = true;
-                    Program.getInstance().setMenu(new AdminMainMenu());
+                    Program.getInstance().setMenu(new DentistMainMenu());
                     break;
 
                 case 0:
@@ -69,7 +69,7 @@ public final class AdminCustomersMenu implements Menu{
         } while (!quit);
     }
 
-    private void createCustomers(Administrator activeUser){
+    private void createCustomers(Dentist activeUser){
         Scanner in = new Scanner(System.in);
         System.out.println("Insert Business-Name :");
         String name = in.nextLine();
@@ -77,7 +77,7 @@ public final class AdminCustomersMenu implements Menu{
         String email = in.nextLine();
         System.out.println("Insert country :");
         String country = in.nextLine();
-        activeUser.createCustomer(name,country,email);
+        activeUser.createOperation(name,country,email);
     }
 
 }

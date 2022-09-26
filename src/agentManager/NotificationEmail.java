@@ -10,10 +10,10 @@ public final class NotificationEmail implements Observer {
 
     @Override
     public void update(Object obj) {
-        Order o = (Order) obj;
+        Operation o = (Operation) obj;
         String to = "";
         for (User u : Program.getInstance().getUsers()) {
-            if (u instanceof Administrator)
+            if (u instanceof Dentist)
                 to += u.getEmail() + ",";
         }
         to = to.substring(0, to.length() - 1); //TODO cazzo serve
@@ -30,11 +30,11 @@ public final class NotificationEmail implements Observer {
                 "<table style='width:100%;'>" +
                 "   <tbody>" +
                 "      <tr style='background:#f5f2f2'>" +
-                "          <td style='font-weight: bold; width:20%'>Order number:</td>" +
+                "          <td style='font-weight: bold; width:20%'>Operation number:</td>" +
                 "          <td>" + o.getId() + "</td>" +
                 "      </tr>" +
                 "      <tr style='background:#e1e1e1'>" +
-                "          <td style='font-weight: bold; width:20%'>Agent:</td>" +
+                "          <td style='font-weight: bold; width:20%'>Assistant:</td>" +
                 "          <td>" + o.getAgent().getName() + " -- " + o.getAgent().getEmail() + "</td>" +
                 "      </tr>" +
                 "      <tr style='background:#f5f2f2'>" +
@@ -64,11 +64,11 @@ public final class NotificationEmail implements Observer {
                 "<table style='width:100%;'>" +
                 "   <tbody>" +
                 "      <tr style='background:#f5f2f2'>" +
-                "          <td style='font-weight: bold; width:20%'>Order number:</td>" +
+                "          <td style='font-weight: bold; width:20%'>Operation number:</td>" +
                 "          <td>" + o.getId() + "</td>" +
                 "      </tr>" +
                 "      <tr style='background:#e1e1e1'>" +
-                "          <td style='font-weight: bold; width:20%'>Agent:</td>" +
+                "          <td style='font-weight: bold; width:20%'>Assistant:</td>" +
                 "          <td>" + o.getAgent().getName() + " -- " + o.getAgent().getEmail() + "</td>" +
                 "      </tr>" +
                 "      <tr style='background:#f5f2f2'>" +
@@ -93,40 +93,38 @@ public final class NotificationEmail implements Observer {
 
     private void sendEmail(String to, String obj, String text) {
 
-        final String username = "mirkomacaluso.swe@gmail.com";
-        final String password = "SWEMirkoMacaluso";
+        String test ="pippodima99@gmail.com";
+        String from = "ing.software.dimpa@gmail.com";
 
-        Properties prop = new Properties();
-        prop.put("mail.smtp.host", "smtp.gmail.com");
-        prop.put("mail.smtp.port", "465");
-        prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.socketFactory.port", "465");
-        prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        Properties properties = System.getProperties();
+        properties.put("mail.smtp.host","smtp.gmail.com");
+        properties.put("mail.smtp.port","465");
+        properties.put("mail.smtp.ssl.enable","true");
+        properties.put("mail.smtp.auth","true");
 
-        Session session = Session.getInstance(prop,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
-                    }
-                });
+        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication(){
+                return new PasswordAuthentication("ing.software.dimpa@gmail.com","neauczeusvreoesu\n"); //mbvmolrwfpmzcuoq neauczeusvreoesu
 
-        try {
+            }
+        });
 
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("from@gmail.com"));
-            message.setRecipients(
-                    Message.RecipientType.TO,
-                    InternetAddress.parse(to)
-            );
+        session.setDebug(true);
+
+        try{
+            MimeMessage message = new MimeMessage(session);
+
+            message.setFrom(new InternetAddress(from));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
             message.setSubject(obj);
-            message.setContent(text, "text/html");
+            message.setContent(text,"text/html");
 
-            Transport trans = session.getTransport("smtp");
-            trans.connect("smtp.gmail.com", 465, "mirkomacaluso.swe@gmail.com", "SWEMirkoMacaluso");
-            trans.sendMessage(message, message.getAllRecipients());
+            System.out.println("sending...");
+            Transport.send(message);
+            System.out.println("inviato");
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        }catch (MessagingException mex){
+            mex.printStackTrace();
         }
     }
 

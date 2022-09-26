@@ -2,12 +2,12 @@ package agentManager;
 
 import java.util.Scanner;
 
-public final class AdminAgentMenu implements Menu{
+public final class DentistAssistantMenu implements Menu{
 
     @Override
     public void showMenu() {
 
-        Administrator admin = (Administrator) Program.getInstance().getActiveUser();
+        Dentist admin = (Dentist) Program.getInstance().getActiveUser();
         Scanner in = new Scanner(System.in);
 
         boolean quit = false;
@@ -15,9 +15,9 @@ public final class AdminAgentMenu implements Menu{
 
         do {
             admin.viewAgent();
-            System.out.println("1. Add Agent");
-            System.out.println("2. Delete Agent");
-            System.out.println("3. View Catalog Agent");
+            System.out.println("1. Add Assistant");
+            System.out.println("2. Delete Assistant");
+            System.out.println("3. View Inventory Assistant");
             System.out.println("9. Back");
             System.out.println("0. Quit");
             System.out.print("Choose menu item: ");
@@ -33,7 +33,7 @@ public final class AdminAgentMenu implements Menu{
                     break;
 
                 case 2:
-                    System.out.println("Enter the code of the Agent to Delete");
+                    System.out.println("Enter the code of the Assistant to Delete");
                     try {
                         int idA = in.nextInt();
                         admin.deleteAgent(idA);
@@ -54,7 +54,7 @@ public final class AdminAgentMenu implements Menu{
 
                 case 9:
                     quit = true;
-                    Program.getInstance().setMenu(new AdminMainMenu());
+                    Program.getInstance().setMenu(new DentistMainMenu());
                     break;
 
                 case 0:
@@ -70,7 +70,7 @@ public final class AdminAgentMenu implements Menu{
         } while (!quit);
     }
 
-    private void createAgent(Administrator activeUser){
+    private void createAgent(Dentist activeUser){
 
         Scanner in = new Scanner(System.in);
 
@@ -91,27 +91,27 @@ public final class AdminAgentMenu implements Menu{
             }
         }while (percentage==-1);
 
-        Catalog catalog = null;
+        Inventory inventory = null;
 
         int idCatalog;
         do{
-            activeUser.viewCatalog();
-            System.out.println("Insert Catalog Id :");
+            activeUser.viewInventory();
+            System.out.println("Insert Inventory Id :");
             try {
                 idCatalog = Integer.parseInt(in.next());
 
-                for(Catalog i: Program.getInstance().getCatalogs()){
+                for(Inventory i: Program.getInstance().getCatalogs()){
                     if (i.getId()==idCatalog){
-                        catalog =i;
+                        inventory =i;
                     }
                 }
 
             }catch (Exception ignored){}
 
-            if (catalog ==null) System.err.println("You must insert a number!");
+            if (inventory ==null) System.err.println("You must insert a number!");
 
-        }while (catalog ==null);
-        activeUser.createAgent(name,password,percentage, catalog,email);
+        }while (inventory ==null);
+        activeUser.createAgent(name,password,percentage, inventory,email);
     }
 
 }

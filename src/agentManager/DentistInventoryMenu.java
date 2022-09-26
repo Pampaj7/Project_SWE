@@ -3,12 +3,12 @@ package agentManager;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public final class AdminCatalogMenu implements Menu{
+public final class DentistInventoryMenu implements Menu{
 
     @Override
     public void showMenu() {
 
-        Administrator admin = (Administrator) Program.getInstance().getActiveUser();
+        Dentist admin = (Dentist) Program.getInstance().getActiveUser();
         Scanner in = new Scanner(System.in);
 
         boolean quit = false;
@@ -16,9 +16,9 @@ public final class AdminCatalogMenu implements Menu{
         int menuItem;
 
         do {
-            admin.viewCatalog();
-            System.out.println("1. Add Catalog");
-            System.out.println("2. Delete Catalog");
+            admin.viewInventory();
+            System.out.println("1. Add Inventory");
+            System.out.println("2. Delete Inventory");
             System.out.println("9. Back");
             System.out.println("0. Quit");
             System.out.print("Choose menu item: ");
@@ -34,7 +34,7 @@ public final class AdminCatalogMenu implements Menu{
                     break;
 
                 case 2:
-                    System.out.println("Enter the code of the Catalog to Delete");
+                    System.out.println("Enter the code of the Inventory to Delete");
                     int idCatalog;
                     try {
                         idCatalog = Integer.parseInt(in.next());
@@ -46,7 +46,7 @@ public final class AdminCatalogMenu implements Menu{
 
                 case 9:
                     quit = true;
-                    Program.getInstance().setMenu(new AdminMainMenu());
+                    Program.getInstance().setMenu(new DentistMainMenu());
                     break;
 
                 case 0:
@@ -63,7 +63,7 @@ public final class AdminCatalogMenu implements Menu{
         } while (!quit);
     }
 
-    private void createCatalog(Administrator activeUser){
+    private void createCatalog(Dentist activeUser){
 
         Scanner in = new Scanner(System.in);
 
@@ -77,7 +77,7 @@ public final class AdminCatalogMenu implements Menu{
         while (true){
             agg = false;
             activeUser.viewProduct();
-            System.out.println("Insert Id Articles or 0 to terminate Catalog");
+            System.out.println("Insert Id Articles or 0 to terminate Inventory");
             try {
                 int idArticle = Integer.parseInt(in.next());
 

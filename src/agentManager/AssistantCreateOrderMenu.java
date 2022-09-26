@@ -5,27 +5,26 @@ import org.javatuples.Pair;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public final class AgentCreateOrderMenu implements Menu{
+public final class AssistantCreateOrderMenu implements Menu{
 
     @Override
     public void showMenu() {
-        Agent agent = (Agent)Program.getInstance().getActiveUser();
+        Assistant assistant = (Assistant)Program.getInstance().getActiveUser();
         Scanner in = new Scanner(System.in);
         boolean quit = false;
-        boolean checkCustomer;
+        boolean checkOp;
         int menuItem;
         int idS;
         do {
 
-            agent.viewCustomers();
-
-            System.out.println("agentManager.Menu option:");
-            System.out.println("1. Create new customers");
-            System.out.println("2. Select a existing customers");
-
-            System.out.println("9. Back");
-            System.out.println("0. Quit");
-            System.out.print("Choose menu item: ");
+            assistant.viewCustomers();
+            System.out.println("Opzioni menù dell'assistente");
+            System.out.println("1. Crea un nuovo cliente");
+            System.out.println("2. Selezione un cliente già esistente da operare");
+            System.out.println("9. indietro");
+            System.out.println("0. Esci");
+            System.out.print("Opzione scelta: ");
+            System.out.println("");
 
             try {
                 menuItem = Integer.parseInt(in.next());
@@ -36,35 +35,35 @@ public final class AgentCreateOrderMenu implements Menu{
             switch (menuItem) {
 
                 case 1:
-                    createCustomers(agent);
+                    createOperation(assistant);
                     break;
 
                 case 2:
                     do{
-                        System.out.println("Insert an id:");
+                        System.out.println("Inserisci un id:");
                         try {
                             idS = Integer.parseInt(in.next());
                         }catch (Exception e){
                             idS = -1;
                         }
 
-                        checkCustomer = false;
+                        checkOp = false;
                         for(Customer c :Program.getInstance().getCustomers()){
                             if (c.getId() == idS) {
-                                checkCustomer = true;
+                                checkOp = true;
                                 break;
                             }
                         }
-                        if(!checkCustomer)
-                            System.err.println("Wrong ID re-insert it!.");
+                        if(!checkOp)
+                            System.err.println("ID sbagliato! Ritenta");
 
-                    }while( !checkCustomer );
+                    }while( !checkOp );
 
-                    subMenuSelectArticles(agent , idS );
+                    subMenuSelectArticles(assistant, idS );
                     break;
 
                 case 9:
-                    Program.getInstance().setMenu(new AgentMainMenu());
+                    Program.getInstance().setMenu(new AssistantMainMenu());
                     quit = true;
                     break;
 
@@ -74,41 +73,41 @@ public final class AgentCreateOrderMenu implements Menu{
                     break;
 
                 default:
-                    System.err.println("Invalid choice.");
+                    System.err.println("Scelta non valida");
             }
         } while (!quit);
     }
 
-    private void createCustomers(Agent activeUser){
+    private void createOperation(Assistant activeUser){
         Scanner in = new Scanner(System.in);
-        System.out.println("Insert Email:");
+        System.out.println("Inserisci Email:");
         String email = in.nextLine();
-        System.out.println("Insert country :");
+        System.out.println("Inserisci città :");
         String country = in.nextLine();
-        System.out.println("Insert Business-Name :");
+        System.out.println("Inserisci nome :");
         String name = in.nextLine();
-        activeUser.createCustomer(name,country,email);
+        activeUser.createOperation(name,country,email);
     }
 
-    private void subMenuSelectArticles(Agent agent, int idSelectedCustomers){
+    private void subMenuSelectArticles(Assistant assistant, int idSelectedOperation){
 
         Scanner in = new Scanner(System.in);
         ArrayList<Pair<Article,Integer>> articlesPair = new ArrayList<>();
-        Catalog c = agent.getCatalog();
+        Inventory c = assistant.getInventory();
 
         boolean agg;
         int qtaArticle;
         while (true){
             agg = false;
-            agent.viewCatalog();
-            System.out.println("Insert an Id Articles or 0 to terminate Order");
+            assistant.viewInventory();
+            System.out.println("Inserisci un ID di un articolo da assegnare per la sua operazione o 0 per terminare l'operazione");
             try {
                 int idArticle = Integer.parseInt(in.next());
                 if (idArticle == 0) {
                     if (articlesPair.size() > 0)
                         break;
                     else {
-                        System.err.println("Select at least an Article!");
+                        System.err.println("Selezione almeno un articolo!");
                         continue;
                     }
                 }
@@ -116,15 +115,15 @@ public final class AgentCreateOrderMenu implements Menu{
                     if (i.getId() == idArticle) {
 
                         do {
-                            System.out.println("Insert quantity of article (>0)");
+                            System.out.println("Inserisci la quantità di articoli (>0)");
                             try {
                                 qtaArticle = Math.abs(Integer.parseInt(in.next()));
                             } catch (Exception e) {
-                                System.err.println("Value not valid");
+                                System.err.println("Valore non valido");
                                 qtaArticle = -1;
                             }
                             if(qtaArticle==0){
-                                System.err.println("Value not valid");
+                                System.err.println("Valore non valido");
                                 qtaArticle = -1;
                             }
                         }while(qtaArticle==-1);
@@ -133,15 +132,15 @@ public final class AgentCreateOrderMenu implements Menu{
                         agg = true;
                     }
                 }
-                if (!agg) System.err.println("Id Article Not Found!");
+                if (!agg) System.err.println("ID non trovato!");
             }catch (Exception e){
-                System.err.println("Id not valid!");
+                System.err.println("Id non valido!");
             }
         }
 
         for(Customer i : Program.getInstance().getCustomers()){
-            if(i.getId() == idSelectedCustomers) {
-                agent.createOrder(i, articlesPair);
+            if(i.getId() == idSelectedOperation) {
+                assistant.createOrder(i, articlesPair);
                 return;
             }
         }

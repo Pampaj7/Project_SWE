@@ -2,24 +2,24 @@ package agentManager;
 
 import java.util.Scanner;
 
-public final class AgentHistoricalOrderMenu implements Menu{
+public final class AssistantHistoricalOrderMenu implements Menu{
 
     @Override
     public void showMenu() {
 
-        Agent agent = (Agent) Program.getInstance().getActiveUser();
+        Assistant assistant = (Assistant) Program.getInstance().getActiveUser();
         Scanner in = new Scanner(System.in);
 
         boolean quit = false;
         int idOrder;
         int menuItem;
         do {
-            agent.viewOrders();
-            System.out.println("Menu option:");
-            System.out.println("1. Delete an order");
-            System.out.println("9. Back");
-            System.out.println("0. Quit");
-            System.out.print("Choose menu item: ");
+            assistant.viewOperations();
+            System.out.println("Opzioni del menu:");
+            System.out.println("1. Cancella un'operazione");
+            System.out.println("9. Indietro");
+            System.out.println("0. Esci");
+            System.out.print("Scelta del menù: ");
 
             try {
                 menuItem = Integer.parseInt(in.next());
@@ -30,17 +30,17 @@ public final class AgentHistoricalOrderMenu implements Menu{
             switch (menuItem) {
                 case 1:
                     do {
-                        System.out.println("Insert order ID");
+                        System.out.println("Inserisci l'ID dell'operazione");
                         try {
                             idOrder = Integer.parseInt(in.next());
                         }catch (Exception e){
                             idOrder = -1;
                         }
-                    }while(!agent.deleteOrder(idOrder));
+                    }while(!assistant.deleteOrder(idOrder));
                     break;
 
                 case 9:
-                    Program.getInstance().setMenu(new AgentMainMenu());
+                    Program.getInstance().setMenu(new AssistantMainMenu());
                     quit = true;
                     break;
 

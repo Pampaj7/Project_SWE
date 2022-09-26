@@ -2,12 +2,12 @@ package agentManager;
 
 import java.util.Scanner;
 
-public final class AdminMainMenu implements Menu{
+public final class DentistMainMenu implements Menu{
 
     @Override
     public void showMenu() {
 
-        Administrator admin = (Administrator) Program.getInstance().getActiveUser();
+        Dentist admin = (Dentist) Program.getInstance().getActiveUser();
         Scanner in = new Scanner(System.in);
 
         System.out.println("Hello "+admin.getName()+"!");
@@ -37,26 +37,26 @@ public final class AdminMainMenu implements Menu{
             switch (menuItem) {
 
                 case 1:
-                    Program.getInstance().setMenu(new AdminAgentMenu());
+                    Program.getInstance().setMenu(new DentistAssistantMenu());
                     quit = true;
                     break;
 
                 case 2:
-                    Program.getInstance().setMenu(new AdminCatalogMenu());
+                    Program.getInstance().setMenu(new DentistInventoryMenu());
                     quit = true;
                     break;
 
                 case 3:
-                    Program.getInstance().setMenu(new AdminCustomersMenu());
+                    Program.getInstance().setMenu(new DentistOperationsMenu());
                     quit = true;
                     break;
 
                 case 4:
-                    admin.viewOrders();
+                    admin.viewOperations();
                     break;
 
                 case 5:
-                    Program.getInstance().setMenu(new AdminArticleMenu());
+                    Program.getInstance().setMenu(new DentistArticleMenu());
                     quit = true;
                     break;
 

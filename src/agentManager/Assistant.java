@@ -4,28 +4,28 @@ import org.javatuples.Pair;
 
 import java.util.ArrayList;
 
-public final class Agent extends User implements Subject {
+public final class Assistant extends User implements Subject {
 
-    private final Catalog catalog;
+    private final Inventory inventory;
     private final float commissionPercentage;
     private final ArrayList<Observer> observers;
 
-    public Agent(String name, String password, float commissionPercentage, Catalog catalog,String email) {
+    public Assistant(String name, String password, float commissionPercentage, Inventory inventory, String email) {
         super(name,password,email);
         this.commissionPercentage = commissionPercentage;
-        this.catalog = catalog;
+        this.inventory = inventory;
         this.observers = new ArrayList<>();
     }
 
-    public Agent(String name, String passwordHash, float commissionPercentage, Catalog catalog, String email,int id) {
+    public Assistant(String name, String passwordHash, float commissionPercentage, Inventory inventory, String email, int id) {
         super(name,passwordHash, email,id);
         this.commissionPercentage = commissionPercentage;
-        this.catalog = catalog;
+        this.inventory = inventory;
         this.observers = new ArrayList<>();
     }
 
-    public Catalog getCatalog() {
-        return catalog;
+    public Inventory getInventory() {
+        return inventory;
     }
 
     public float getCommissionPercentage() {
@@ -33,28 +33,28 @@ public final class Agent extends User implements Subject {
     }
 
     public void createOrder(Customer c, ArrayList<Pair<Article,Integer>> articles) {
-        Order order = new Order(this,articles,c);
-        Program.getInstance().getOrders().add(order);
+        Operation operation = new Operation(this,articles,c);
+        Program.getInstance().getOrders().add(operation);
         System.out.println("Created!");
-        notify(new Order(order));
+        notify(new Operation(operation));
     }
 
     public boolean deleteOrder(int id) {
 
-        Order orderToDelete = null;
+        Operation operationToDelete = null;
 
-        for(Order i : Program.getInstance().getOrders()) {
+        for(Operation i : Program.getInstance().getOrders()) {
             if(i.getId() == id && i.getAgent().getId() == this.getId()){
-                orderToDelete = i;
+                operationToDelete = i;
             }
         }
 
-        if(orderToDelete==null) {
-            System.err.println("Wrong ID! Re-insert it");
+        if(operationToDelete ==null) {
+            System.err.println("Errore! Reinserire l'ID");
             return false;
         }
 
-        Program.getInstance().getOrders().remove(orderToDelete);
+        Program.getInstance().getOrders().remove(operationToDelete);
 
         return true;
 
@@ -67,26 +67,26 @@ public final class Agent extends User implements Subject {
     }
 
     @Override
-    public void viewCatalog() {
+    public void viewInventory() {
         System.out.println("----------------------------------");
-        catalog.printCatalog();
+        inventory.printInventory();
         System.out.println("----------------------------------");
     }
 
     @Override
-    public void viewOrders() {
+    public void viewOperations() {
         System.out.println("----------------------------------");
         boolean check = false;
-        for(Order i : Program.getInstance().getOrders()){
+        for(Operation i : Program.getInstance().getOrders()){
             if(i.getAgent().getId() == this.getId()) {
-                System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName());
+                System.out.println("Operazione -> ID: " + i.getId() + " Costo Totale: " + i.getTotal() + "Commissione per l'operazione: " + i.getCommissionTot() + "€ Cliente: " + i.getClient().getBusinessName());
                 i.printArticle();
                 System.out.println();
                 check=true;
             }
         }
         if(!check)
-            System.out.println("There are no orders.");
+            System.out.println("Non ci sono operazioni fatte da questo assistente, è ancora in prova.");
         System.out.println("----------------------------------");
     }
 

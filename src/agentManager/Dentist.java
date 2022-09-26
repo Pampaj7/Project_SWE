@@ -2,24 +2,24 @@ package agentManager;
 
 import java.util.ArrayList;
 
-public final class Administrator extends User {
+public final class Dentist extends User {
 
-    public Administrator(String name, String password,String email) {
+    public Dentist(String name, String password, String email) {
         super(name, password,email);
     }
-    public Administrator(String name, String passwordHash,String email ,int id) {
+    public Dentist(String name, String passwordHash, String email , int id) {
         super(name, passwordHash, email,id);
     }
 
     @Override
-    public void viewOrders() {
+    public void viewOperations() {
         System.out.println("----------------------------------");
         boolean check = false;
-        for(Order i : Program.getInstance().getOrders()){
+        for(Operation i : Program.getInstance().getOrders()){
             if (i.getAgent()!=null) {
-                System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName()+" Agent: "+i.getAgent().getName());
+                System.out.println("Operation -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName()+" Assistant: "+i.getAgent().getName());
             }else{
-                System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName()+" Agent: DELETED");
+                System.out.println("Operation -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName()+" Assistant: DELETED");
             }
             i.printArticle();
             System.out.println();
@@ -31,12 +31,12 @@ public final class Administrator extends User {
     }
 
     @Override
-    public void viewCatalog() {
+    public void viewInventory() {
         System.out.println("----------------------------------");
         if (Program.getInstance().getCatalogs().size()>0){
             System.out.println();
-            for (Catalog i : Program.getInstance().getCatalogs()) {
-                i.printCatalog();
+            for (Inventory i : Program.getInstance().getCatalogs()) {
+                i.printInventory();
                 System.out.println();
             }
         }else
@@ -54,13 +54,13 @@ public final class Administrator extends User {
 
     public void viewAgent() {
         System.out.println("----------------------------------");
-        Agent a;
+        Assistant a;
         boolean check = false;
         for (User u : Program.getInstance().getUsers()){
-            if(u instanceof Agent){
+            if(u instanceof Assistant){
                 check = true;
-                a = (Agent)u;
-                System.out.println("Agent -> ID: "+a.getId()+" Name: "+a.getName()+" Commission: "+a.getCommissionPercentage()+"%");
+                a = (Assistant)u;
+                System.out.println("Assistant -> ID: "+a.getId()+" Name: "+a.getName()+" Commission: "+a.getCommissionPercentage()+"%");
             }
         }
         if(!check)
@@ -74,18 +74,18 @@ public final class Administrator extends User {
 
     public void viewCatalogAgent(int idAgent){
         System.out.println("----------------------------------");
-        Agent a;
+        Assistant a;
         boolean check = false;
         for (User u : Program.getInstance().getUsers()){
-            if((u instanceof Agent) && u.getId() == idAgent){
+            if((u instanceof Assistant) && u.getId() == idAgent){
                 check = true;
-                a = (Agent)u;
-                System.out.println("Agent -> ID: "+a.getId()+" Name: "+a.getName()+" Commission: "+a.getCommissionPercentage()+"%");
-                a.getCatalog().printCatalog();
+                a = (Assistant)u;
+                System.out.println("Assistant -> ID: "+a.getId()+" Name: "+a.getName()+" Commission: "+a.getCommissionPercentage()+"%");
+                a.getInventory().printInventory();
             }
         }
         if(!check)
-            System.err.println("Agent ID wrong!.");
+            System.err.println("Assistant ID wrong!.");
         System.out.println("----------------------------------");
     }
 
@@ -93,9 +93,9 @@ public final class Administrator extends User {
 
         System.out.println("----------------------------------");
         boolean check = false;
-        for(Order i : Program.getInstance().getOrders()){
+        for(Operation i : Program.getInstance().getOrders()){
             if (i.getAgent()!=null&&i.getAgent().getId()==idCustomer) {
-                System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName());
+                System.out.println("Operation -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName());
                 i.printArticle();
                 check = true;
             }
@@ -106,13 +106,13 @@ public final class Administrator extends User {
 
     }
 
-    public void createAgent(String name, String password, float commission, Catalog catalog, String email) {
-        Program.getInstance().getUsers().add(new Agent(name,password,commission, catalog,email));
+    public void createAgent(String name, String password, float commission, Inventory inventory, String email) {
+        Program.getInstance().getUsers().add(new Assistant(name,password,commission, inventory,email));
         System.out.println("Created!");
     }
 
     public void createCatalog(String description, String marketZone, ArrayList<Article> articles) {
-        Program.getInstance().getCatalogs().add(new Catalog(articles,description,marketZone));
+        Program.getInstance().getCatalogs().add(new Inventory(articles,description,marketZone));
         System.out.println("Created!");
     }
 
@@ -125,16 +125,16 @@ public final class Administrator extends User {
     }
 
     public void deleteCatalog(int IdCatalog){
-        Catalog tmp = null;
+        Inventory tmp = null;
 
         for(User i: Program.getInstance().getUsers()){
-            if(i instanceof Agent && ((Agent) i).getCatalog().getId()==IdCatalog){
-                System.err.println("Catalog Can't be Deleted! It's Linked to an User!");
+            if(i instanceof Assistant && ((Assistant) i).getInventory().getId()==IdCatalog){
+                System.err.println("Inventory Can't be Deleted! It's Linked to an User!");
                 return;
             }
         }
 
-        for(Catalog i: Program.getInstance().getCatalogs()){
+        for(Inventory i: Program.getInstance().getCatalogs()){
             if(i.getId()==IdCatalog){
                 tmp = i;
             }
@@ -152,9 +152,9 @@ public final class Administrator extends User {
     public void deleteCustomer(int idClient) {
         Customer tmp = null;
 
-        for(Order i: Program.getInstance().getOrders()){
+        for(Operation i: Program.getInstance().getOrders()){
             if(i.getClient().getId()==idClient){
-                System.err.println("Client Can't be Deleted! It's Linked to an Order!");
+                System.err.println("Client Can't be Deleted! It's Linked to an Operation!");
                 return;
             }
         }
@@ -177,7 +177,7 @@ public final class Administrator extends User {
     public void deleteProduct(int idArticle) {
         Article tmp = null;
 
-        for(Order i: Program.getInstance().getOrders()){
+        for(Operation i: Program.getInstance().getOrders()){
             for(Article j:i.getArticles()){
                 if (j.getId()==idArticle){
                     System.err.println("This Article is Already Ordered! It can't be Deleted!");
@@ -208,7 +208,7 @@ public final class Administrator extends User {
             return;
         }
 
-        for(Catalog i: Program.getInstance().getCatalogs())
+        for(Inventory i: Program.getInstance().getCatalogs())
             i.getArticles().removeIf(j -> j.getId() == idArticle); //remove j if j.getId() == article
 
 
@@ -217,26 +217,26 @@ public final class Administrator extends User {
     }
 
     public void deleteAgent(int idAgent){
-        Agent agent=null;
+        Assistant assistant =null;
         for(User i : Program.getInstance().getUsers()){
-            if (i instanceof Agent && i.getId()==idAgent){
-                agent = (Agent) i;
+            if (i instanceof Assistant && i.getId()==idAgent){
+                assistant = (Assistant) i;
                 break;
             }
         }
 
-        if (agent==null){
-            System.err.println("Id Agent Doesn't Exist!");
+        if (assistant ==null){
+            System.err.println("Id Assistant Doesn't Exist!");
             return;
         }
 
-        for(Order i : Program.getInstance().getOrders()){
-            if (i.getAgent()==agent){
+        for(Operation i : Program.getInstance().getOrders()){
+            if (i.getAgent()== assistant){
                 i.agentDeleted();
             }
         }
 
-        Program.getInstance().getUsers().remove(agent);
+        Program.getInstance().getUsers().remove(assistant);
         System.out.println("Deleted!");
     }
 

@@ -3,12 +3,12 @@ package agentManager;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public final class AdminArticleMenu implements Menu{
+public final class DentistArticleMenu implements Menu{
 
     @Override
     public void showMenu() {
 
-        Administrator admin = (Administrator) Program.getInstance().getActiveUser();
+        Dentist admin = (Dentist) Program.getInstance().getActiveUser();
         Scanner in = new Scanner(System.in);
 
         boolean quit = false;
@@ -44,7 +44,7 @@ public final class AdminArticleMenu implements Menu{
 
                 case 9:
                     quit = true;
-                    Program.getInstance().setMenu(new AdminMainMenu());
+                    Program.getInstance().setMenu(new DentistMainMenu());
                     break;
 
                 case 0:
@@ -60,7 +60,7 @@ public final class AdminArticleMenu implements Menu{
         } while (!quit);
     }
 
-    private void createProductQuery(Administrator activeUser){
+    private void createProductQuery(Dentist activeUser){
 
         Scanner in = new Scanner(System.in);
         boolean done = false;
