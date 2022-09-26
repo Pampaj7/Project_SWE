@@ -16,7 +16,7 @@ public final class NotificationEmail implements Observer {
             if (u instanceof Dentist)
                 to += u.getEmail() + ",";
         }
-        to = to.substring(0, to.length() - 1); //TODO cazzo serve
+        to = to.substring(0, to.length() - 1); //TODO mettere email dell'admin
 
         String products = "";
         for (Pair<Article, Integer> a : o.getRows()) {
