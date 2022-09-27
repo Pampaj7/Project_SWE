@@ -25,31 +25,31 @@ public final class NotificationEmail implements Observer {
 
         String text;
         text = "<html><meta charset='UTF-8'>" +
-                "<p style='line-height: 2em; font-size: 16px; font-family: Calibri;'>" +
+                "<p style='line-height: 3em; font-size: 20px; font-family: Calibri;  font-weight: bolder; color: darkblue'>" +
                 "We require your attention regarding the following order: <br>" +
-                "<table style='width:100%;'>" +
+                "<table style='width:80%; height: 30%; padding-left: 20%' >" +
                 "   <tbody>" +
-                "      <tr style='background:#f5f2f2'>" +
-                "          <td style='font-weight: bold; width:20%'>Operation number:</td>" +
+                "      <tr style='background:azure; color: darkblue; font-weight: bold'>" +
+                "          <td style='font-weight: bold; width:25%'>Operation number:</td>" +
                 "          <td>" + o.getId() + "</td>" +
                 "      </tr>" +
-                "      <tr style='background:#e1e1e1'>" +
+                "      <tr style='background-color: lightskyblue; color: darkblue; font-weight: bold'>" +
                 "          <td style='font-weight: bold; width:20%'>Assistant:</td>" +
                 "          <td>" + o.getAgent().getName() + " -- " + o.getAgent().getEmail() + "</td>" +
                 "      </tr>" +
-                "      <tr style='background:#f5f2f2'>" +
+                "      <tr style='background:azure; color: darkblue; font-weight: bold'>" +
                 "          <td style='font-weight: bold; width:20%'>Customer:</td>" +
                 "          <td>" + o.getClient().getBusinessName() + " -- " + o.getClient().getEmail() + "</td>" +
                 "      </tr>" +
-                "      <tr style='background:#e1e1e1'>" +
+                "      <tr style='background-color: lightskyblue; color: darkblue; font-weight: bold'>" +
                 "          <td style='font-weight: bold; width:20%'>Total:</td>" +
                 "          <td>" + o.getTotal() + "</td>" +
                 "      </tr>" +
-                "      <tr style='background:#f5f2f2'>" +
+                "      <tr style='background: azure; font-weight: bold; color: darkblue;'>" +
                 "          <td style='font-weight: bold; width:20%'>Commission:</td>" +
                 "          <td>" + o.getCommissionTot() + "</td>" +
                 "      </tr>" +
-                "      <tr style='background:#e1e1e1'>" +
+                "      <tr style='background-color: lightskyblue; color: darkblue; font-weight: bold;'>" +
                 "          <td style='font-weight: bold; width:20%'>Products:</td>" +
                 "          <td>" + products + "</td>" +
                 "      </tr>" +
@@ -59,27 +59,27 @@ public final class NotificationEmail implements Observer {
                 "</html>";
         sendEmail(to, "A new order has been issued!", text);
         text = "<html><meta charset='UTF-8'>" +
-                "<p style='line-height: 2em; font-size: 16px; font-family: Calibri;'>" +
+                "<p style='line-height: 3em; font-size: 20px; font-family: Calibri; font-weight: bolder; color: darkblue'>" +
                 "We require your attention regarding the following order: <br>" +
-                "<table style='width:100%;'>" +
+                "<table style='width:80%; height: 30%; padding-left: 20%' >" +
                 "   <tbody>" +
-                "      <tr style='background:#f5f2f2'>" +
-                "          <td style='font-weight: bold; width:20%'>Operation number:</td>" +
+                "      <tr style='background:azure; color: darkblue; font-weight: bold'>" +
+                "          <td style='font-weight: bold; width:25%'>Operation number:</td>" +
                 "          <td>" + o.getId() + "</td>" +
                 "      </tr>" +
-                "      <tr style='background:#e1e1e1'>" +
-                "          <td style='font-weight: bold; width:20%'>Assistant:</td>" +
+                "      <tr style='background-color: lightskyblue; color: darkblue; font-weight: bold'>" +
+                "          <td style='font-weight: bold; width:25%'>Assistant:</td>" +
                 "          <td>" + o.getAgent().getName() + " -- " + o.getAgent().getEmail() + "</td>" +
                 "      </tr>" +
-                "      <tr style='background:#f5f2f2'>" +
+                "      <tr style='background:azure; color: darkblue; font-weight: bold'>" +
                 "          <td style='font-weight: bold; width:20%'>Customer:</td>" +
                 "          <td>" + o.getClient().getBusinessName() + " -- " + o.getClient().getEmail() + "</td>" +
                 "      </tr>" +
-                "      <tr style='background:#e1e1e1'>" +
+                "      <tr style='background-color: lightskyblue; color: darkblue; font-weight: bold'>" +
                 "          <td style='font-weight: bold; width:20%'>Total:</td>" +
                 "          <td>" + o.getTotal() + "</td>" +
                 "      </tr>" +
-                "      <tr style='background:#f5f2f2'>" +
+                "      <tr style='background: azure; font-weight: bold; color: darkblue;'>" +
                 "          <td style='font-weight: bold; width:20%'>Products:</td>" +
                 "          <td>" + products + "</td>" +
                 "      </tr>" +
