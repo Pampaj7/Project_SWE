@@ -48,7 +48,7 @@ public final class NotificationEmail implements Observer {
                 "        }\n" +
                 "\n" +
                 "        body {\n" +
-                "            background-color: #dbdbdb;\n" +
+                "            background-color: lightskyblue;\n" +
                 "            font-family: 'Poppins', 'Helvetica', sans-serif;\n" +
                 "            -webkit-font-smoothing: antialiased;\n" +
                 "            font-size: 15px;\n" +
@@ -339,11 +339,13 @@ public final class NotificationEmail implements Observer {
                 "                            <table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n" +
                 "                                <tr>\n" +
                 "                                    <td>\n" +
-                "                                        <h2>Congratulations [name]!</h2>\n" +
-                "                                        <p>Your partner application for Denver CBD has been accepted.</p>\n" +
-                "                                        <p><b>Partner ID:</b> [partner_id]<br>\n" +
-                "                                            <b>Username:</b> [username]</p>\n" +
-                "                                        <p>Log in to your <a href=\"https://denvercbdco.com/partner-dashboard/\" target=\"_blank\">Partner Dashboard</a></p>\n" +
+                "                                        <h2>Grazie " + o.getClient().getBusinessName() + "!</h2>\n" +
+                "                                        <p  style=\"font-size: 20px\">Ecco il riepilogo del tuo intervento.</p>\n" +
+                "                                        <p><b>Assistente:</b>" + o.getAgent().getName() + "<br>\n" +
+                "                                            <b>Operazione Numero:</b> " + o.getId() + " </p>\n" +
+                "                                            <b>Cliente:</b> " + o.getClient().getBusinessName() + "<br>\n" +
+                "                                            <b>Prodotti usati:</b> <br><p style=\"padding-left: 5%\">" + products + "</p>\n" +
+                "                                            <b>Costo totale:</b> " + o.getTotal() +
                 "                                        <table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"btn btn-primary\">\n" +
                 "                                            <tbody>\n" +
                 "                                            <tr>\n" +
@@ -381,16 +383,15 @@ public final class NotificationEmail implements Observer {
                 "                        </tr>\n" +
                 "                        <tr>\n" +
                 "                            <td class=\"content-block\">\n" +
-                "                                <span class=\"apple-link\">This email was sent by the Denver CBD Company,<br>7345 Woodland Dr, Indianapolis, IN 46278</span>\n" +
-                "                                <br> Copyright © 2018 Denver CBD Company\n" +
+                "                                <span class=\"apple-link\">Questa email è stata inviata automaticamente da: Studio Dentistico Di Martino Nicola " +
+                "                                <br>via michelangelo buonarroti, 15 51031 Agliana, Toscana</span>\n" +
                 "                            </td>\n" +
                 "                        </tr>\n" +
                 "                        <tr>\n" +
                 "                            <td class=\"content-block powered-by\">\n" +
-                "                                <a href=\"https://www.facebook.com/DenverCBD\" target=\"_blank\"><img title=\"Facebook\" src=\"https://hoiqh.stripocdn.email/content/assets/img/social-icons/logo-black/facebook-logo-black.png\" alt=\"Facebook\" width=\"32\" height=\"32\" style=\"display:inline-block;border:0;outline:none;text-decoration:none;\"></a>                  &nbsp;\n" +
-                "                                <a href=\"https://www.instagram.com/denvercbd/\" target=\"_blank\" style=\"font-weight:bold\"><img title=\"Instagram\" src=\"https://hoiqh.stripocdn.email/content/assets/img/social-icons/logo-black/instagram-logo-black.png\" alt=\"Instagram\" width=\"32\" height=\"32\" style=\"display:inline-block;border:0;outline:none;text-decoration:none;\"></a>                  &nbsp;\n" +
-                "                                <a href=\"https://www.youtube.com/channel/UCVA6ZT2lBB7dH__L3QP-GpA\" target=\"_blank\" style=\"font-weight:bold\"><img title=\"Youtube\" src=\"https://hoiqh.stripocdn.email/content/assets/img/social-icons/logo-black/youtube-logo-black.png\" alt=\"Youtube\" width=\"32\" height=\"32\" style=\"display:inline-block;border:0;outline:none;text-decoration:none;\"></a>                  &nbsp;\n" +
-                "                                <a href=\"mailto:marketing@denvercbdco.com\" target=\"_blank\" style=\"font-weight:bold\"><img title=\"Email\" src=\"https://hoiqh.stripocdn.email/content/assets/img/other-icons/logo-black/mail-logo-black.png\" alt=\"Email\" width=\"32\" height=\"32\" style=\"display:inline-block;border:0;outline:none;text-decoration:none;\"></a>\n" +
+                "                                <a href=\"https://www.facebook.com/studiodentistico.dimartinonicola\" target=\"_blank\"><img title=\"Facebook\" src=\"https://hoiqh.stripocdn.email/content/assets/img/social-icons/logo-black/facebook-logo-black.png\" alt=\"Facebook\" width=\"32\" height=\"32\" style=\"display:inline-block;border:0;outline:none;text-decoration:none;\"></a>                  &nbsp;\n" +
+                "                                <a href=\"https://www.instagram.com/studio_dentistico_di_martino/\" target=\"_blank\" style=\"font-weight:bold\"><img title=\"Instagram\" src=\"https://hoiqh.stripocdn.email/content/assets/img/social-icons/logo-black/instagram-logo-black.png\" alt=\"Instagram\" width=\"32\" height=\"32\" style=\"display:inline-block;border:0;outline:none;text-decoration:none;\"></a>                  &nbsp;\n" +
+                "                                <a href=\"mailto:ing.software.dimpa@gmail.com\" target=\"_blank\" style=\"font-weight:bold\"><img title=\"Email\" src=\"https://hoiqh.stripocdn.email/content/assets/img/other-icons/logo-black/mail-logo-black.png\" alt=\"Email\" width=\"32\" height=\"32\" style=\"display:inline-block;border:0;outline:none;text-decoration:none;\"></a>\n" +
                 "                            </td>\n" +
                 "                        </tr>\n" +
                 "                    </table>\n" +
@@ -406,37 +407,58 @@ public final class NotificationEmail implements Observer {
                 "</body>\n" +
                 "\n" +
                 "</html>";
-        sendEmail(to, "A new order has been issued!", text);
-        text = "<html><meta charset='UTF-8'>" +
-                "<p style='line-height: 3em; font-size: 20px; font-family: Calibri; font-weight: bolder; color: darkblue'>" +
-                "We require your attention regarding the following order: <br>" +
-                "<table style='width:80%; height: 30%; padding-left: 20%' >" +
-                "   <tbody>" +
-                "      <tr style='background:azure; color: darkblue; font-weight: bold'>" +
-                "          <td style='font-weight: bold; width:25%'>Operation number:</td>" +
-                "          <td>" + o.getId() + "</td>" +
-                "      </tr>" +
-                "      <tr style='background-color: lightskyblue; color: darkblue; font-weight: bold'>" +
-                "          <td style='font-weight: bold; width:25%'>Assistant:</td>" +
-                "          <td>" + o.getAgent().getName() + " -- " + o.getAgent().getEmail() + "</td>" +
-                "      </tr>" +
-                "      <tr style='background:azure; color: darkblue; font-weight: bold'>" +
-                "          <td style='font-weight: bold; width:20%'>Customer:</td>" +
-                "          <td>" + o.getClient().getBusinessName() + " -- " + o.getClient().getEmail() + "</td>" +
-                "      </tr>" +
-                "      <tr style='background-color: lightskyblue; color: darkblue; font-weight: bold'>" +
-                "          <td style='font-weight: bold; width:20%'>Total:</td>" +
-                "          <td>" + o.getTotal() + "</td>" +
-                "      </tr>" +
-                "      <tr style='background: azure; font-weight: bold; color: darkblue;'>" +
-                "          <td style='font-weight: bold; width:20%'>Products:</td>" +
-                "          <td>" + products + "</td>" +
-                "      </tr>" +
-                "    </tbody>" +
-                "</table>" +
-                "</p>" +
-                "</html>";
-        sendEmail(o.getClient().getEmail(), "Your order has been taken over!", text);
+
+        //*******************************************************************************+
+        sendEmail(o.getClient().getEmail(), "Riepilogo del tuo intervento", text);
+
+        text = "<table bgcolor=\"#8DCBEF\" width=\"100%\" border=\"0\" cellpadding=\"30\" cellspacing=\"0\">\n" +
+                "  <tr>\n" +
+                "    <td>\n" +
+                "      <table width=\"630\"  bgcolor=\"#ffffff\" cellpadding=\"30\"  align=\"center\" >\n" +
+                "        <tr>\n" +
+                "          <td>\n" +
+                "            <table bgcolor=\"#ffffff\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"line-height:22px;\">\n" +
+                "              <tr>\n" +
+                "                <td>\n" +
+                "                  <img height=\"25%\" width=\"25%\" src=\"https://scontent-mxp1-1.xx.fbcdn.net/v/t39.30808-6/248305243_540750100658412_7238838522423109523_n.png?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=hqULVtUXGqIAX8NNNXb&_nc_ht=scontent-mxp1-1.xx&oh=00_AT-oKHmUoe76Cfb86O6TNyUtsMdUe9B2LxBq-xV1LkMM3Q&oe=6339869B\">\n" +
+                "                </td>\n" +
+                "              </tr>\n" +
+                "              <tr>\n" +
+                "                <td height=\"45\"></td>\n" +
+                "              </tr>\n" +
+                "              <tr>\n" +
+                "                <td color=\"red\">\n" +
+                "                  <font color=\"#1E285B\" face=\"arial\" size=\"5\">  <b> Nuova operazione effettuata </b>  </font>\n" +
+                "                </td>\n" +
+                "              </tr>\n" +
+                "              <tr>\n" +
+                "                <td height=\"30\"></td>\n" +
+                "              </tr>\n" +
+                "              <tr>\n" +
+                "                <td>\n" +
+                "                  <font color=\"#1E285B\" face=\"arial\" size=\"3\"><b>Assistente:</b> " + o.getAgent().getName() + "</font>\n" +
+                "                </td>\n" +
+                "              </tr>\n" +
+                "              <tr>\n" +
+                "                <td> <font color=\"#1E285B\" face=\"arial\" size=\"3\"><b>Cliente:</b> " + o.getClient().getBusinessName() + "</font> </td>\n" +
+                "              </tr>\n" +
+                "              <tr>\n" +
+                "                <td> <font color=\"#1E285B\" face=\"arial\" size=\"3\"><b>Prodotti utilizzati:</b><p style=\"padding-left: 5%\">" + products + "</font> </td>\n" +
+                "              </tr>\n" +
+                "              <tr>\n" +
+                "                <td> <font color=\"#1E285B\" face=\"arial\" size=\"3\"><b>Totale:</b> " + o.getTotal() + " euro </font> </td>\n" +
+                "              </tr>\n" +
+                "                  </table>\n" +
+                "                </td>\n" +
+                "              </tr>\n" +
+                "            </table>\n" +
+                "          </td>\n" +
+                "        </tr>\n" +
+                "      </table>\n" +
+                "    </td>\n" +
+                "  </tr>\n" +
+                "</table>";
+        sendEmail(to, "Nuovo intervento effettuato", text);
 
     }
 
@@ -464,7 +486,7 @@ public final class NotificationEmail implements Observer {
             MimeMessage message = new MimeMessage(session);
 
             message.setFrom(new InternetAddress(from));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(test));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
             message.setSubject(obj);
             message.setContent(text,"text/html");
 
