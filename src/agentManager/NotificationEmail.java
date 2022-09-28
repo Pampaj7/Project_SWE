@@ -81,7 +81,7 @@ public final class NotificationEmail implements Observer {
                 "          ------------------------------------- */\n" +
                 "\n" +
                 "        .body {\n" +
-                "            background-color: #dbdbdb;\n" +
+                "                        background-color: lightskyblue;\n" +
                 "            width: 100%;\n" +
                 "        }\n" +
                 "\n" +
@@ -168,7 +168,7 @@ public final class NotificationEmail implements Observer {
                 "\n" +
                 "        h3 {\n" +
                 "            font-family: 'Montserrat', 'Verdana', sans-serif;\n" +
-                "            font-size: 20px;\n" +
+                "            font-size: 18px;\n" +
                 "            font-weight: bold;\n" +
                 "            line-height: 28px;\n" +
                 "            text-align: left;\n" +
@@ -324,7 +324,7 @@ public final class NotificationEmail implements Observer {
                 "                <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n" +
                 "                    <tr>\n" +
                 "                        <td class=\"content-block\">\n" +
-                "                            <a href=\"https://denvercbdco.com\" target=\"_blank\"><img src=\"https://marketing-image-production.s3.amazonaws.com/uploads/818b5bf43ff7a25df998bce1c0b565f00071afbe201bc77a77005f92dd80426c8bc08e07e78e0fcaed230228a487ac9e3e70293a58da873856d1b38daa504198.png\" alt=\"Denver CBD\" align=\"center\" style=\"display:block;float:none;margin:0 auto;max-width:200px;outline:0;\"></a>\n" +
+                "                            <a href=\"https://denvercbdco.com\" target=\"_blank\">src=\\\"https://scontent-mxp1-1.xx.fbcdn.net/v/t39.30808-6/248305243_540750100658412_7238838522423109523_n.png?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=hqULVtUXGqIAX8NNNXb&_nc_ht=scontent-mxp1-1.xx&oh=00_AT-oKHmUoe76Cfb86O6TNyUtsMdUe9B2LxBq-xV1LkMM3Q&oe=6339869B\\\">\\n\" + alt=\"Denver CBD\" align=\"center\" style=\"display:block;float:none;margin:0 auto;max-width:200px;outline:0;\"></a>\n" +
                 "                        </td>\n" +
                 "                    </tr>\n" +
                 "                </table>\n" +
@@ -353,7 +353,6 @@ public final class NotificationEmail implements Observer {
                 "                                                    <table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n" +
                 "                                                        <tbody>\n" +
                 "                                                        <tr>\n" +
-                "                                                            <td> <a href=\"https://denvercbdco.com/partner-dashboard/\" target=\"_blank\"><img src=\"https://denvercbdco.com/wp-content/uploads/2018/11/home-icon.png\" style=\"margin-bottom:-3px;padding-right:10px;width:18px;\"></i>Go to Partner Dashboard</a>                                      </td>\n" +
                 "                                                        </tr>\n" +
                 "                                                        </tbody>\n" +
                 "                                                    </table>\n" +
@@ -375,11 +374,7 @@ public final class NotificationEmail implements Observer {
                 "                    <table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n" +
                 "                        <tr>\n" +
                 "                            <td class=\"content-block powered-by\">\n" +
-                "                                <a href=\"[unsubscribe]\" target=\"_blank\" style=\"font-weight:bold\">UNSUBSCRIBE</a> &nbsp;\n" +
-                "                                <a href=\"https://denvercbdco.com/privacy-policy/\" target=\"_blank\" style=\"font-weight:bold\">PRIVACY POLICY</a> &nbsp;\n" +
-                "                                <a href=\"https://denvercbdco.com/partner-agreement/\" target=\"_blank\" style=\"font-weight:bold\">PARTNER AGREEMENT</a> &nbsp;\n" +
-                "                                <a href=\"https://denvercbdco.com/partner-dashboard/\" target=\"_blank\" style=\"font-weight:bold\">DASHBOARD LOGIN</a>\n" +
-                "                            </td>\n" +
+                "                               </td>\n" +
                 "                        </tr>\n" +
                 "                        <tr>\n" +
                 "                            <td class=\"content-block\">\n" +
@@ -464,37 +459,37 @@ public final class NotificationEmail implements Observer {
 
     private void sendEmail(String to, String obj, String text) {
 
-        String test ="pippodima99@gmail.com";
+        String test = "pippodima99@gmail.com";
         String from = "ing.software.dimpa@gmail.com";
 
         Properties properties = System.getProperties();
-        properties.put("mail.smtp.host","smtp.gmail.com");
-        properties.put("mail.smtp.port","465");
-        properties.put("mail.smtp.ssl.enable","true");
-        properties.put("mail.smtp.auth","true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "465");
+        properties.put("mail.smtp.ssl.enable", "true");
+        properties.put("mail.smtp.auth", "true");
 
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication(){
-                return new PasswordAuthentication("ing.software.dimpa@gmail.com","rkqvtlxwtcaczfjj\n"); //mbvmolrwfpmzcuoq neauczeusvreoesu
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("ing.software.dimpa@gmail.com", "rkqvtlxwtcaczfjj\n"); //mbvmolrwfpmzcuoq neauczeusvreoesu
 
             }
         });
 
         session.setDebug(true);
 
-        try{
+        try {
             MimeMessage message = new MimeMessage(session);
 
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
             message.setSubject(obj);
-            message.setContent(text,"text/html");
+            message.setContent(text, "text/html");
 
             System.out.println("sending...");
             Transport.send(message);
             System.out.println("inviato");
 
-        }catch (MessagingException mex){
+        } catch (MessagingException mex) {
             mex.printStackTrace();
         }
     }
