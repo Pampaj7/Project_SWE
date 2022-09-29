@@ -20,7 +20,7 @@ public final class NotificationCenter implements Observer {
         for (String i: notification){
             System.out.println(i);
         }
-        if(notification.size()==0) System.out.println("There aren't Notification!");
+        if(notification.size()==0) System.out.println("Non ci sono notifiche!");
 
         System.out.println("----------------------------------");
         resetNotification();
@@ -37,7 +37,7 @@ public final class NotificationCenter implements Observer {
     @Override
     public void update(Object obj) {
         Operation operation = (Operation)obj;
-        this.notification.add("A new operation has been issued by for customer " + operation.getClient().getBusinessName() + " from " + operation.getAgent().getName());
+        this.notification.add("Una nuova operazione per " + operation.getClient().getBusinessName() + " è stata fatta da " + operation.getAgent().getName());
     }
 
 }

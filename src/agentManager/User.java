@@ -66,7 +66,7 @@ public abstract class User {
 
     public void createOperation(String businessName, String country, String email){
         Program.getInstance().getCustomers().add(new Customer(businessName,country,email));
-        System.out.println("Created!");
+        System.out.println("Creato!");
     }
 
     public void viewCustomers(){

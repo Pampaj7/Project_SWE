@@ -79,7 +79,7 @@ public final class Program {
         try {
             this.load(DBConnection.getInstance());
         } catch (SQLException e) {
-            System.err.println("Unable to load!");
+            System.err.println("Impossibile caricare!");
             return;
         }
 
@@ -88,7 +88,7 @@ public final class Program {
         while (!wantClose)
             menu.showMenu();
 
-        System.out.println("Bye Bye!");
+        System.out.println("Buona giornata!");
         this.upload(DBConnection.getInstance());
 
     }
@@ -102,7 +102,7 @@ public final class Program {
         }
 
         if (activeUser == null) {
-            System.err.println("Wrong password and/or UserName !");
+            System.err.println("Password o username errati!");
             return false;
         }
 

@@ -48,7 +48,7 @@ public final class NotificationEmail implements Observer {
                 "        }\n" +
                 "\n" +
                 "        body {\n" +
-                "            background-color: lightskyblue;\n" +
+                "            background-color: lightcyan;\n" +
                 "            font-family: 'Poppins', 'Helvetica', sans-serif;\n" +
                 "            -webkit-font-smoothing: antialiased;\n" +
                 "            font-size: 15px;\n" +
@@ -73,7 +73,7 @@ public final class NotificationEmail implements Observer {
                 "            line-height: 28px;\n" +
                 "            letter-spacing: .5px;\n" +
                 "            text-align: left;\n" +
-                "            color: #6F6F6F;\n" +
+                "            color: black;\n" +
                 "        }\n" +
                 "\n" +
                 "        /* -------------------------------------\n" +
@@ -81,7 +81,7 @@ public final class NotificationEmail implements Observer {
                 "          ------------------------------------- */\n" +
                 "\n" +
                 "        .body {\n" +
-                "                        background-color: lightskyblue;\n" +
+                "            background-color: white;\n" +
                 "            width: 100%;\n" +
                 "        }\n" +
                 "\n" +
@@ -111,7 +111,7 @@ public final class NotificationEmail implements Observer {
                 "          ------------------------------------- */\n" +
                 "\n" +
                 "        .main {\n" +
-                "            background: #ffffff;\n" +
+                "            background: lightskyblue;\n" +
                 "            border-radius: 3px;\n" +
                 "            width: 100%;\n" +
                 "        }\n" +
@@ -323,9 +323,9 @@ public final class NotificationEmail implements Observer {
                 "            <div class=\"footer\">\n" +
                 "                <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n" +
                 "                    <tr>\n" +
-                "                        <td class=\"content-block\">\n" +
-                "                            <a href=\"https://denvercbdco.com\" target=\"_blank\">src=\\\"https://scontent-mxp1-1.xx.fbcdn.net/v/t39.30808-6/248305243_540750100658412_7238838522423109523_n.png?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=hqULVtUXGqIAX8NNNXb&_nc_ht=scontent-mxp1-1.xx&oh=00_AT-oKHmUoe76Cfb86O6TNyUtsMdUe9B2LxBq-xV1LkMM3Q&oe=6339869B\\\">\\n\" + alt=\"Denver CBD\" align=\"center\" style=\"display:block;float:none;margin:0 auto;max-width:200px;outline:0;\"></a>\n" +
-                "                        </td>\n" +
+                "                        <td>\n" +
+                "                  <img height=\"25%\" width=\"25%\" src=\"https://scontent-mxp1-1.xx.fbcdn.net/v/t39.30808-6/248305243_540750100658412_7238838522423109523_n.png?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=hqULVtUXGqIAX8NNNXb&_nc_ht=scontent-mxp1-1.xx&oh=00_AT-oKHmUoe76Cfb86O6TNyUtsMdUe9B2LxBq-xV1LkMM3Q&oe=6339869B\">\n" +
+                "                </td>\n" +
                 "                    </tr>\n" +
                 "                </table>\n" +
                 "            </div>\n" +
@@ -379,7 +379,7 @@ public final class NotificationEmail implements Observer {
                 "                        <tr>\n" +
                 "                            <td class=\"content-block\">\n" +
                 "                                <span class=\"apple-link\">Questa email è stata inviata automaticamente da: Studio Dentistico Di Martino Nicola " +
-                "                                <br>via michelangelo buonarroti, 15 51031 Agliana, Toscana</span>\n" +
+                "                                <br>Via Michelangelo Buonarroti, 15 51031 Agliana, Toscana</span>\n" +
                 "                            </td>\n" +
                 "                        </tr>\n" +
                 "                        <tr>\n" +

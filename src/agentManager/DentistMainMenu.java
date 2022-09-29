@@ -10,7 +10,7 @@ public final class DentistMainMenu implements Menu{
         Dentist admin = (Dentist) Program.getInstance().getActiveUser();
         Scanner in = new Scanner(System.in);
 
-        System.out.println("Hello "+admin.getName()+"!");
+        System.out.println("Ciao "+admin.getName()+"!");
 
         admin.viewNotification();
 
@@ -18,16 +18,16 @@ public final class DentistMainMenu implements Menu{
         int menuItem;
 
         do {
-            System.out.println("Menu Option:");
+            System.out.println("Opzioni:");
 
-            System.out.println("1. View Agents");
-            System.out.println("2. View Catalogs");
-            System.out.println("3. View Customers");
-            System.out.println("4. View Historical Orders");
-            System.out.println("5. View Articles");
+            System.out.println("1. Vedi Assistenti");
+            System.out.println("2. Vedi inventari");
+            System.out.println("3. Vedi clienti");
+            System.out.println("4. Vedi storico operazioni");
+            System.out.println("5. Vedi articoli");
             System.out.println("9. Logout");
             System.out.println("0. Quit");
-            System.out.print("Choose menu item: ");
+            System.out.print("Opzione scelta: ");
 
             try {
                 menuItem = Integer.parseInt(in.next());
@@ -71,7 +71,7 @@ public final class DentistMainMenu implements Menu{
                     break;
 
                 default:
-                    System.err.println("Invalid choice.");
+                    System.err.println("Scelta non valida.");
             }
         } while (!quit);
     }

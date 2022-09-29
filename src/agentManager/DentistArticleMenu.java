@@ -16,11 +16,11 @@ public final class DentistArticleMenu implements Menu{
 
         do {
             admin.viewProduct();
-            System.out.println("1. Add Article");
-            System.out.println("2. Delete Article");
-            System.out.println("9. Back");
+            System.out.println("1. Aggiungi articolo");
+            System.out.println("2. Cancella articolo");
+            System.out.println("9. Idietro");
             System.out.println("0. Quit");
-            System.out.print("Choose menu item: ");
+            System.out.print("Opzione scelta: ");
             try {
                 menuItem = Integer.parseInt(in.next());
             }catch (Exception e){
@@ -33,12 +33,12 @@ public final class DentistArticleMenu implements Menu{
                     break;
 
                 case 2:
-                    System.out.println("Enter the code of the Product to Delete");
+                    System.out.println("Inserisci il codice del prodotto da eliminare");
                     try {
                         int idP = in.nextInt();
                         admin.deleteProduct(idP);
                     }catch (Exception e){
-                        System.err.println("Invalid Id!");
+                        System.err.println("Id errato!");
                     }
                     break;
 
@@ -53,7 +53,7 @@ public final class DentistArticleMenu implements Menu{
                     break;
 
                 default:
-                    System.err.println("Invalid choice.");
+                    System.err.println("Scelta non valida.");
 
             }
 
@@ -67,13 +67,13 @@ public final class DentistArticleMenu implements Menu{
         float price = 0;
         ArrayList<Article> articles = new ArrayList<>();
 
-        System.out.println("Insert Article Name :");
+        System.out.println("Inserisci nome articolo:");
         String name = in.nextLine();
 
         int reply;
         do {
-            System.out.println("Do you want to insert a Composite Article?");
-            System.out.println("1. Yes");
+            System.out.println("Vuoi creare un oggetto composto?");
+            System.out.println("1. Si");
             System.out.println("0. No");
 
             try {
@@ -88,7 +88,7 @@ public final class DentistArticleMenu implements Menu{
                     while (true) {
                         agg = false;
                         activeUser.viewProduct();
-                        System.out.println("Insert Id Articles Components or 0 to terminate Composition");
+                        System.out.println("Inserisci l'ID dell'articolo per la composizione o 0 per terminare la composizione");
                         try {
                             int idArticle = Integer.parseInt(in.next());
 
@@ -96,7 +96,7 @@ public final class DentistArticleMenu implements Menu{
                                 if (articles.size() > 0) {
                                     break;
                                 } else {
-                                    System.err.println("Select at least an Article!");
+                                    System.err.println("Seleziona almeno un articolo!");
                                     continue;
                                 }
                             }
@@ -109,9 +109,9 @@ public final class DentistArticleMenu implements Menu{
                                 }
                             }
 
-                            if (!agg) System.err.println("Id Article Not Found!");
+                            if (!agg) System.err.println("ID non trovato!");
                         } catch (Exception e) {
-                            System.err.println("Id Not Valid!");
+                            System.err.println("ID non valido!");
                         }
                     }
                     done = true;
@@ -120,12 +120,12 @@ public final class DentistArticleMenu implements Menu{
 
                 case 0:
                     do {
-                        System.out.println("Insert Price :");
+                        System.out.println("Inserisci il prezzo :");
                         try {
                             price = Float.parseFloat(in.next());
                             break;
                         } catch (Exception e) {
-                            System.err.println("Invalid Choice!");
+                            System.err.println("Scelta non valida!");
                         }
                     } while (true);
                     done = true;
@@ -133,7 +133,7 @@ public final class DentistArticleMenu implements Menu{
                     break;
 
                 default:
-                    System.err.println("Invalid choice.");
+                    System.err.println("Scelta non valida!");
             }
         } while (!done);
     }

@@ -26,9 +26,9 @@ public final class Compound extends Article {
     }
 
     public void display() {
-        System.out.println("--Id: "+this.id+" Compound: " + name + " Price: " + price);
+        System.out.println("--Id: "+this.id+" Composizione: " + name + " Prezzo: " + price);
         for(Article i : components) {
-            System.out.println("  ||Component: " + i.getName() + " Price: " + i.getPrice() + (i instanceof Compound ? " (Compound)":""));
+            System.out.println("  ||Componente: " + i.getName() + " Prezzo: " + i.getPrice() + (i instanceof Compound ? " (Composizione)":""));
         }
     }
 

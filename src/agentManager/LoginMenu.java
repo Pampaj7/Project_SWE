@@ -12,10 +12,10 @@ public final class LoginMenu implements Menu{
         int menuItem;
 
         do {
-            System.out.println("Menu option:");
+            System.out.println("Opzioni:");
             System.out.println("1. Login");
             System.out.println("0. Quit");
-            System.out.print("Choose menu item: ");
+            System.out.print("Opzione scelta: ");
             try {
                 menuItem = Integer.parseInt(in.next());
             }catch (Exception e){
@@ -28,9 +28,9 @@ public final class LoginMenu implements Menu{
                 case 1:
                     while (Program.getInstance().getActiveUser() == null) {
 
-                        System.out.println("Insert Username:");
+                        System.out.println("Inserisci nome:");
                         String name = inLog.nextLine();
-                        System.out.println("Insert Password:");
+                        System.out.println("Inserisci Password:");
                         String psw = inLog.nextLine();
                         Program.getInstance().login(name, psw);
 
@@ -44,7 +44,7 @@ public final class LoginMenu implements Menu{
                     break;
 
                 default:
-                    System.err.println("Invalid choice.");
+                    System.err.println("Scelta non valida.");
             }
         } while (!quit);
     }

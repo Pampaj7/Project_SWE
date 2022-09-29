@@ -35,7 +35,7 @@ public final class Assistant extends User implements Subject {
     public void createOrder(Customer c, ArrayList<Pair<Article,Integer>> articles) {
         Operation operation = new Operation(this,articles,c);
         Program.getInstance().getOrders().add(operation);
-        System.out.println("Created!");
+        System.out.println("Creato!");
         notify(new Operation(operation));
     }
 

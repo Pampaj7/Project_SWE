@@ -15,12 +15,12 @@ public final class DentistOperationsMenu implements Menu{
 
         do {
             admin.viewCustomers();
-            System.out.println("1. Add Customers");
-            System.out.println("2. Delete Customers");
-            System.out.println("3. View Operation Client");
-            System.out.println("9. Back");
+            System.out.println("1. Aggiungi cliente");
+            System.out.println("2. Elimina cliente");
+            System.out.println("3. Vedi operazioni cliente");
+            System.out.println("9. Indietro");
             System.out.println("0. Quit");
-            System.out.print("Choose menu item: ");
+            System.out.print("Opzione scelta: ");
             try {
                 menuItem = Integer.parseInt(in.next());
             }catch (Exception e){
@@ -33,22 +33,22 @@ public final class DentistOperationsMenu implements Menu{
                     break;
 
                 case 2:
-                    System.out.println("Enter the code of the Customer to Delete");
+                    System.out.println("Inserisci il codice del cliente da cancellare");
                     try {
                         int idC = in.nextInt();
                         admin.deleteCustomer(idC);
                     }catch (Exception e){
-                        System.err.println("Invalid Id!");
+                        System.err.println("ID errato!");
                     }
                     break;
 
                 case 3:
-                    System.out.println("Enter the code of the Customer for which to view the Orders");
+                    System.out.println("Inserisci il codice del cliente per il quale vedere le operazioni");
                     try {
                         int idCustomer = in.nextInt();
                         admin.viewCustomerOrders(idCustomer);
                     }catch (Exception e){
-                        System.err.println("Invalid Id!");
+                        System.err.println("ID errato!");
                     }
                     break;
 
@@ -63,7 +63,7 @@ public final class DentistOperationsMenu implements Menu{
                     break;
 
                 default:
-                    System.err.println("Invalid choice.");
+                    System.err.println("Scelta non valida.");
 
             }
         } while (!quit);
@@ -71,11 +71,11 @@ public final class DentistOperationsMenu implements Menu{
 
     private void createCustomers(Dentist activeUser){
         Scanner in = new Scanner(System.in);
-        System.out.println("Insert Business-Name :");
+        System.out.println("Inserisci nome :");
         String name = in.nextLine();
-        System.out.println("Insert Email:");
+        System.out.println("Inserisci Email:");
         String email = in.nextLine();
-        System.out.println("Insert country :");
+        System.out.println("Inserisci Nazionalità :");
         String country = in.nextLine();
         activeUser.createOperation(name,country,email);
     }

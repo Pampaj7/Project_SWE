@@ -17,11 +17,11 @@ public final class DentistInventoryMenu implements Menu{
 
         do {
             admin.viewInventory();
-            System.out.println("1. Add Inventory");
-            System.out.println("2. Delete Inventory");
-            System.out.println("9. Back");
+            System.out.println("1. Aggiungi inventario");
+            System.out.println("2. Cancella inventario");
+            System.out.println("9. Indietro");
             System.out.println("0. Quit");
-            System.out.print("Choose menu item: ");
+            System.out.print("Opzione scelta: ");
             try {
                 menuItem = Integer.parseInt(in.next());
             }catch (Exception e){
@@ -34,7 +34,7 @@ public final class DentistInventoryMenu implements Menu{
                     break;
 
                 case 2:
-                    System.out.println("Enter the code of the Inventory to Delete");
+                    System.out.println("Inserisci il codice dell'inventario da eliminare");
                     int idCatalog;
                     try {
                         idCatalog = Integer.parseInt(in.next());
@@ -56,7 +56,7 @@ public final class DentistInventoryMenu implements Menu{
 
                 default:
 
-                    System.err.println("Invalid choice.");
+                    System.err.println("Scelta non valida.");
 
             }
 
@@ -67,9 +67,9 @@ public final class DentistInventoryMenu implements Menu{
 
         Scanner in = new Scanner(System.in);
 
-        System.out.println("Insert Description:");
+        System.out.println("Inserisci descrizione:");
         String description = in.nextLine();
-        System.out.println("Insert Market Zone :");
+        System.out.println("Inserisci zona inventario :");
         String marketZone = in.nextLine();
 
         ArrayList<Article> articles = new ArrayList<>();
@@ -77,7 +77,7 @@ public final class DentistInventoryMenu implements Menu{
         while (true){
             agg = false;
             activeUser.viewProduct();
-            System.out.println("Insert Id Articles or 0 to terminate Inventory");
+            System.out.println("Inserisci l'ID dell'articolo o 0 per terminare");
             try {
                 int idArticle = Integer.parseInt(in.next());
 
@@ -85,7 +85,7 @@ public final class DentistInventoryMenu implements Menu{
                     if (articles.size()>0) {
                         break;
                     }else{
-                        System.err.println("Select at least an Article!");
+                        System.err.println("Seleziona almeno un articolo!");
                         continue;
                     }
                 }
@@ -96,9 +96,9 @@ public final class DentistInventoryMenu implements Menu{
                         agg = true;
                     }
                 }
-                if (!agg) System.err.println("Id Article Not Found!");
+                if (!agg) System.err.println("ID Articolo non trovato!");
             }catch (Exception e){
-                System.err.println("Id Not Valid!");
+                System.err.println("ID non valido!");
             }
         }
         activeUser.createCatalog(description,marketZone,articles);

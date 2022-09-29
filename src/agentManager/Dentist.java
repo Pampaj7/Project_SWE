@@ -17,16 +17,16 @@ public final class Dentist extends User {
         boolean check = false;
         for(Operation i : Program.getInstance().getOrders()){
             if (i.getAgent()!=null) {
-                System.out.println("Operation -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName()+" Assistant: "+i.getAgent().getName());
+                System.out.println("Operation -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COMMISSIONE: " + i.getCommissionTot() + "€ CLIENTE: " + i.getClient().getBusinessName()+" Assistente: "+i.getAgent().getName());
             }else{
-                System.out.println("Operation -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName()+" Assistant: DELETED");
+                System.out.println("Operation -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COMMISSIONE: " + i.getCommissionTot() + "€ CLIENTE: " + i.getClient().getBusinessName()+" Assistente: CANCELLATO");
             }
             i.printArticle();
             System.out.println();
             check=true;
         }
         if(!check)
-            System.out.println("There are no orders.");
+            System.out.println("Non ci sono nuovi ordini.");
         System.out.println("----------------------------------");
     }
 
@@ -40,7 +40,7 @@ public final class Dentist extends User {
                 System.out.println();
             }
         }else
-            System.out.println("There are no catalogs!.");
+            System.out.println("Non c'è un inventario!.");
         System.out.println("----------------------------------");
     }
 
@@ -60,11 +60,11 @@ public final class Dentist extends User {
             if(u instanceof Assistant){
                 check = true;
                 a = (Assistant)u;
-                System.out.println("Assistant -> ID: "+a.getId()+" Name: "+a.getName()+" Commission: "+a.getCommissionPercentage()+"%");
+                System.out.println("Assistente -> ID: "+a.getId()+" Nome: "+a.getName()+" Commissione: "+a.getCommissionPercentage()+"%");
             }
         }
         if(!check)
-            System.out.println("There are no agent.");
+            System.out.println("Non ci sono assistenti.");
         System.out.println("----------------------------------");
     }
 
@@ -80,12 +80,12 @@ public final class Dentist extends User {
             if((u instanceof Assistant) && u.getId() == idAgent){
                 check = true;
                 a = (Assistant)u;
-                System.out.println("Assistant -> ID: "+a.getId()+" Name: "+a.getName()+" Commission: "+a.getCommissionPercentage()+"%");
+                System.out.println("Assistente -> ID: "+a.getId()+" Nome: "+a.getName()+" Commissione: "+a.getCommissionPercentage()+"%");
                 a.getInventory().printInventory();
             }
         }
         if(!check)
-            System.err.println("Assistant ID wrong!.");
+            System.err.println("Id assistente errato!.");
         System.out.println("----------------------------------");
     }
 
@@ -95,25 +95,25 @@ public final class Dentist extends User {
         boolean check = false;
         for(Operation i : Program.getInstance().getOrders()){
             if (i.getAgent()!=null&&i.getAgent().getId()==idCustomer) {
-                System.out.println("Operation -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName());
+                System.out.println("Operazione -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COMMISSIONE: " + i.getCommissionTot() + "€ CLIENTE: " + i.getClient().getBusinessName());
                 i.printArticle();
                 check = true;
             }
         }
         if(!check)
-            System.out.println("There are no orders.");
+            System.out.println("Non ci sono ordini!.");
         System.out.println("----------------------------------");
 
     }
 
     public void createAgent(String name, String password, float commission, Inventory inventory, String email) {
         Program.getInstance().getUsers().add(new Assistant(name,password,commission, inventory,email));
-        System.out.println("Created!");
+        System.out.println("Creato!");
     }
 
     public void createCatalog(String description, String marketZone, ArrayList<Article> articles) {
         Program.getInstance().getCatalogs().add(new Inventory(articles,description,marketZone));
-        System.out.println("Created!");
+        System.out.println("Creato!");
     }
 
     public void createProduct(String name, ArrayList<Article> a) {
@@ -129,7 +129,7 @@ public final class Dentist extends User {
 
         for(User i: Program.getInstance().getUsers()){
             if(i instanceof Assistant && ((Assistant) i).getInventory().getId()==IdCatalog){
-                System.err.println("Inventory Can't be Deleted! It's Linked to an User!");
+                System.err.println("L'inventario non può essere cancellato! E' legato ad un' assistente!");
                 return;
             }
         }
@@ -141,12 +141,12 @@ public final class Dentist extends User {
         }
 
         if (tmp == null){
-            System.err.println("Wrong ID! Re-insert it");
+            System.err.println("ID sbagliato! Riprovare");
             return;
         }
 
         Program.getInstance().getCatalogs().remove(tmp);
-        System.out.println("Deleted!");
+        System.out.println("Cancellato!");
     }
 
     public void deleteCustomer(int idClient) {
@@ -154,7 +154,7 @@ public final class Dentist extends User {
 
         for(Operation i: Program.getInstance().getOrders()){
             if(i.getClient().getId()==idClient){
-                System.err.println("Client Can't be Deleted! It's Linked to an Operation!");
+                System.err.println("Il cliente non può essere cancellato! E' legato ad un operazione!");
                 return;
             }
         }
@@ -166,12 +166,12 @@ public final class Dentist extends User {
         }
 
         if (tmp == null){
-            System.err.println("Wrong ID! Re-insert it");
+            System.err.println("ID sbagliato! Riprovare");
             return;
         }
 
         Program.getInstance().getCustomers().remove(tmp);
-        System.out.println("Deleted!");
+        System.out.println("Cancellato!");
     }
 
     public void deleteProduct(int idArticle) {
@@ -180,7 +180,7 @@ public final class Dentist extends User {
         for(Operation i: Program.getInstance().getOrders()){
             for(Article j:i.getArticles()){
                 if (j.getId()==idArticle){
-                    System.err.println("This Article is Already Ordered! It can't be Deleted!");
+                    System.err.println("Questo articolo è necessario per un operazione! Non può essere attualmente cancellato!");
                     return;
                 }
             }
@@ -190,7 +190,7 @@ public final class Dentist extends User {
             if(i instanceof Compound){
                 for(Article j : ((Compound) i).getComponents()){
                     if (j.getId()==idArticle){
-                        System.err.println("This Article is a Component Of Another Article! It can't be Deleted!");
+                        System.err.println("Questo articolo è presente in una composizione! Devi prima cancellare la composizione!");
                         return;
                     }
                 }
@@ -204,16 +204,16 @@ public final class Dentist extends User {
         }
 
         if (tmp == null){
-            System.err.println("Wrong ID! Re-insert it");
+            System.err.println("ID sbagliato! Riprovare");
             return;
         }
 
         for(Inventory i: Program.getInstance().getCatalogs())
-            i.getArticles().removeIf(j -> j.getId() == idArticle); //remove j if j.getId() == article
+            i.getArticles().removeIf(j -> j.getId() == idArticle);
 
 
         Program.getInstance().getArticles().remove(tmp);
-        System.out.println("Deleted!");
+        System.out.println("Cancellato!");
     }
 
     public void deleteAgent(int idAgent){
@@ -226,7 +226,7 @@ public final class Dentist extends User {
         }
 
         if (assistant ==null){
-            System.err.println("Id Assistant Doesn't Exist!");
+            System.err.println("L'ID dell'assistente non esiste!");
             return;
         }
 
@@ -237,7 +237,7 @@ public final class Dentist extends User {
         }
 
         Program.getInstance().getUsers().remove(assistant);
-        System.out.println("Deleted!");
+        System.out.println("Cancellato!");
     }
 
 }

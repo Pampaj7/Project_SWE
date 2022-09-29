@@ -50,7 +50,7 @@ public final class AssistantHistoricalOrderMenu implements Menu{
                     break;
 
                 default:
-                    System.err.println("Invalid choice.");
+                    System.err.println("Scelta non valida.");
 
             }
         } while (!quit);
