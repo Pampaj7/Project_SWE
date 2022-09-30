@@ -177,20 +177,20 @@ public final class Dentist extends User {
     public void deleteProduct(int idArticle) {
         Article tmp = null;
 
-        for(Operation i: Program.getInstance().getOrders()){
+        /*for(Operation i: Program.getInstance().getOrders()){
             for(Article j:i.getArticles()){
                 if (j.getId()==idArticle){
                     System.err.println("Questo articolo è necessario per un operazione! Non può essere attualmente cancellato!");
                     return;
                 }
             }
-        }
+        }*/
 
         for(Article i: Program.getInstance().getArticles()){
             if(i instanceof Compound){
                 for(Article j : ((Compound) i).getComponents()){
                     if (j.getId()==idArticle){
-                        System.err.println("Questo articolo è presente in una composizione! Devi prima cancellare la composizione!");
+                        System.err.println("Questo articolo è necessario per una o piu operazioni! Devi prima cancellare le operazioni associate!");
                         return;
                     }
                 }
