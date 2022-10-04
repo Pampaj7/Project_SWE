@@ -82,7 +82,7 @@ public final class DentistAssistantMenu implements Menu{
         String email = in.nextLine();
         float percentage ;
         do{
-            System.out.println("Inserisci percentuale di commissione :"); //TODO
+            System.out.println("Inserisci percentuale del costo personale :"); //TOD
             try {
                 percentage = Math.abs(Float.parseFloat(in.next()));
             }catch (Exception e){

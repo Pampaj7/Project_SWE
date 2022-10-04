@@ -331,7 +331,7 @@ public final class NotificationEmail implements Observer {
                 "            </div>\n" +
                 "            <div class=\"content\">\n" +
                 "\n" +
-                "                <span class=\"preheader\">This is preheader text. Some clients will show this text as a preview.</span>\n" +
+                "                <span class=\"preheader\">Ciao! Ecco il riepilogo della tua operazione appena svolta!</span>\n" +
                 "                <table role=\"presentation\" class=\"main\">\n" +
                 "\n" +
                 "                    <tr>\n" +
@@ -404,7 +404,7 @@ public final class NotificationEmail implements Observer {
                 "</html>";
 
         //*******************************************************************************+
-        sendEmail(o.getClient().getEmail(), "Riepilogo del tuo intervento", text);
+        sendEmail(o.getAgent().getEmail(), "Riepilogo del tuo intervento", text);
 
         text = "<table bgcolor=\"#8DCBEF\" width=\"100%\" border=\"0\" cellpadding=\"30\" cellspacing=\"0\">\n" +
                 "  <tr>\n" +

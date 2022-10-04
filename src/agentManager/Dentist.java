@@ -17,9 +17,9 @@ public final class Dentist extends User {
         boolean check = false;
         for(Operation i : Program.getInstance().getOrders()){
             if (i.getAgent()!=null) {
-                System.out.println("Operation -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COMMISSIONE: " + i.getCommissionTot() + "€ CLIENTE: " + i.getClient().getBusinessName()+" Assistente: "+i.getAgent().getName());
+                System.out.println("Operation -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COSTO PERSONALE: " + i.getCommissionTot() + "€ CLIENTE: " + i.getClient().getBusinessName()+" Assistente: "+i.getAgent().getName());
             }else{
-                System.out.println("Operation -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COMMISSIONE: " + i.getCommissionTot() + "€ CLIENTE: " + i.getClient().getBusinessName()+" Assistente: CANCELLATO");
+                System.out.println("Operation -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COSTO PERSONALE: " + i.getCommissionTot() + "€ CLIENTE: " + i.getClient().getBusinessName()+" Assistente: CANCELLATO");
             }
             i.printArticle();
             System.out.println();
@@ -60,7 +60,7 @@ public final class Dentist extends User {
             if(u instanceof Assistant){
                 check = true;
                 a = (Assistant)u;
-                System.out.println("Assistente -> ID: "+a.getId()+" Nome: "+a.getName()+" Commissione: "+a.getCommissionPercentage()+"%");
+                System.out.println("Assistente -> ID: "+a.getId()+" Nome: "+a.getName()+" Costo personale: "+a.getCommissionPercentage()+"%");
             }
         }
         if(!check)
@@ -80,7 +80,7 @@ public final class Dentist extends User {
             if((u instanceof Assistant) && u.getId() == idAgent){
                 check = true;
                 a = (Assistant)u;
-                System.out.println("Assistente -> ID: "+a.getId()+" Nome: "+a.getName()+" Commissione: "+a.getCommissionPercentage()+"%");
+                System.out.println("Assistente -> ID: "+a.getId()+" Nome: "+a.getName()+" Costo personale: "+a.getCommissionPercentage()+"%");
                 a.getInventory().printInventory();
             }
         }
@@ -95,7 +95,7 @@ public final class Dentist extends User {
         boolean check = false;
         for(Operation i : Program.getInstance().getOrders()){
             if (i.getAgent()!=null&&i.getAgent().getId()==idCustomer) {
-                System.out.println("Operazione -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COMMISSIONE: " + i.getCommissionTot() + "€ CLIENTE: " + i.getClient().getBusinessName());
+                System.out.println("Operazione -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COSTO PERSONALE: " + i.getCommissionTot() + "€ CLIENTE: " + i.getClient().getBusinessName());
                 i.printArticle();
                 check = true;
             }
