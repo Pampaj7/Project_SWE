@@ -1,4 +1,4 @@
-package agentManager;
+package operationsManager;
 
 import java.util.ArrayList;
 import java.util.Scanner;

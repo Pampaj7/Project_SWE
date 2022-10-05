@@ -1,4 +1,4 @@
-package agentManager;
+package operationsManager;
 
 import java.util.ArrayList;
 
@@ -37,7 +37,7 @@ public final class NotificationCenter implements Observer {
     @Override
     public void update(Object obj) {
         Operation operation = (Operation)obj;
-        this.notification.add("Una nuova operazione per " + operation.getClient().getBusinessName() + " è stata fatta da " + operation.getAgent().getName());
+        this.notification.add("Una nuova operazione per " + operation.getCustomer().getBusinessName() + " è stata fatta da " + operation.getAssistant().getName());
     }
 
 }

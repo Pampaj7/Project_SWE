@@ -1,4 +1,4 @@
-package agentManager;
+package operationsManager;
 
 import java.util.Scanner;
 
@@ -36,7 +36,7 @@ public final class AssistantHistoricalOrderMenu implements Menu{
                         }catch (Exception e){
                             idOrder = -1;
                         }
-                    }while(!assistant.deleteOrder(idOrder));
+                    }while(!assistant.deleteOperation(idOrder));
                     break;
 
                 case 9:

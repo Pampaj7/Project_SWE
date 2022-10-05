@@ -1,4 +1,4 @@
-package agentManager;
+package operationsManager;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -64,7 +64,7 @@ public abstract class User {
         return lastID;
     }
 
-    public void createOperation(String businessName, String country, String email){
+    public void createCustomer(String businessName, String country, String email){
         Program.getInstance().getCustomers().add(new Customer(businessName,country,email));
         System.out.println("Creato!");
     }

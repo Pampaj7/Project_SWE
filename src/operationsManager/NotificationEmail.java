@@ -1,4 +1,4 @@
-package agentManager;
+package operationsManager;
 
 import org.javatuples.Pair;
 
@@ -339,11 +339,11 @@ public final class NotificationEmail implements Observer {
                 "                            <table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n" +
                 "                                <tr>\n" +
                 "                                    <td>\n" +
-                "                                        <h2>Grazie " + o.getClient().getBusinessName() + "!</h2>\n" +
+                "                                        <h2>Grazie " + o.getCustomer().getBusinessName() + "!</h2>\n" +
                 "                                        <p  style=\"font-size: 20px\">Ecco il riepilogo del tuo intervento.</p>\n" +
-                "                                        <p><b>Assistente:</b>" + o.getAgent().getName() + "<br>\n" +
+                "                                        <p><b>Assistente:</b>" + o.getAssistant().getName() + "<br>\n" +
                 "                                            <b>Operazione Numero:</b> " + o.getId() + " </p>\n" +
-                "                                            <b>Cliente:</b> " + o.getClient().getBusinessName() + "<br>\n" +
+                "                                            <b>Cliente:</b> " + o.getCustomer().getBusinessName() + "<br>\n" +
                 "                                            <b>Prodotti usati:</b> <br><p style=\"padding-left: 5%\">" + products + "</p>\n" +
                 "                                            <b>Costo totale:</b> " + o.getTotal() +
                 "                                        <table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"btn btn-primary\">\n" +
@@ -404,7 +404,7 @@ public final class NotificationEmail implements Observer {
                 "</html>";
 
         //*******************************************************************************+
-        sendEmail(o.getAgent().getEmail(), "Riepilogo del tuo intervento", text);
+        sendEmail(o.getAssistant().getEmail(), "Riepilogo del tuo intervento", text);
 
         text = "<table bgcolor=\"#8DCBEF\" width=\"100%\" border=\"0\" cellpadding=\"30\" cellspacing=\"0\">\n" +
                 "  <tr>\n" +
@@ -431,11 +431,11 @@ public final class NotificationEmail implements Observer {
                 "              </tr>\n" +
                 "              <tr>\n" +
                 "                <td>\n" +
-                "                  <font color=\"#1E285B\" face=\"arial\" size=\"3\"><b>Assistente:</b> " + o.getAgent().getName() + "</font>\n" +
+                "                  <font color=\"#1E285B\" face=\"arial\" size=\"3\"><b>Assistente:</b> " + o.getAssistant().getName() + "</font>\n" +
                 "                </td>\n" +
                 "              </tr>\n" +
                 "              <tr>\n" +
-                "                <td> <font color=\"#1E285B\" face=\"arial\" size=\"3\"><b>Cliente:</b> " + o.getClient().getBusinessName() + "</font> </td>\n" +
+                "                <td> <font color=\"#1E285B\" face=\"arial\" size=\"3\"><b>Cliente:</b> " + o.getCustomer().getBusinessName() + "</font> </td>\n" +
                 "              </tr>\n" +
                 "              <tr>\n" +
                 "                <td> <font color=\"#1E285B\" face=\"arial\" size=\"3\"><b>Prodotti utilizzati:</b><p style=\"padding-left: 5%\">" + products + "</font> </td>\n" +

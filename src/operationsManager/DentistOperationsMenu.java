@@ -1,4 +1,4 @@
-package agentManager;
+package operationsManager;
 
 import java.util.Scanner;
 
@@ -77,7 +77,7 @@ public final class DentistOperationsMenu implements Menu{
         String email = in.nextLine();
         System.out.println("Inserisci Nazionalità :");
         String country = in.nextLine();
-        activeUser.createOperation(name,country,email);
+        activeUser.createCustomer(name,country,email);
     }
 
 }

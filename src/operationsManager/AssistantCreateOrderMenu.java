@@ -1,4 +1,4 @@
-package agentManager;
+package operationsManager;
 
 import org.javatuples.Pair;
 
@@ -86,7 +86,7 @@ public final class AssistantCreateOrderMenu implements Menu{
         String country = in.nextLine();
         System.out.println("Inserisci nome :");
         String name = in.nextLine();
-        activeUser.createOperation(name,country,email);
+        activeUser.createCustomer(name,country,email);
     }
 
     private void subMenuSelectArticles(Assistant assistant, int idSelectedOperation){
@@ -140,7 +140,7 @@ public final class AssistantCreateOrderMenu implements Menu{
 
         for(Customer i : Program.getInstance().getCustomers()){
             if(i.getId() == idSelectedOperation) {
-                assistant.createOrder(i, articlesPair);
+                assistant.createOperation(i, articlesPair);
                 return;
             }
         }

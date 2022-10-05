@@ -1,4 +1,4 @@
-package agentManager;
+package operationsManager;
 
 import org.javatuples.Pair;
 
@@ -15,7 +15,7 @@ public final class Operation {
     private final Customer client;
 
     public Operation(Operation old){
-        this(old.getTotal(),old.getCommissionTot(), old.getAgent(), old.getRows(), old.getClient(), old.getId());
+        this(old.getTotal(),old.getCommissionTot(), old.getAssistant(), old.getRows(), old.getCustomer(), old.getId());
     }
 
     public Operation(Assistant assistant, ArrayList<Pair<Article, Integer>> pairArticles , Customer client ) {
@@ -68,7 +68,7 @@ public final class Operation {
         return pairArticles;
     }
 
-    public Customer getClient() {
+    public Customer getCustomer() {
         return client;
     }
 
@@ -84,7 +84,7 @@ public final class Operation {
         return total;
     }
 
-    public Assistant getAgent() {
+    public Assistant getAssistant() {
         return agent;
     }
 

@@ -1,4 +1,4 @@
-package agentManager;
+package operationsManager;
 
 import org.javatuples.Pair;
 
@@ -58,7 +58,7 @@ public final class Program {
         return customers;
     }
 
-    public ArrayList<Operation> getOrders() {
+    public ArrayList<Operation> getOperations() {
         return orders;
     }
 
@@ -318,10 +318,10 @@ public final class Program {
 
         for (Operation operation : orders) {
             try {
-                if (operation.getAgent() != null)
-                    sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,Commission) " + "VALUES (" + operation.getId() + ", '" + operation.getAgent().getId() + "', " + operation.getClient().getId() + " ,'" + operation.getTotal() + "', '" + operation.getCommissionTot() + "');";
+                if (operation.getAssistant() != null)
+                    sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,Commission) " + "VALUES (" + operation.getId() + ", '" + operation.getAssistant().getId() + "', " + operation.getCustomer().getId() + " ,'" + operation.getTotal() + "', '" + operation.getCommissionTot() + "');";
                 else
-                    sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,Commission) " + "VALUES (" + operation.getId() + ", '" + -1 + "', " + operation.getClient().getId() + " ,'" + operation.getTotal() + "', '" + operation.getCommissionTot() + "');";
+                    sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,Commission) " + "VALUES (" + operation.getId() + ", '" + -1 + "', " + operation.getCustomer().getId() + " ,'" + operation.getTotal() + "', '" + operation.getCommissionTot() + "');";
                 stmt = c.createStatement();
                 stmt.executeUpdate(sql);
                 c.commit();

@@ -1,4 +1,4 @@
-package agentManager;
+package operationsManager;
 
 import java.util.ArrayList;
 
@@ -15,11 +15,11 @@ public final class Dentist extends User {
     public void viewOperations() {
         System.out.println("----------------------------------");
         boolean check = false;
-        for(Operation i : Program.getInstance().getOrders()){
-            if (i.getAgent()!=null) {
-                System.out.println("Operation -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COSTO PERSONALE: " + i.getCommissionTot() + "€ CLIENTE: " + i.getClient().getBusinessName()+" Assistente: "+i.getAgent().getName());
+        for(Operation i : Program.getInstance().getOperations()){
+            if (i.getAssistant()!=null) {
+                System.out.println("Operation -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COSTO PERSONALE: " + i.getCommissionTot() + "€ CLIENTE: " + i.getCustomer().getBusinessName()+" Assistente: "+i.getAssistant().getName());
             }else{
-                System.out.println("Operation -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COSTO PERSONALE: " + i.getCommissionTot() + "€ CLIENTE: " + i.getClient().getBusinessName()+" Assistente: CANCELLATO");
+                System.out.println("Operation -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COSTO PERSONALE: " + i.getCommissionTot() + "€ CLIENTE: " + i.getCustomer().getBusinessName()+" Assistente: CANCELLATO");
             }
             i.printArticle();
             System.out.println();
@@ -93,9 +93,9 @@ public final class Dentist extends User {
 
         System.out.println("----------------------------------");
         boolean check = false;
-        for(Operation i : Program.getInstance().getOrders()){
-            if (i.getAgent()!=null&&i.getAgent().getId()==idCustomer) {
-                System.out.println("Operazione -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COSTO PERSONALE: " + i.getCommissionTot() + "€ CLIENTE: " + i.getClient().getBusinessName());
+        for(Operation i : Program.getInstance().getOperations()){
+            if (i.getAssistant()!=null&&i.getAssistant().getId()==idCustomer) {
+                System.out.println("Operazione -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COSTO PERSONALE: " + i.getCommissionTot() + "€ CLIENTE: " + i.getCustomer().getBusinessName());
                 i.printArticle();
                 check = true;
             }
@@ -152,8 +152,8 @@ public final class Dentist extends User {
     public void deleteCustomer(int idClient) {
         Customer tmp = null;
 
-        for(Operation i: Program.getInstance().getOrders()){
-            if(i.getClient().getId()==idClient){
+        for(Operation i: Program.getInstance().getOperations()){
+            if(i.getCustomer().getId()==idClient){
                 System.err.println("Il cliente non può essere cancellato! E' legato ad un operazione!");
                 return;
             }
@@ -230,8 +230,8 @@ public final class Dentist extends User {
             return;
         }
 
-        for(Operation i : Program.getInstance().getOrders()){
-            if (i.getAgent()== assistant){
+        for(Operation i : Program.getInstance().getOperations()){
+            if (i.getAssistant()== assistant){
                 i.agentDeleted();
             }
         }

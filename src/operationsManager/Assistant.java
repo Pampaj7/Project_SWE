@@ -1,4 +1,4 @@
-package agentManager;
+package operationsManager;
 
 import org.javatuples.Pair;
 
@@ -32,19 +32,19 @@ public final class Assistant extends User implements Subject {
         return commissionPercentage;
     }
 
-    public void createOrder(Customer c, ArrayList<Pair<Article,Integer>> articles) {
+    public void createOperation(Customer c, ArrayList<Pair<Article,Integer>> articles) {
         Operation operation = new Operation(this,articles,c);
-        Program.getInstance().getOrders().add(operation);
+        Program.getInstance().getOperations().add(operation);
         System.out.println("Creato!");
         notify(new Operation(operation));
     }
 
-    public boolean deleteOrder(int id) {
+    public boolean deleteOperation(int id) {
 
         Operation operationToDelete = null;
 
-        for(Operation i : Program.getInstance().getOrders()) {
-            if(i.getId() == id && i.getAgent().getId() == this.getId()){
+        for(Operation i : Program.getInstance().getOperations()) {
+            if(i.getId() == id && i.getAssistant().getId() == this.getId()){
                 operationToDelete = i;
             }
         }
@@ -54,7 +54,7 @@ public final class Assistant extends User implements Subject {
             return false;
         }
 
-        Program.getInstance().getOrders().remove(operationToDelete);
+        Program.getInstance().getOperations().remove(operationToDelete);
 
         return true;
 
@@ -77,9 +77,9 @@ public final class Assistant extends User implements Subject {
     public void viewOperations() {
         System.out.println("----------------------------------");
         boolean check = false;
-        for(Operation i : Program.getInstance().getOrders()){
-            if(i.getAgent().getId() == this.getId()) {
-                System.out.println("Operazione -> ID: " + i.getId() + " Costo Totale: " + i.getTotal() + "Commissione per l'operazione: " + i.getCommissionTot() + "€ Cliente: " + i.getClient().getBusinessName());
+        for(Operation i : Program.getInstance().getOperations()){
+            if(i.getAssistant().getId() == this.getId()) {
+                System.out.println("Operazione -> ID: " + i.getId() + " Costo Totale: " + i.getTotal() + "Commissione per l'operazione: " + i.getCommissionTot() + "€ Cliente: " + i.getCustomer().getBusinessName());
                 i.printArticle();
                 System.out.println();
                 check=true;

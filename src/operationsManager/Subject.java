@@ -1,4 +1,4 @@
-package agentManager;
+package operationsManager;
 
 public interface Subject {
 

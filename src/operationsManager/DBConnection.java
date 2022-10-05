@@ -1,4 +1,4 @@
-package agentManager;
+package operationsManager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
