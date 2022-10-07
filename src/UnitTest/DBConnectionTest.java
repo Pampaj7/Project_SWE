@@ -21,5 +21,4 @@ public class DBConnectionTest {
         }
         return c;
     }
-
 }

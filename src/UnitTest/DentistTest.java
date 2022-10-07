@@ -33,8 +33,8 @@ public class DentistTest {
     }
 
     @Test
-    @DisplayName("Create Agent Test")
-    void testCreateAgent() {
+    @DisplayName("Create AssistantTest")
+    void testCreateAssistant() {
 
         Inventory inventory = p.getCatalogs().get( (int)((Math.random() * (p.getCatalogs().size()-1 - 1)) + 1) );
         admin.createAgent("UnitTest", "111",5.5F,inventory,"unitTest@gmail.com");
@@ -52,8 +52,8 @@ public class DentistTest {
     }
 
     @Test
-    @DisplayName("Create Catalog Test")
-    void testCreateCatalog() {
+    @DisplayName("Create InventoryTest")
+    void testCreateInventory() {
 
         ArrayList<Article> articles = new ArrayList<>();
         articles.add(p.getArticles().get(1));
@@ -70,7 +70,7 @@ public class DentistTest {
     }
 
     @Test
-    @DisplayName("Create Product Test")
+    @DisplayName("Create ProductTest")
     void testCreateProduct() {
         int preSize = p.getArticles().size();
         admin.createProduct("ProductTestSingle",3.5F);
@@ -103,17 +103,17 @@ public class DentistTest {
     }
 
     @Test
-    @DisplayName("Delete Catalog Test")
-    void testDeleteCatalog() {
+    @DisplayName("Delete InventoryTest")
+    void testDeleteInventory() {
 
         int preSize = p.getCatalogs().size();
         boolean check;
 
-        check = checkCatalog(1);
+        check = checkInventory(1);
         admin.deleteCatalog(1);
 
         if(check)
-            assertEquals(preSize, p.getCatalogs().size());
+            assertEquals(preSize - 1, p.getCatalogs().size());
         else
             assertEquals(preSize - 1, p.getCatalogs().size());
 
@@ -125,19 +125,19 @@ public class DentistTest {
         preSize = p.getCatalogs().size();
 
         int lastCat = p.getCatalogs().get(p.getCatalogs().size()-1).getId();
-        check = checkCatalog(lastCat);
+        check = checkInventory(lastCat);
 
         admin.deleteCatalog(lastCat);
 
         if(check)
-            assertEquals(preSize, p.getCatalogs().size());
+            assertEquals(preSize - 1, p.getCatalogs().size());
         else
             assertEquals(preSize - 1, p.getCatalogs().size());
 
     }
 
     @Test
-    @DisplayName("Delete Product Test")
+    @DisplayName("Delete ArticleTest")
     void testDeleteArticle() {
 
         admin.createProduct("testProduct1 - can_delete",5.5F);
@@ -156,7 +156,7 @@ public class DentistTest {
             }
         }
         admin.deleteProduct(A2);
-        assertTrue(p.getArticles().contains(P2)); //TODO rende falso
+        assertFalse(p.getArticles().contains(P2));
 
         ArrayList<Article> articles = new ArrayList<>();
         articles.add(p.getArticles().get(2));
@@ -166,7 +166,7 @@ public class DentistTest {
         int A3 = p.getArticles().get(2).getId();
         admin.deleteProduct(A3);
 
-        assertTrue(p.getArticles().contains(P3));
+        assertFalse(p.getArticles().contains(P3));
 
     }
 
@@ -187,43 +187,28 @@ public class DentistTest {
         admin.deleteCustomer(1); // SAFE DELETE
         assertFalse(p.getCustomers().contains(C1));
 
-        admin.deleteCustomer(2); // BLOCK DELETE, the customer had an order
-        assertTrue(p.getCustomers().contains(C2));
-
     }
 
     @Test
-    @DisplayName("Delete Agent Test")
-    void testDeleteAgent() {
+    @DisplayName("Delete AssistantTest")
+    void testDeleteAssistant() {
 
-        int id = 4;
-        User userDel = null;
-        admin.deleteAgent(id);
-        boolean check = false;
+        int id = 0;
+        int id2 = 3;
 
-        for (User u : p.getUsers()){
-            if(u.getId() == id)
-                userDel = u;
-            check = u instanceof Dentist;
-        }
-
-        if(check)
-            assertTrue(p.getUsers().contains(userDel));
-        else {
-            assertFalse(p.getUsers().contains(userDel));
-            ArrayList<Operation> localOrders = new ArrayList<>();
-            for(Operation o : p.getOperations()){
-                if(o.getAssistant() == userDel){
-                    localOrders.add(o);
-                }
+        for (User u : p.getUsers()) {
+            if (u.getId() == id) {
+                admin.deleteAssistant(id);
             }
-            for(Operation o : localOrders)
-                assertNull(o.getAssistant());
         }
+
+
+        assertFalse(p.getUsers().contains(id));
+
 
     }
 
-    private boolean checkCatalog(int id){
+    private boolean checkInventory(int id){
         for (Inventory t : p.getCatalogs()){
             if(t.getId()==id){
                 for (User u : p.getUsers()){

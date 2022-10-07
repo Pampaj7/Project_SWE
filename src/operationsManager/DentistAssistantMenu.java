@@ -36,7 +36,7 @@ public final class DentistAssistantMenu implements Menu{
                     System.out.println("Inserisci il codice dell'assistente da eliminare");
                     try {
                         int idA = in.nextInt();
-                        admin.deleteAgent(idA);
+                        admin.deleteAssistant(idA);
                     }catch (Exception e){
                         System.err.println("Invalid Id!");
                     }

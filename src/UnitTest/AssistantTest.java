@@ -31,7 +31,7 @@ public class AssistantTest {
 
         assertNotNull(assistant);
     }
-//TODO abbiamo la mail bloccata
+
     @Test
     @DisplayName("Create Order Test")
     void testOrderCreation() {

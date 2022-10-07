@@ -127,12 +127,7 @@ public final class Dentist extends User {
     public void deleteCatalog(int IdCatalog){
         Inventory tmp = null;
 
-        for(User i: Program.getInstance().getUsers()){
-            if(i instanceof Assistant && ((Assistant) i).getInventory().getId()==IdCatalog){
-                System.err.println("L'inventario non può essere cancellato! E' legato ad un' assistente!");
-                return;
-            }
-        }
+
 
         for(Inventory i: Program.getInstance().getCatalogs()){
             if(i.getId()==IdCatalog){
@@ -152,12 +147,7 @@ public final class Dentist extends User {
     public void deleteCustomer(int idClient) {
         Customer tmp = null;
 
-        for(Operation i: Program.getInstance().getOperations()){
-            if(i.getCustomer().getId()==idClient){
-                System.err.println("Il cliente non può essere cancellato! E' legato ad un operazione!");
-                return;
-            }
-        }
+
 
         for(Customer i: Program.getInstance().getCustomers()){
             if(i.getId()==idClient){
@@ -177,25 +167,6 @@ public final class Dentist extends User {
     public void deleteProduct(int idArticle) {
         Article tmp = null;
 
-        /*for(Operation i: Program.getInstance().getOrders()){
-            for(Article j:i.getArticles()){
-                if (j.getId()==idArticle){
-                    System.err.println("Questo articolo è necessario per un operazione! Non può essere attualmente cancellato!");
-                    return;
-                }
-            }
-        }*/
-
-        for(Article i: Program.getInstance().getArticles()){
-            if(i instanceof Compound){
-                for(Article j : ((Compound) i).getComponents()){
-                    if (j.getId()==idArticle){
-                        System.err.println("Questo articolo è necessario per una o piu operazioni! Devi prima cancellare le operazioni associate!");
-                        return;
-                    }
-                }
-            }
-        }
 
         for(Article i: Program.getInstance().getArticles()){
             if(i.getId()==idArticle){
@@ -216,7 +187,7 @@ public final class Dentist extends User {
         System.out.println("Cancellato!");
     }
 
-    public void deleteAgent(int idAgent){
+    public void deleteAssistant(int idAgent){
         Assistant assistant =null;
         for(User i : Program.getInstance().getUsers()){
             if (i instanceof Assistant && i.getId()==idAgent){
