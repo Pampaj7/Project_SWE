@@ -60,7 +60,7 @@ public final class Dentist extends User {
             if(u instanceof Assistant){
                 check = true;
                 a = (Assistant)u;
-                System.out.println("Assistente -> ID: "+a.getId()+" Nome: "+a.getName()+" Costo personale: "+a.getCommissionPercentage()+"%");
+                System.out.println("Assistente -> ID: "+a.getId()+" Nome: "+a.getName()+" Costo personale: "+a.getPersonalCost()+"%");
             }
         }
         if(!check)
@@ -80,7 +80,7 @@ public final class Dentist extends User {
             if((u instanceof Assistant) && u.getId() == idAgent){
                 check = true;
                 a = (Assistant)u;
-                System.out.println("Assistente -> ID: "+a.getId()+" Nome: "+a.getName()+" Costo personale: "+a.getCommissionPercentage()+"%");
+                System.out.println("Assistente -> ID: "+a.getId()+" Nome: "+a.getName()+" Costo personale: "+a.getPersonalCost()+"%");
                 a.getInventory().printInventory();
             }
         }

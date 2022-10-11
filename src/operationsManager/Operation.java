@@ -25,7 +25,7 @@ public final class Operation {
             tmp = tmp + a.getValue0().getPrice() * a.getValue1();
 
         this.total = tmp;
-        this.commissionTot = (assistant.getCommissionPercentage()*this.total)/100;
+        this.commissionTot = (assistant.getPersonalCost()*this.total)/100;
         lastID++;
         this.id = lastID;
         this.agent = assistant;

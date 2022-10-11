@@ -83,7 +83,7 @@ public final class Program {
             return;
         }
 
-        this.setMenu(new LoginMenu());
+        this.setMenu(new loginMenu());
 
         while (!wantClose)
             menu.showMenu();
@@ -123,7 +123,7 @@ public final class Program {
             ((Assistant) activeUser).detach(emailNot);
         }
         activeUser = null;
-        this.setMenu(new LoginMenu());
+        this.setMenu(new loginMenu());
     }
 
     public void load(Connection c) throws SQLException {
@@ -293,7 +293,7 @@ public final class Program {
                 } else {
                     type = 1;
                     Assistant tmp = (Assistant) user;
-                    perch = tmp.getCommissionPercentage();
+                    perch = tmp.getPersonalCost();
                     sql = "INSERT INTO User (Id,Name,PasswordHash,Type,CommissionPerc,IdCatalog,email) " + "VALUES (" + user.getId() + ", '" + user.getName() + "', '" + user.getPasswordHash() + "', " + type + ", " + perch + " ," + tmp.getInventory().getId() + " ,'" + user.getEmail() + "');";
                 }
 

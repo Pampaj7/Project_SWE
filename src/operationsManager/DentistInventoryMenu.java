@@ -30,7 +30,7 @@ public final class DentistInventoryMenu implements Menu{
             switch (menuItem) {
 
                 case 1:
-                    createCatalog(admin);
+                    createInventory(admin);
                     break;
 
                 case 2:
@@ -63,7 +63,7 @@ public final class DentistInventoryMenu implements Menu{
         } while (!quit);
     }
 
-    private void createCatalog(Dentist activeUser){
+    private void createInventory(Dentist activeUser){
 
         Scanner in = new Scanner(System.in);
 

@@ -7,19 +7,19 @@ import java.util.ArrayList;
 public final class Assistant extends User implements Subject {
 
     private final Inventory inventory;
-    private final float commissionPercentage;
+    private final float personalCost    ;
     private final ArrayList<Observer> observers;
 
-    public Assistant(String name, String password, float commissionPercentage, Inventory inventory, String email) {
+    public Assistant(String name, String password, float personalCost, Inventory inventory, String email) {
         super(name,password,email);
-        this.commissionPercentage = commissionPercentage;
+        this.personalCost = personalCost;
         this.inventory = inventory;
         this.observers = new ArrayList<>();
     }
 
-    public Assistant(String name, String passwordHash, float commissionPercentage, Inventory inventory, String email, int id) {
+    public Assistant(String name, String passwordHash, float personalCost, Inventory inventory, String email, int id) {
         super(name,passwordHash, email,id);
-        this.commissionPercentage = commissionPercentage;
+        this.personalCost = personalCost;
         this.inventory = inventory;
         this.observers = new ArrayList<>();
     }
@@ -28,8 +28,8 @@ public final class Assistant extends User implements Subject {
         return inventory;
     }
 
-    public float getCommissionPercentage() {
-        return commissionPercentage;
+    public float getPersonalCost() {
+        return personalCost;
     }
 
     public void createOperation(Customer c, ArrayList<Pair<Article,Integer>> articles) {

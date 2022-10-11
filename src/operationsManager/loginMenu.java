@@ -2,7 +2,7 @@ package operationsManager;
 
 import java.util.Scanner;
 
-public final class LoginMenu implements Menu{
+public final class loginMenu implements Menu{
 
     @Override
     public void showMenu() {

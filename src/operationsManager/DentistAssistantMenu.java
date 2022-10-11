@@ -29,7 +29,7 @@ public final class DentistAssistantMenu implements Menu{
             switch (menuItem) {
 
                 case 1:
-                    createAgent(admin);
+                    createAssistant(admin);
                     break;
 
                 case 2:
@@ -70,7 +70,7 @@ public final class DentistAssistantMenu implements Menu{
         } while (!quit);
     }
 
-    private void createAgent(Dentist activeUser){
+    private void createAssistant(Dentist activeUser){
 
         Scanner in = new Scanner(System.in);
 
