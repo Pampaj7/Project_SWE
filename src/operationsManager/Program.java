@@ -14,9 +14,9 @@ public final class Program {
     private User activeUser;
     private final ArrayList<User> users;
     private final ArrayList<Article> articles;
-    private final ArrayList<Inventory> catalogs;
+    private final ArrayList<Inventory> inventories;
     private final ArrayList<Customer> customers;
-    private final ArrayList<Operation> orders;
+    private final ArrayList<Operation> operations;
     private final NotificationCenter notCenter;
     private static Program instance;
     private Menu menu;
@@ -28,8 +28,8 @@ public final class Program {
         emailNot = new NotificationEmail();
         users = new ArrayList<>();
         articles = new ArrayList<>();
-        catalogs = new ArrayList<>();
-        orders = new ArrayList<>();
+        inventories = new ArrayList<>();
+        operations = new ArrayList<>();
         customers = new ArrayList<>();
         activeUser = null;
     }
@@ -50,8 +50,8 @@ public final class Program {
         return articles;
     }
 
-    public ArrayList<Inventory> getCatalogs() {
-        return catalogs;
+    public ArrayList<Inventory> getInventories() {
+        return inventories;
     }
 
     public ArrayList<Customer> getCustomers() {
@@ -59,7 +59,7 @@ public final class Program {
     }
 
     public ArrayList<Operation> getOperations() {
-        return orders;
+        return operations;
     }
 
     public static Program getInstance() {
@@ -189,7 +189,7 @@ public final class Program {
                     }
                 }
             }
-            catalogs.add(new Inventory(tmp, description, marketZone, id));
+            inventories.add(new Inventory(tmp, description, marketZone, id));
         }
 
         rs = stmt.executeQuery("SELECT * FROM User;");
@@ -204,7 +204,7 @@ public final class Program {
 
             if (type == 1) {
                 Inventory tmp = null;
-                for (Inventory i : catalogs) {
+                for (Inventory i : inventories) {
                     if (i.getId() == idCatalog) {
                         tmp = i;
                     }
@@ -262,7 +262,7 @@ public final class Program {
                     }
                 }
             }
-            orders.add(new Operation(total, commission, tmpAssistant, tmp, tmpCustomer, id));
+            operations.add(new Operation(total, commission, tmpAssistant, tmp, tmpCustomer, id));
         }
 
     }
@@ -316,12 +316,12 @@ public final class Program {
             }
         }
 
-        for (Operation operation : orders) {
+        for (Operation operation : operations) {
             try {
                 if (operation.getAssistant() != null)
-                    sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,Commission) " + "VALUES (" + operation.getId() + ", '" + operation.getAssistant().getId() + "', " + operation.getCustomer().getId() + " ,'" + operation.getTotal() + "', '" + operation.getCommissionTot() + "');";
+                    sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,Commission) " + "VALUES (" + operation.getId() + ", '" + operation.getAssistant().getId() + "', " + operation.getCustomer().getId() + " ,'" + operation.getTotal() + "', '" + operation.getOPersonalCost() + "');";
                 else
-                    sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,Commission) " + "VALUES (" + operation.getId() + ", '" + -1 + "', " + operation.getCustomer().getId() + " ,'" + operation.getTotal() + "', '" + operation.getCommissionTot() + "');";
+                    sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,Commission) " + "VALUES (" + operation.getId() + ", '" + -1 + "', " + operation.getCustomer().getId() + " ,'" + operation.getTotal() + "', '" + operation.getOPersonalCost() + "');";
                 stmt = c.createStatement();
                 stmt.executeUpdate(sql);
                 c.commit();
@@ -340,9 +340,9 @@ public final class Program {
             }
         }
 
-        for (Inventory inventory : catalogs) {
+        for (Inventory inventory : inventories) {
             try {
-                sql = "INSERT INTO CatalogHead (idHead,Description,MarketZone) " + "VALUES (" + inventory.getId() + ", '" + inventory.getDescription() + "', '" + inventory.getMarketZone() + "');";
+                sql = "INSERT INTO CatalogHead (idHead,Description,MarketZone) " + "VALUES (" + inventory.getId() + ", '" + inventory.getDescription() + "', '" + inventory.getZone() + "');";
                 stmt = c.createStatement();
                 stmt.executeUpdate(sql);
                 c.commit();

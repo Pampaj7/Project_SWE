@@ -36,8 +36,8 @@ public class DentistTest {
     @DisplayName("Create AssistantTest")
     void testCreateAssistant() {
 
-        Inventory inventory = p.getCatalogs().get( (int)((Math.random() * (p.getCatalogs().size()-1 - 1)) + 1) );
-        admin.createAgent("UnitTest", "111",5.5F,inventory,"unitTest@gmail.com");
+        Inventory inventory = p.getInventories().get( (int)((Math.random() * (p.getInventories().size()-1 - 1)) + 1) );
+        admin.createAssistant("UnitTest", "111",5.5F,inventory,"unitTest@gmail.com");
         User createUser = p.getUsers().get(p.getUsers().size()-1);
 
         assertTrue(createUser instanceof Assistant);
@@ -59,12 +59,12 @@ public class DentistTest {
         articles.add(p.getArticles().get(1));
         articles.add(p.getArticles().get(2));
         articles.add(p.getArticles().get(3));
-        int preSize = p.getCatalogs().size();
-        admin.createCatalog("description","Italy",articles);
+        int preSize = p.getInventories().size();
+        admin.createInventory("description","Italy",articles);
 
         assertAll("Test create agent",
-                () -> assertEquals(preSize + 1, p.getCatalogs().size()),
-                () -> assertEquals(articles, p.getCatalogs().get(p.getCatalogs().size()-1).getArticles())
+                () -> assertEquals(preSize + 1, p.getInventories().size()),
+                () -> assertEquals(articles, p.getInventories().get(p.getInventories().size()-1).getArticles())
         );
 
     }
@@ -106,33 +106,33 @@ public class DentistTest {
     @DisplayName("Delete InventoryTest")
     void testDeleteInventory() {
 
-        int preSize = p.getCatalogs().size();
+        int preSize = p.getInventories().size();
         boolean check;
 
         check = checkInventory(1);
-        admin.deleteCatalog(1);
+        admin.deleteInventory(1);
 
         if(check)
-            assertEquals(preSize - 1, p.getCatalogs().size());
+            assertEquals(preSize - 1, p.getInventories().size());
         else
-            assertEquals(preSize - 1, p.getCatalogs().size());
+            assertEquals(preSize - 1, p.getInventories().size());
 
         ArrayList<Article> articles = new ArrayList<>();
         articles.add(p.getArticles().get(1));
         articles.add(p.getArticles().get(2));
         articles.add(p.getArticles().get(3));
-        admin.createCatalog("description","Italy",articles);
-        preSize = p.getCatalogs().size();
+        admin.createInventory("description","Italy",articles);
+        preSize = p.getInventories().size();
 
-        int lastCat = p.getCatalogs().get(p.getCatalogs().size()-1).getId();
+        int lastCat = p.getInventories().get(p.getInventories().size()-1).getId();
         check = checkInventory(lastCat);
 
-        admin.deleteCatalog(lastCat);
+        admin.deleteInventory(lastCat);
 
         if(check)
-            assertEquals(preSize - 1, p.getCatalogs().size());
+            assertEquals(preSize - 1, p.getInventories().size());
         else
-            assertEquals(preSize - 1, p.getCatalogs().size());
+            assertEquals(preSize - 1, p.getInventories().size());
 
     }
 
@@ -209,7 +209,7 @@ public class DentistTest {
     }
 
     private boolean checkInventory(int id){
-        for (Inventory t : p.getCatalogs()){
+        for (Inventory t : p.getInventories()){
             if(t.getId()==id){
                 for (User u : p.getUsers()){
                     if(u instanceof Assistant){

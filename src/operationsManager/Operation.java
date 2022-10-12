@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public final class Operation {
 
-    private final ArrayList<Pair<Article, Integer>> pairArticles;
+    private final ArrayList<Pair<Article, Integer>> pairOp;
     private final int id;
     private static int lastID;
     private Assistant agent;
@@ -15,13 +15,13 @@ public final class Operation {
     private final Customer client;
 
     public Operation(Operation old){
-        this(old.getTotal(),old.getCommissionTot(), old.getAssistant(), old.getRows(), old.getCustomer(), old.getId());
+        this(old.getTotal(),old.getOPersonalCost(), old.getAssistant(), old.getRows(), old.getCustomer(), old.getId());
     }
 
-    public Operation(Assistant assistant, ArrayList<Pair<Article, Integer>> pairArticles , Customer client ) {
+    public Operation(Assistant assistant, ArrayList<Pair<Article, Integer>> pairOp, Customer client ) {
 
         float tmp = 0;
-        for (Pair<Article, Integer> a : pairArticles)
+        for (Pair<Article, Integer> a : pairOp)
             tmp = tmp + a.getValue0().getPrice() * a.getValue1();
 
         this.total = tmp;
@@ -29,25 +29,25 @@ public final class Operation {
         lastID++;
         this.id = lastID;
         this.agent = assistant;
-        this.pairArticles = pairArticles;
+        this.pairOp = pairOp;
         this.client = client;
     }
 
-    public Operation(float total, float commissionTot, Assistant assistant, ArrayList<Pair<Article, Integer>> pairArticles , Customer client ) {
+    public Operation(float total, float commissionTot, Assistant assistant, ArrayList<Pair<Article, Integer>> pairOp, Customer client ) {
         this.total = total;
         this.commissionTot = commissionTot;
         lastID++;
         this.id = lastID;
         this.agent = assistant;
-        this.pairArticles = pairArticles;
+        this.pairOp = pairOp;
         this.client = client;
     }
 
-    public Operation(float total, float commissionTot, Assistant assistant, ArrayList<Pair<Article, Integer>> pairArticles, Customer client , int id ) {
+    public Operation(float total, float commissionTot, Assistant assistant, ArrayList<Pair<Article, Integer>> pairOp, Customer client , int id ) {
         this.total = total;
         this.commissionTot = commissionTot;
         this.agent = assistant;
-        this.pairArticles = pairArticles;
+        this.pairOp = pairOp;
         this.id=id;
         lastID = Math.max(lastID, id);
         this.client = client;
@@ -56,7 +56,7 @@ public final class Operation {
     public ArrayList<Article> getArticles() {
 
         ArrayList<Article> tmp = new ArrayList<>();
-        for (Pair<Article, Integer> a : pairArticles){
+        for (Pair<Article, Integer> a : pairOp){
             tmp.add(a.getValue0());
         }
 
@@ -65,7 +65,7 @@ public final class Operation {
     }
 
     public ArrayList<Pair<Article, Integer>> getRows() {
-        return pairArticles;
+        return pairOp;
     }
 
     public Customer getCustomer() {
@@ -88,13 +88,13 @@ public final class Operation {
         return agent;
     }
 
-    public float getCommissionTot() {
+    public float getOPersonalCost() {
         return commissionTot;
     }
 
     public void printArticle() {
 
-        for(Pair<Article,Integer> i:pairArticles)
+        for(Pair<Article,Integer> i: pairOp)
             System.out.println("    • Id: "+i.getValue0().getId()+" Articolo: "+i.getValue0().getName()+" Prezzo: "+i.getValue0().getPrice()+" Quantità: "+i.getValue1());
 
     }

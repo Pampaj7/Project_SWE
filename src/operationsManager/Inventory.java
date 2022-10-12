@@ -6,22 +6,22 @@ public final class Inventory {
 
     private final int id;
     private final String description;
-    private final String marketZone;
+    private final String Zone;
     private static int lastID = 0;
     private final ArrayList<Article> articles;
 
-    public Inventory(ArrayList<Article> articles, String description , String marketZone) {
+    public Inventory(ArrayList<Article> articles, String description , String Zone) {
         this.articles = articles;
         this.description = description;
-        this.marketZone = marketZone;
+        this.Zone = Zone;
         lastID++;
         this.id=lastID;
     }
 
-    public Inventory(ArrayList<Article> articles, String description , String marketZone, int id) {
+    public Inventory(ArrayList<Article> articles, String description , String Zone, int id) {
         this.articles = articles;
         this.description = description;
-        this.marketZone = marketZone;
+        this.Zone = Zone;
         this.id=id;
         lastID = Math.max(lastID, id);
     }
@@ -34,8 +34,8 @@ public final class Inventory {
         return description;
     }
 
-    public String getMarketZone() {
-        return marketZone;
+    public String getZone() {
+        return Zone;
     }
 
     public ArrayList<Article> getArticles() {
@@ -43,7 +43,7 @@ public final class Inventory {
     }
 
     public void printInventory() {
-        System.out.println("Id: "+id+" Inventario:  " + description +" Zona: " + marketZone);
+        System.out.println("Id: "+id+" Inventario:  " + description +" Zona: " + Zone);
         for(Article i : articles){
             i.display();
         }

@@ -14,7 +14,7 @@ public final class DentistAssistantMenu implements Menu{
         int menuItem;
 
         do {
-            admin.viewAgent();
+            admin.viewAssistant();
             System.out.println("1. Aggiungi assistente");
             System.out.println("2. Cancella assistente");
             System.out.println("3. Vedi inventario assistente");
@@ -46,7 +46,7 @@ public final class DentistAssistantMenu implements Menu{
                     System.out.println("Inserisci il codice dell'agente per il quale vedere l'inventario");
                     try {
                         int idAgent = in.nextInt();
-                        admin.viewCatalogAgent(idAgent);
+                        admin.viewInventoryAssistant(idAgent);
                     }catch (Exception e){
                         System.err.println("ID errato!");
                     }
@@ -100,7 +100,7 @@ public final class DentistAssistantMenu implements Menu{
             try {
                 idCatalog = Integer.parseInt(in.next());
 
-                for(Inventory i: Program.getInstance().getCatalogs()){
+                for(Inventory i: Program.getInstance().getInventories()){
                     if (i.getId()==idCatalog){
                         inventory =i;
                     }
@@ -111,7 +111,7 @@ public final class DentistAssistantMenu implements Menu{
             if (inventory ==null) System.err.println("Devi inserire un numero!");
 
         }while (inventory ==null);
-        activeUser.createAgent(name,password,percentage, inventory,email);
+        activeUser.createAssistant(name,password,percentage, inventory,email);
     }
 
 }

@@ -46,7 +46,7 @@ public final class DentistOperationsMenu implements Menu{
                     System.out.println("Inserisci il codice del cliente per il quale vedere le operazioni");
                     try {
                         int idCustomer = in.nextInt();
-                        admin.viewCustomerOrders(idCustomer);
+                        admin.viewCustomerOperations(idCustomer);
                     }catch (Exception e){
                         System.err.println("ID errato!");
                     }

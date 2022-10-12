@@ -41,7 +41,7 @@ public final class DentistInventoryMenu implements Menu{
                     }catch (Exception e){
                         idCatalog = -1;
                     }
-                    admin.deleteCatalog(idCatalog);
+                    admin.deleteInventory(idCatalog);
                     break;
 
                 case 9:
@@ -101,7 +101,7 @@ public final class DentistInventoryMenu implements Menu{
                 System.err.println("ID non valido!");
             }
         }
-        activeUser.createCatalog(description,marketZone,articles);
+        activeUser.createInventory(description,marketZone,articles);
     }
 
 }

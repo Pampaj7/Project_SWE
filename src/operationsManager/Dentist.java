@@ -17,9 +17,9 @@ public final class Dentist extends User {
         boolean check = false;
         for(Operation i : Program.getInstance().getOperations()){
             if (i.getAssistant()!=null) {
-                System.out.println("Operation -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COSTO PERSONALE: " + i.getCommissionTot() + "€ CLIENTE: " + i.getCustomer().getBusinessName()+" Assistente: "+i.getAssistant().getName());
+                System.out.println("Operation -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COSTO PERSONALE: " + i.getOPersonalCost() + "€ CLIENTE: " + i.getCustomer().getBusinessName()+" Assistente: "+i.getAssistant().getName());
             }else{
-                System.out.println("Operation -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COSTO PERSONALE: " + i.getCommissionTot() + "€ CLIENTE: " + i.getCustomer().getBusinessName()+" Assistente: CANCELLATO");
+                System.out.println("Operation -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COSTO PERSONALE: " + i.getOPersonalCost() + "€ CLIENTE: " + i.getCustomer().getBusinessName()+" Assistente: CANCELLATO");
             }
             i.printArticle();
             System.out.println();
@@ -33,9 +33,9 @@ public final class Dentist extends User {
     @Override
     public void viewInventory() {
         System.out.println("----------------------------------");
-        if (Program.getInstance().getCatalogs().size()>0){
+        if (Program.getInstance().getInventories().size()>0){
             System.out.println();
-            for (Inventory i : Program.getInstance().getCatalogs()) {
+            for (Inventory i : Program.getInstance().getInventories()) {
                 i.printInventory();
                 System.out.println();
             }
@@ -52,7 +52,7 @@ public final class Dentist extends User {
         System.out.println("----------------------------------");
     }
 
-    public void viewAgent() {
+    public void viewAssistant() {
         System.out.println("----------------------------------");
         Assistant a;
         boolean check = false;
@@ -72,12 +72,12 @@ public final class Dentist extends User {
         Program.getInstance().getNotificationCenter().viewNotification();
     }
 
-    public void viewCatalogAgent(int idAgent){
+    public void viewInventoryAssistant(int idAssistant){
         System.out.println("----------------------------------");
         Assistant a;
         boolean check = false;
         for (User u : Program.getInstance().getUsers()){
-            if((u instanceof Assistant) && u.getId() == idAgent){
+            if((u instanceof Assistant) && u.getId() == idAssistant){
                 check = true;
                 a = (Assistant)u;
                 System.out.println("Assistente -> ID: "+a.getId()+" Nome: "+a.getName()+" Costo personale: "+a.getPersonalCost()+"%");
@@ -89,13 +89,13 @@ public final class Dentist extends User {
         System.out.println("----------------------------------");
     }
 
-    public void viewCustomerOrders(int idCustomer){
+    public void viewCustomerOperations(int idCustomer){
 
         System.out.println("----------------------------------");
         boolean check = false;
         for(Operation i : Program.getInstance().getOperations()){
             if (i.getAssistant()!=null&&i.getAssistant().getId()==idCustomer) {
-                System.out.println("Operazione -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COSTO PERSONALE: " + i.getCommissionTot() + "€ CLIENTE: " + i.getCustomer().getBusinessName());
+                System.out.println("Operazione -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COSTO PERSONALE: " + i.getOPersonalCost() + "€ CLIENTE: " + i.getCustomer().getBusinessName());
                 i.printArticle();
                 check = true;
             }
@@ -106,13 +106,13 @@ public final class Dentist extends User {
 
     }
 
-    public void createAgent(String name, String password, float commission, Inventory inventory, String email) {
+    public void createAssistant(String name, String password, float commission, Inventory inventory, String email) {
         Program.getInstance().getUsers().add(new Assistant(name,password,commission, inventory,email));
         System.out.println("Creato!");
     }
 
-    public void createCatalog(String description, String marketZone, ArrayList<Article> articles) {
-        Program.getInstance().getCatalogs().add(new Inventory(articles,description,marketZone));
+    public void createInventory(String description, String marketZone, ArrayList<Article> articles) {
+        Program.getInstance().getInventories().add(new Inventory(articles,description,marketZone));
         System.out.println("Creato!");
     }
 
@@ -124,12 +124,12 @@ public final class Dentist extends User {
         Program.getInstance().getArticles().add(new Product(name, price));
     }
 
-    public void deleteCatalog(int IdCatalog){
+    public void deleteInventory(int IdCatalog){
         Inventory tmp = null;
 
 
 
-        for(Inventory i: Program.getInstance().getCatalogs()){
+        for(Inventory i: Program.getInstance().getInventories()){
             if(i.getId()==IdCatalog){
                 tmp = i;
             }
@@ -140,7 +140,7 @@ public final class Dentist extends User {
             return;
         }
 
-        Program.getInstance().getCatalogs().remove(tmp);
+        Program.getInstance().getInventories().remove(tmp);
         System.out.println("Cancellato!");
     }
 
@@ -179,7 +179,7 @@ public final class Dentist extends User {
             return;
         }
 
-        for(Inventory i: Program.getInstance().getCatalogs())
+        for(Inventory i: Program.getInstance().getInventories())
             i.getArticles().removeIf(j -> j.getId() == idArticle);
 
 

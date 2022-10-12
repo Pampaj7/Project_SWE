@@ -79,7 +79,7 @@ public final class Assistant extends User implements Subject {
         boolean check = false;
         for(Operation i : Program.getInstance().getOperations()){
             if(i.getAssistant().getId() == this.getId()) {
-                System.out.println("Operazione -> ID: " + i.getId() + " Costo Totale: " + i.getTotal() + "Commissione per l'operazione: " + i.getCommissionTot() + "€ Cliente: " + i.getCustomer().getBusinessName());
+                System.out.println("Operazione -> ID: " + i.getId() + " Costo Totale: " + i.getTotal() + "Commissione per l'operazione: " + i.getOPersonalCost() + "€ Cliente: " + i.getCustomer().getBusinessName());
                 i.printArticle();
                 System.out.println();
                 check=true;
