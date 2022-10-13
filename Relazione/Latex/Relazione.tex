@@ -1,6 +1,10 @@
 \documentclass{article}
+\usepackage{amsfonts, amsmath, amsthm, amssymb}
 \usepackage{graphicx}
-
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{needspace}
+\graphicspath{ {Img/}}
 \title{Dentist management system}
 \author{Leonardo Pampaloni, Filippo di Martino}
 \date{September 2022}
@@ -20,19 +24,99 @@
         \textbf{Leonardo Pampaloni, Filippo di Martino}
         \vfill
         \vspace{0.8cm}
-        \includegraphics[width=0.4\textwidth]{university.png}
-
-
-       
-        
+        \includegraphics[width=0.4\textwidth]{university.png}        
         \Large
         
         Computer Engineering\\
         University Of Florence\\
         Italy\\
-        
     \end{center}
 \end{titlepage}
+
+\newpage
+
+
+\section{Introduzione}
+L'idea del progetto nasce come applicazione per la gestione di interventi fatti da dentisti e assistenti su vari clienti. Nell'applicazione sono presenti principalmente:
+
+\begin{enumerate} 
+	\item \textbf{\textsl{Dentista}}: 
+			Il dentista ha la possibilità di controllare tutte le informazioni riguardanti i clienti, gli assistenti e i set di interventi 					assegnati agli Assistenti.
+	\item \textbf{\textsl{Assistenti}}:
+			Ogni assistente ha a sua disposizione un set predefinito di interventi da poter fare, oltre che poter vedere le 							informazioni sui clienti.
+	\item \textbf{\textsl{Clienti}}
+	\item \textbf{\textsl{Interventi}}
+\end{enumerate}
+L'applicazione ha come obiettivo quello di gestire e notificare l'admin, ovvero il dentista, ti tutti gli interventi effettuati dagli assistenti, inoltre è compresa nell'applicazione il salvataggio dei clienti, degli articoli e degli interventi all'interno di un database. Sono presenti due tipologie di notifica per l'admin, uno all'interno dell'applicazione, che tiene traccia dello storico delle operazioni fatte da tutti gli assistenti mentre l'altro è esterno all'applicazione e viene notificato l'admin tramite email ogni volta che un assistente effettua un intervento su un cliente.
+
+\section{Diagrammi UML}
+Abbiamo scelto di presentare tre diversi diagrammi UML, il diagramma delle classi (\textsl{Class Diagram}), il diagramma dei casi d'uso (\textsl{Use Case Diagram}), e il diagramma E/R (\textsl{Entity Relationship} del progetto.
+\subsection{Class Diagram}
+Dal \textsl{Class Diagram} possiamo vedere come effettivamente sono legate le varie classi del programma. Si può notare infatti che le operazioni di notifica sono effettuate da un \textsl{Observer pattern}, suddiviso in due diverse classi per le due tipologie differenti di notifica. Sono presenti anche altri due pattern: lo \textsl{State pattern} e il \textsl{Composite pattern}, rispettivamente per la gestione delle classi dei vari menù e per la gestione delle classi per le operazioni/interventi.\newline
+Il Dentista (\textsl{Admin},ha il compito di creare Clienti, Articoli, e set di Operazioni/Interventi. Per le operazioni abbiamo incluso la possibilità di raccogliere più interventi in uno (creandolo tramite il \textsl{Composite pattern}), oltre ovviamente a poter selezionare l'uso di più articoli e strumenti (E.g. Creazione di un kit-monouso (Guanti,Bicchiere,Tovaglietta), e includerlo in tutte le operazioni).\newline
+La classe \textsl{Program} è il cuore della gestione dell'applicazione: rappresenta il nodo centrale del sistema. \textsl{Program} è una classe \textsl{\textbf{Singleone}} in quanto si necessita di avere una singola istanza di essa e deve essere necessariamente reperibile, al suo interno sono presenti inoltre metodi come \textsl{load(Connection c} e \textsl{upload(Connection c)} che permettono la comunicazione con il DB esterno e \textsl{run()} per poter gestire il loop di sistema.
+\newline
+
+\begin{figure}[h]
+\centerline{\includegraphics[scale=.14]{ClassDiagram}}
+\caption{Diagramma delle classi}
+\end{figure}
+
+\subsection{Use Case Diagram}
+Nello \textsl{Use Case Diagram} sono presenti due attori che interagiscono con il sistema, il Dentista e l'Assistente. I due attori hanno un caso d'uso comune, in quanto entrambi sono classi derivate di User.\newline
+Di seguito lo Use Case completo del progetto.
+
+\begin{figure}[h]
+\centerline{\includegraphics[scale=.3]{UseCaseDiagram}}
+\caption{Diagramma dei casi d'uso}
+\end{figure}
+
+\newpage
+
+\subsubsection{Dentist's Use Case}
+Si distinguono quattro macro gruppi di casi d'uso:
+\begin{enumerate} 
+	\item \textbf{\textsl{Articoli}}: 
+			Il Dentista ha la possibilità di gestire gli articoli, può infatti scegliere se creare, eliminare o semplicemente visualizzare gli Articoli.
+	\item \textbf{\textsl{Inventari}}:
+			Solo il Dentista ha la possibilità di aggiungere e rimuovere eventuali Inventari contenenti i Set di Operazioni assegnati ai vari 						assistenti.
+	\item \textbf{\textsl{Assistenti}}:
+			Il Dentista ha la possibilità di gestire anchegli Assistenti, può infatti scegliere se aggiungere, eliminare o visualizzare gli Inveentari 					dei vari Assistenti.
+	\item \textbf{\textsl{Clienti}}:
+			Il Dentista ha la possibilità di gestire i Clienti, può infatti creare, eliminare o visualizzare lo storico delle operazioni avvenute su quel 			Cliente.
+\end{enumerate}
+
+\begin{figure}[h]
+\centerline{\includegraphics[scale=.4]{OwnerUseCaseDiagram}}
+\caption{Diagramma dei casi d'uso del Dentista}
+\end{figure}
+
+\newpage
+
+\subsubsection{Assistent's Use Case}
+Nello \textsl{Use Case Diagram} dell'Assistente invece sono presenti meno funzionalità:
+\begin{enumerate} 
+	\item \textbf{\textsl{Operazioni}}: 
+			Tramite la creazione di una nuova operazione è possibile creare o selezionare il cliente alla quale verrà fatto l'intervento. Inoltre è 			possibile vedere lo storico delle operazioni fatte dall'Assistente stesso.
+	\item \textbf{\textsl{Inventario}}:
+			L'Assistente può vedere quali operazioni ha nel suo inventario.
+\end{enumerate}
+
+
+
+\begin{figure}[h]
+\centerline{\includegraphics[scale=.5]{AssistentUseCaseDiagram}}
+\caption{Diagramma dei casi d'uso dell'Assistente}
+\end{figure}
+
+
+
+
+
+
+
+        
+
 \end{document}
 
 \maketitle
