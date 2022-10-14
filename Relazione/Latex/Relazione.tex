@@ -33,7 +33,6 @@
     \end{center}
 \end{titlepage}
 
-\newpage
 
 
 \section{Introduzione}
@@ -51,7 +50,10 @@ L'applicazione ha come obiettivo quello di gestire e notificare l'admin, ovvero 
 
 \section{Diagrammi UML}
 Abbiamo scelto di presentare tre diversi diagrammi UML, il diagramma delle classi (\textsl{Class Diagram}), il diagramma dei casi d'uso (\textsl{Use Case Diagram}), e il diagramma E/R (\textsl{Entity Relationship} del progetto.
+
+
 \subsection{Class Diagram}
+
 Dal \textsl{Class Diagram} possiamo vedere come effettivamente sono legate le varie classi del programma. Si può notare infatti che le operazioni di notifica sono effettuate da un \textsl{Observer pattern}, suddiviso in due diverse classi per le due tipologie differenti di notifica. Sono presenti anche altri due pattern: lo \textsl{State pattern} e il \textsl{Composite pattern}, rispettivamente per la gestione delle classi dei vari menù e per la gestione delle classi per le operazioni/interventi.\newline
 Il Dentista (\textsl{Admin},ha il compito di creare Clienti, Articoli, e set di Operazioni/Interventi. Per le operazioni abbiamo incluso la possibilità di raccogliere più interventi in uno (creandolo tramite il \textsl{Composite pattern}), oltre ovviamente a poter selezionare l'uso di più articoli e strumenti (E.g. Creazione di un kit-monouso (Guanti,Bicchiere,Tovaglietta), e includerlo in tutte le operazioni).\newline
 La classe \textsl{Program} è il cuore della gestione dell'applicazione: rappresenta il nodo centrale del sistema. \textsl{Program} è una classe \textsl{\textbf{Singleone}} in quanto si necessita di avere una singola istanza di essa e deve essere necessariamente reperibile, al suo interno sono presenti inoltre metodi come \textsl{load(Connection c} e \textsl{upload(Connection c)} che permettono la comunicazione con il DB esterno e \textsl{run()} per poter gestire il loop di sistema.
@@ -62,6 +64,36 @@ La classe \textsl{Program} è il cuore della gestione dell'applicazione: rappres
 \caption{Diagramma delle classi}
 \end{figure}
 
+
+
+\subsubsection{State Pattern}
+Si tratta di un pattern comportamentale basato su oggetti che viene utilizzato quando il comportamento di un oggetto deve cambiare in base al suo stato. Questo pattern è spesso utilizzato per le macchine a stati finiti, il nostro caso è molto simile a quello scenario, infatti il menù passa da uno stato all'altro in base alla scelta dell'utente che lo sta utilizzando.
+
+\begin{figure}[h]
+\centerline{\includegraphics[scale=.35]{StatePattern}}
+\caption{Diagramma delle classi (State pattern)}
+\end{figure}
+
+
+\subsubsection{Observer Pattern}
+Questo pattern permette di definire una dipendenza 1$\longrightarrow$N fra oggetti, il suo compito è quello di notificare gli N oggetti ogni volta che un oggetto (Subject) cambia stato. Nel progetto sono inseriti due tipologie di Observer: uno che notifica internamente all'applicazione (\textsl{NotificationCenter}) mentre l'altro che manda una mail all'assistente desiderato e all'Admin (\textsl{NotificationEmail}).
+
+\begin{figure}[h]
+\centerline{\includegraphics[scale=.365]{ObserverPattern}}
+\caption{Diagramma delle classi (Observer pattern)}
+\end{figure}
+
+
+\subsubsection{Composite Pattern}
+Il pattern serve per poter trattare un gruppo di oggetti come istanza di un oggetto singolo. Solitamente questo raggruppamento si può vedere come una struttura ad albero, nel progetto però il pattern è stato leggermente modificato per permettere l'annidamento delle classi composte, in questo caso infatti il grafico del pattern potrebbe essere riassunto con un grafo anzichè un albero.
+
+\begin{figure}[h]
+\centerline{\includegraphics[scale=.5]{CompositePattern}}
+\caption{Diagramma delle classi (Composite pattern)}
+\end{figure}
+
+
+
 \subsection{Use Case Diagram}
 Nello \textsl{Use Case Diagram} sono presenti due attori che interagiscono con il sistema, il Dentista e l'Assistente. I due attori hanno un caso d'uso comune, in quanto entrambi sono classi derivate di User.\newline
 Di seguito lo Use Case completo del progetto.
@@ -71,7 +103,7 @@ Di seguito lo Use Case completo del progetto.
 \caption{Diagramma dei casi d'uso}
 \end{figure}
 
-\newpage
+
 
 \subsubsection{Dentist's Use Case}
 Si distinguono quattro macro gruppi di casi d'uso:
@@ -91,7 +123,6 @@ Si distinguono quattro macro gruppi di casi d'uso:
 \caption{Diagramma dei casi d'uso del Dentista}
 \end{figure}
 
-\newpage
 
 \subsubsection{Assistent's Use Case}
 Nello \textsl{Use Case Diagram} dell'Assistente invece sono presenti meno funzionalità:
@@ -103,14 +134,15 @@ Nello \textsl{Use Case Diagram} dell'Assistente invece sono presenti meno funzio
 \end{enumerate}
 
 
-
 \begin{figure}[h]
 \centerline{\includegraphics[scale=.5]{AssistentUseCaseDiagram}}
 \caption{Diagramma dei casi d'uso dell'Assistente}
 \end{figure}
 
+\subsection{E/R Diagram}
+Per avere più chiarezza su come è strutturato il DB abbiamo fatto il diagramma \textsl{Entity Relationship} della struttura dati.
 
-
+[Inserire immagine E/R]
 
 
 
