@@ -21,7 +21,7 @@ public final class DentistMainMenu implements Menu{
             System.out.println("Opzioni:");
 
             System.out.println("1. Vedi Assistenti");
-            System.out.println("2. Vedi inventari");
+            System.out.println("2. Vedi inventario");
             System.out.println("3. Vedi clienti");
             System.out.println("4. Vedi storico operazioni");
             System.out.println("5. Vedi articoli");

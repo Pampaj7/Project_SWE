@@ -7,8 +7,8 @@ public final class Dentist extends User {
     public Dentist(String name, String password, String email) {
         super(name, password,email);
     }
-    public Dentist(String name, String passwordHash, String email , int id) {
-        super(name, passwordHash, email,id);
+    public Dentist(String name, String password, String email , int id) {
+        super(name, password, email,id);
     }
 
     @Override

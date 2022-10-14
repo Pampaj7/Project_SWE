@@ -196,16 +196,16 @@ public final class Program {
         while (rs.next()) {
             int id = rs.getInt("id");                             //1 agent - 0 administrator
             String name = rs.getString("Name");
-            String passHash = rs.getString("Passwordhash");
+            String passHash = rs.getString("Password");
             int type = rs.getInt("Type");
-            int idCatalog = rs.getInt("IdCatalog");
-            float commissionPercentage = rs.getFloat("CommissionPerc");
+            int idInventory = rs.getInt("IdInventory");
+            float personalCost = rs.getFloat("PersonalCost");
             String email = rs.getString("email");
 
             if (type == 1) {
                 Inventory tmp = null;
                 for (Inventory i : inventories) {
-                    if (i.getId() == idCatalog) {
+                    if (i.getId() == idInventory) {
                         tmp = i;
                     }
                 }
@@ -215,7 +215,7 @@ public final class Program {
                     break;
                 }
 
-                users.add(new Assistant(name, passHash, commissionPercentage, tmp, email, id));
+                users.add(new Assistant(name, passHash, personalCost, tmp, email, id));
             } else {
                 users.add(new Dentist(name, passHash, email, id));
             }
@@ -227,7 +227,7 @@ public final class Program {
             int idAgent = rs.getInt("idAgent");
             int idCustomers = rs.getInt("IdCustomer");
             float total = rs.getFloat("Total");
-            float commission = rs.getFloat("Commission");
+            float cost = rs.getFloat("PersonalCost");
 
             Assistant tmpAssistant = null;
             for (User i : users) {
@@ -262,7 +262,7 @@ public final class Program {
                     }
                 }
             }
-            operations.add(new Operation(total, commission, tmpAssistant, tmp, tmpCustomer, id));
+            operations.add(new Operation(total, cost, tmpAssistant, tmp, tmpCustomer, id));
         }
 
     }
@@ -289,12 +289,12 @@ public final class Program {
                 if (!(user instanceof Assistant)) {
                     type = 0;
                     perch = 0;
-                    sql = "INSERT INTO User (Id,Name,PasswordHash,Type,CommissionPerc,email) " + "VALUES (" + user.getId() + ", '" + user.getName() + "', '" + user.getPasswordHash() + "', " + type + ", " + perch + " ,'" + user.getEmail() + "');";
+                    sql = "INSERT INTO User (Id,Name,Password,Type,PersonalCost,email) " + "VALUES (" + user.getId() + ", '" + user.getName() + "', '" + user.getPassword() + "', " + type + ", " + perch + " ,'" + user.getEmail() + "');";
                 } else {
                     type = 1;
                     Assistant tmp = (Assistant) user;
                     perch = tmp.getPersonalCost();
-                    sql = "INSERT INTO User (Id,Name,PasswordHash,Type,CommissionPerc,IdCatalog,email) " + "VALUES (" + user.getId() + ", '" + user.getName() + "', '" + user.getPasswordHash() + "', " + type + ", " + perch + " ," + tmp.getInventory().getId() + " ,'" + user.getEmail() + "');";
+                    sql = "INSERT INTO User (Id,Name,Password,Type,PersonalCost,idInventory,email) " + "VALUES (" + user.getId() + ", '" + user.getName() + "', '" + user.getPassword() + "', " + type + ", " + perch + " ," + tmp.getInventory().getId() + " ,'" + user.getEmail() + "');";
                 }
 
                 stmt = c.createStatement();
@@ -319,9 +319,9 @@ public final class Program {
         for (Operation operation : operations) {
             try {
                 if (operation.getAssistant() != null)
-                    sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,Commission) " + "VALUES (" + operation.getId() + ", '" + operation.getAssistant().getId() + "', " + operation.getCustomer().getId() + " ,'" + operation.getTotal() + "', '" + operation.getOPersonalCost() + "');";
+                    sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,PersonalCost) " + "VALUES (" + operation.getId() + ", '" + operation.getAssistant().getId() + "', " + operation.getCustomer().getId() + " ,'" + operation.getTotal() + "', '" + operation.getOPersonalCost() + "');";
                 else
-                    sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,Commission) " + "VALUES (" + operation.getId() + ", '" + -1 + "', " + operation.getCustomer().getId() + " ,'" + operation.getTotal() + "', '" + operation.getOPersonalCost() + "');";
+                    sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,PersonalCost) " + "VALUES (" + operation.getId() + ", '" + -1 + "', " + operation.getCustomer().getId() + " ,'" + operation.getTotal() + "', '" + operation.getOPersonalCost() + "');";
                 stmt = c.createStatement();
                 stmt.executeUpdate(sql);
                 c.commit();

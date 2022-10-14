@@ -7,20 +7,20 @@ public abstract class User {
 
     private final int id;
     private final String name;
-    private final String passwordHash;
+    private final String password;
     private static int lastID;
     private final String email;
 
     public User(String name, String password,String email) {
-        this.passwordHash=getHash(password);
+        this.password =getHash(password);
         lastID++;
         this.id = lastID;
         this.name = name;
         this.email = email;
     }
 
-    public User(String name, String passwordHash, String email,int id) {
-        this.passwordHash=passwordHash;
+    public User(String name, String password, String email, int id) {
+        this.password = password;
         this.id=id;
         lastID = Math.max(lastID, id);
         this.name = name;
@@ -56,8 +56,8 @@ public abstract class User {
         return name;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getPassword() {
+        return password;
     }
 
     public static int getLastID() {
