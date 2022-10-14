@@ -173,13 +173,13 @@ public final class Program {
             articles.add(new Compound(name, components, id));
         }
 
-        rs = stmt.executeQuery("SELECT * FROM CatalogHead;");
+        rs = stmt.executeQuery("SELECT * FROM InventoryUser;");
         while (rs.next()) {
             int id = rs.getInt("idHead");
             String description = rs.getString("Description");
             String marketZone = rs.getString("MarketZone");
             ArrayList<Article> tmp = new ArrayList<>();
-            rs1 = stmt1.executeQuery("SELECT * FROM CatalogRow WHERE IdHead = " + id + " ;");
+            rs1 = stmt1.executeQuery("SELECT * FROM InventoryArticle WHERE IdHead = " + id + " ;");
             while (rs1.next()) {
                 int idArticle = rs1.getInt("idArticle");
                 for (Article a : articles) {
@@ -221,17 +221,17 @@ public final class Program {
             }
         }
 
-        rs = stmt.executeQuery("SELECT * FROM OrderHead;");
+        rs = stmt.executeQuery("SELECT * FROM CustomerAssistant;");
         while (rs.next()) {
             int id = rs.getInt("idHead");
-            int idAgent = rs.getInt("idAgent");
+            int Assistant = rs.getInt("idAssistant");
             int idCustomers = rs.getInt("IdCustomer");
             float total = rs.getFloat("Total");
             float cost = rs.getFloat("PersonalCost");
 
             Assistant tmpAssistant = null;
             for (User i : users) {
-                if (i.getId() == idAgent) {
+                if (i.getId() == Assistant) {
                     tmpAssistant = (Assistant) i;
                     break;
                 }
@@ -251,7 +251,7 @@ public final class Program {
             }
 
             ArrayList<Pair<Article, Integer>> tmp = new ArrayList<>();
-            rs1 = stmt1.executeQuery("SELECT * FROM OrderRow WHERE IdHead = " + id + " ;");
+            rs1 = stmt1.executeQuery("SELECT * FROM CustomerAssistantArticle WHERE IdHead = " + id + " ;");
             while (rs1.next()) {
                 int idArticle = rs1.getInt("idArticle");
                 int qta = rs1.getInt("qta");
@@ -272,7 +272,7 @@ public final class Program {
         Statement stmt = null;
         try {
             stmt = c.createStatement();
-            for (String s : Arrays.asList("DELETE FROM User;", "DELETE FROM OrderHead;", "DELETE FROM OrderRow;", "DELETE FROM Notification;", "DELETE FROM Customer;", "DELETE FROM CatalogRow;", "DELETE FROM CatalogHead;", "DELETE FROM Article;", "DELETE FROM ArticleCompound;")) {
+            for (String s : Arrays.asList("DELETE FROM User;", "DELETE FROM CustomerAssistant;", "DELETE FROM CustomerAssistantArticle;", "DELETE FROM Notification;", "DELETE FROM Customer;", "DELETE FROM InventoryArticle;", "DELETE FROM InventoryUser;", "DELETE FROM Article;", "DELETE FROM ArticleCompound;")) {
                 sql = s;
                 stmt.executeUpdate(sql);
                 c.commit();
@@ -319,9 +319,9 @@ public final class Program {
         for (Operation operation : operations) {
             try {
                 if (operation.getAssistant() != null)
-                    sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,PersonalCost) " + "VALUES (" + operation.getId() + ", '" + operation.getAssistant().getId() + "', " + operation.getCustomer().getId() + " ,'" + operation.getTotal() + "', '" + operation.getOPersonalCost() + "');";
+                    sql = "INSERT INTO CustomerAssistant (idHead,idAssistant,IdCustomer,Total,PersonalCost) " + "VALUES (" + operation.getId() + ", '" + operation.getAssistant().getId() + "', " + operation.getCustomer().getId() + " ,'" + operation.getTotal() + "', '" + operation.getOPersonalCost() + "');";
                 else
-                    sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,PersonalCost) " + "VALUES (" + operation.getId() + ", '" + -1 + "', " + operation.getCustomer().getId() + " ,'" + operation.getTotal() + "', '" + operation.getOPersonalCost() + "');";
+                    sql = "INSERT INTO CustomerAssistant (idHead,idAssistant,IdCustomer,Total,PersonalCost) " + "VALUES (" + operation.getId() + ", '" + -1 + "', " + operation.getCustomer().getId() + " ,'" + operation.getTotal() + "', '" + operation.getOPersonalCost() + "');";
                 stmt = c.createStatement();
                 stmt.executeUpdate(sql);
                 c.commit();
@@ -330,7 +330,7 @@ public final class Program {
             }
             try {
                 for (Pair<Article, Integer> i : operation.getRows()) {
-                    sql = "INSERT INTO OrderRow (idHead,idArticle,qta) " + "VALUES (" + operation.getId() + ", " + i.getValue0().getId() + "," + i.getValue1() + ");";
+                    sql = "INSERT INTO CustomerAssistantArticle (idHead,idArticle,qta) " + "VALUES (" + operation.getId() + ", " + i.getValue0().getId() + "," + i.getValue1() + ");";
                     stmt = c.createStatement();
                     stmt.executeUpdate(sql);
                     c.commit();
@@ -342,7 +342,7 @@ public final class Program {
 
         for (Inventory inventory : inventories) {
             try {
-                sql = "INSERT INTO CatalogHead (idHead,Description,MarketZone) " + "VALUES (" + inventory.getId() + ", '" + inventory.getDescription() + "', '" + inventory.getZone() + "');";
+                sql = "INSERT INTO InventoryUser (idHead,Description,MarketZone) " + "VALUES (" + inventory.getId() + ", '" + inventory.getDescription() + "', '" + inventory.getZone() + "');";
                 stmt = c.createStatement();
                 stmt.executeUpdate(sql);
                 c.commit();
@@ -351,7 +351,7 @@ public final class Program {
             }
             try {
                 for (Article article : inventory.getArticles()) {
-                    sql = "INSERT INTO CatalogRow (idHead,idArticle) " + "VALUES (" + inventory.getId() + ", " + article.getId() + ");";
+                    sql = "INSERT INTO InventoryArticle (idHead,idArticle) " + "VALUES (" + inventory.getId() + ", " + article.getId() + ");";
                     stmt = c.createStatement();
                     stmt.executeUpdate(sql);
                     c.commit();
