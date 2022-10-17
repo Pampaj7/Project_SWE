@@ -16,7 +16,7 @@ public final class NotificationEmail implements Observer {
             if (u instanceof Dentist)
                 to += u.getEmail() + ",";
         }
-        to = to.substring(0, to.length() - 1); //TODO mettere email dell'admin
+        to = to.substring(0, to.length() - 1);
 
         String products = "";
         for (Pair<Article, Integer> a : o.getRows()) {
@@ -323,9 +323,7 @@ public final class NotificationEmail implements Observer {
                 "            <div class=\"footer\">\n" +
                 "                <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n" +
                 "                    <tr>\n" +
-                "                        <td>\n" +
-                "                  <img height=\"25%\" width=\"25%\" src=\"https://scontent-mxp1-1.xx.fbcdn.net/v/t39.30808-6/248305243_540750100658412_7238838522423109523_n.png?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=hqULVtUXGqIAX8NNNXb&_nc_ht=scontent-mxp1-1.xx&oh=00_AT-oKHmUoe76Cfb86O6TNyUtsMdUe9B2LxBq-xV1LkMM3Q&oe=6339869B\">\n" +
-                "                </td>\n" +
+
                 "                    </tr>\n" +
                 "                </table>\n" +
                 "            </div>\n" +
@@ -414,9 +412,6 @@ public final class NotificationEmail implements Observer {
                 "          <td>\n" +
                 "            <table bgcolor=\"#ffffff\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"line-height:22px;\">\n" +
                 "              <tr>\n" +
-                "                <td>\n" +
-                "                  <img height=\"25%\" width=\"25%\" src=\"https://scontent-mxp1-1.xx.fbcdn.net/v/t39.30808-6/248305243_540750100658412_7238838522423109523_n.png?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=hqULVtUXGqIAX8NNNXb&_nc_ht=scontent-mxp1-1.xx&oh=00_AT-oKHmUoe76Cfb86O6TNyUtsMdUe9B2LxBq-xV1LkMM3Q&oe=6339869B\">\n" +
-                "                </td>\n" +
                 "              </tr>\n" +
                 "              <tr>\n" +
                 "                <td height=\"45\"></td>\n" +

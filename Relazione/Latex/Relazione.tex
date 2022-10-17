@@ -177,14 +177,17 @@ Per avere più chiarezza su come è strutturato il DB abbiamo fatto il diagramma
 \end{figure}
 
 \subsubsection{Compound DB Structure}
+Di seguito riportiamo una scelta implementativa all'interno del database a nostro dire: 'interessante'. Durante la creazione della logica della struttura dati dovevamo creare un modo per archiviare gli articoli di tipo compound. Essendo questi degli articoli composti da articoli che potevano essere aggiunti ai vari inventari dovevamo travare un modo di creare una composizione all'interno del database. Come possiamo notare la tabella article è composta da un id, un nome e un prezzo.
 \begin{figure}[h]
 \centerline{\includegraphics[scale=.5]{DBArticle}}
 \caption{Struttura Article}
 \end{figure}
 
+La tabella ArticleCompound è composta da un idCoumpound e un idComponent. Facendo si che entrambe le colonne siano chiave primaria possiamo 'duplicare' i vari idCompound e associarvi diversi idComponent. Questo stratagemma conclude con l'associazione di vari articoli ad un articolo indipendente.
+
 \begin{figure}[h]
 \centerline{\includegraphics[scale=.5]{DBArticleCompound}}
-\caption{Struttura Article Compound}
+\caption{Struttura ArticleCompound}
 \end{figure}
 
 
@@ -192,6 +195,8 @@ Per avere più chiarezza su come è strutturato il DB abbiamo fatto il diagramma
 Di seguito riportiamo alcuni dei più importanti metodi utilizzati che necessitano di una spiegazione più approfondita.
 
 \subsection{Observer}
+
+Il pattern Observer è utilizzato per notificare sia il dentista che i vari assistenti. Il nostro intento era di fornire all'assistente un resoconto dell'operazione con i vari articoli utilizzato e l'importo dei materiali. Per il dentista invece funge da 'allarme' non appena un assistente dichiara di aver utilizzato alcuni articoli. Più nello specifico il nostro subject non è altro che l'assistente in quanto è responsabile di effettuare le operazioni. Appena si logga gli observer verranno legati tramite il metodo \textit{attach()} e \textit{detach()} non appena si slogga. Il pattern observer è implementato attraverso due interfacce ovvero il NotificationEmail e il NotificationCenter. La prioma è responsabile di inviare una mail ai diretti interessati col resoconto delle operazioni. L'altra invece è responsabile di notificare il dentista alla sua entrata con le operazioni effettuate in sua assenza.
 \UseRawInputEncoding
 \begin{lstlisting}[caption={Observer},captionpos=b]
 public final class NotificationCenter implements Observer {
@@ -209,7 +214,8 @@ public final class NotificationCenter implements Observer {
 
 
 \subsubsection{Email Observer}
-\begin{listing}[caption={Email Observer},captionpos=b]
+\UseRawInputEncoding
+\begin{lstlisting}[caption={Email Observer},captionpos=b]
 public final class NotificationEmail implements Observer {
 
     @Override
@@ -268,16 +274,446 @@ private void sendEmail(String to, String obj, String text) {
     }
 
 }
-\end{listing}
+\end{lstlisting}
+Una volta che il sistema registra le nuove operazioni queste sono le email inoltrate automaticamente dal sistema.
+
+
+\begin{figure}[h]
+\centerline{\includegraphics[scale=.2]{EmailPerAssist}}
+\caption{Email inoltrata all'assistente che ha effettuato l'operazione}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\includegraphics[scale=.2]{EmailPerDentista}}
+\caption{Email inoltrata al dentista.}
+\end{figure}
+
+\subsubsection{Cursiosita'}
+
+pippo scrivi cosa hai fatto ed il casino successo
+
+\begin{figure}[h]
+\centerline{\includegraphics[scale=.2]{SiamoStatiHackerati}}
+\caption{Email inoltrata al dentista.}
+\end{figure}
+
 
 
 
 \subsection{User}
-\subsection{Dentist}
-\subsection{Operation}
+La classe User è dichiarata astratta in modo che possa fornire una base di partenza per tutti i tipi di utenti previsti e non nel nostro programma. La classe astratta presenta vari metodi di base come il \textit{viewOperations()} e il \textit{viewInventory()} che sono comuni ai vari tipi di utente previsti.
+Questi due metodi sono implementati nelle classi derivate in due modi diversi in quanto un assistente può visualizzare le operazioni fatte soltanto da loro e non pò vedere quelle degli altri. Il dentista invece è in grado di vedere tutte le operazioni in quanto 'Admin' del sistema. Possiede inoltre un attributo comune quale la password in quanto ogni utente per loggare nel programma avrà bisogno delle sue credenziali d'accesso.
+
+\subsubsection{Assistant}
+Come in un vero studio dentistico gli assistenti sono in grado di effettuare le proprie operazioni supervisionati dal dentista effettivo. Sono in grado di aggiungere i clienti, effettuare delle nuove operazioni con l'inventario a loro associato. Possono essere in grado di eliminare anche i clienti nel caso in cui questi vogliano cambiare studio dentistico. Quando gli assistenti effettuano un'operazione l'observer notifica attraverso il sistema di mail sia lui stesso con il resoconto degli articoli utilizzati sia il dentista.
+
+\UseRawInputEncoding
+\begin{lstlisting}[caption={Crezione operazione},captionpos=b]
+ public void createOperation(Customer c, ArrayList<Pair<Article,Integer>> articles) {
+        Operation operation = new Operation(this,articles,c);
+        Program.getInstance().getOperations().add(operation);
+        System.out.println("Creato!");
+        notify(new Operation(operation));
+    }
+\end{lstlisting}
+
+
+\UseRawInputEncoding
+\begin{lstlisting}[caption={Notify},captionpos=b]
+  public void notify(Object obj) {
+        for(Observer o: observers)
+            o.update(obj);
+    }
+
+\end{lstlisting}
+
+\subsubsection{Dentist}
+Il dentista, ovvero l'Admin del sistema è in grado di visualizzare tutto di tutti. E' inoltre il responsabile della creazione di nuovi inventari, aggiunta di articoli e articoli composti. Può inoltre cancellare qualsiasi cosa, persino gli assistenti. Quando assume un nuovo assistente deve associare una mail esistente in modo che il sistema di notifica possa funzionare correttamente.
+
+
+\UseRawInputEncoding
+\begin{lstlisting}[caption={Crezione assistente},captionpos=b]
+  public void createAssistant(String name, String password, float commission, Inventory inventory, String email) {
+        Program.getInstance().getUsers().add(new Assistant(name,password,commission, inventory,email));
+        System.out.println("Creato!");
+    }
+\end{lstlisting}
+
+Come vediamo nel seguente esempio può vedere tutte le operazioni di uno specifico cliente.
+
+\UseRawInputEncoding
+\begin{lstlisting}[caption={Controllo operazioni di un cliente specifico},captionpos=b]
+public void viewCustomerOperations(int idCustomer){
+
+        System.out.println("----------------------------------");
+        boolean check = false;
+        for(Operation i : Program.getInstance().getOperations()){
+            if (i.getAssistant()!=null&&i.getAssistant().getId()==idCustomer) {
+                System.out.println("Operazione -> ID: " + i.getId() + " TOTALE: " + i.getTotal() + "€ COSTO PERSONALE: " + i.getOPersonalCost() + "€ CLIENTE: " + i.getCustomer().getBusinessName());
+                i.printArticle();
+                check = true;
+            }
+        }
+        if(!check)
+            System.out.println("Non ci sono ordini!.");
+        System.out.println("----------------------------------");
+
+    }
+\end{lstlisting}
+
+
+\UseRawInputEncoding
+\begin{lstlisting}[caption={Eliminazione di un assistente},captionpos=b]
+  public void deleteAssistant(int idAgent){
+        Assistant assistant =null;
+        for(User i : Program.getInstance().getUsers()){
+            if (i instanceof Assistant && i.getId()==idAgent){
+                assistant = (Assistant) i;
+                break;
+            }
+        }
+\end{lstlisting}
+
+Durante l'eliminazione di un relativo inventario ci siamo trovati davanti ad una difficile scelta implementativa. La problematica era che eliminando un inventario si eliminava pure lo storico delle operazioni di un assistente che ha attinto a quei vari articoli. Inizialmente avevamo creato dei controlli affinchè non si potesse eliminare un inventario se un assistente avesse usato delle componenti proprie. Successivamente però, anche da un confronto con la realtà, abbiamo deciso di ignorare il problema perchè se scegliamo di eliminare un determinato inventario è perchè decidiamo di effettuare una ristrutturazione della gestione delle risorse in quanto possono cambiare prezzi e disponibilità.
+
+\UseRawInputEncoding
+\begin{lstlisting}[caption={Eliminazione di un inventario},captionpos=b]
+ public void deleteInventory(int IdCatalog){
+        Inventory tmp = null;
+
+
+
+        for(Inventory i: Program.getInstance().getInventories()){
+            if(i.getId()==IdCatalog){
+                tmp = i;
+            }
+        }
+
+        if (tmp == null){
+            System.err.println("ID sbagliato! Riprovare");
+            return;
+        }
+
+        Program.getInstance().getInventories().remove(tmp);
+        System.out.println("Cancellato!");
+    }
+\end{lstlisting}
+
+
+
+\UseRawInputEncoding
+\begin{lstlisting}[caption={Controllo operazioni di un cliente specifico},captionpos=b]
+\end{lstlisting}
+
+
+\UseRawInputEncoding
+\begin{lstlisting}[caption={Controllo operazioni di un cliente specifico},captionpos=b]
+\end{lstlisting}
+
+
 \subsection{Program}
+La classe Program è responsabile del download e upload dei dati attraverso la funzione \textit{load(Connection c)}, i dati vengono recuperati attraverso delle query al database indicato nella connection e caricati allinterno degli ArrayList della classe. Durante questa fase di sviluppo, StackOverflow si è rivelato il nostro migliore amico.
 
 
+\UseRawInputEncoding
+\begin{lstlisting}[caption={Implementazione Load},captionpos=b]
+public void load(Connection c) throws SQLException {
+
+        Statement stmt = c.createStatement();
+        Statement stmt1 = c.createStatement();
+        ResultSet rs, rs1;
+
+        rs = stmt.executeQuery("SELECT * FROM Customer;");
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String businessName = rs.getString("BusinessName");
+            String country = rs.getString("Country");
+            String email = rs.getString("Email");
+            customers.add(new Customer(id, businessName, country, email));
+        }
+
+        rs = stmt.executeQuery("SELECT * FROM Notification;");
+        while (rs.next()) {
+            String message = rs.getString("message");
+            notCenter.addNotification(message);
+        }
+
+        rs = stmt.executeQuery("SELECT * FROM Article WHERE id not in (SELECT IdCompound FROM ArticleCompound );");
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            float price = rs.getFloat("Price");
+            articles.add(new Product(name, price, id));
+        }
+        rs = stmt.executeQuery("SELECT * FROM Article WHERE id in (SELECT IdCompound FROM ArticleCompound );");
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            ArrayList<Article> components = new ArrayList<>();
+            rs1 = stmt1.executeQuery("SELECT * FROM ArticleCompound WHERE IdCompound = " + id + " ;");
+            while (rs1.next()) {
+                int idComponent = rs1.getInt("idComponent");
+
+                for (Article a : articles) {
+                    if (a.getId() == idComponent) {
+                        components.add(a);
+                        break;
+                    }
+                }
+            }
+            articles.add(new Compound(name, components, id));
+        }
+
+        rs = stmt.executeQuery("SELECT * FROM InventoryUser;");
+        while (rs.next()) {
+            int id = rs.getInt("idHead");
+            String description = rs.getString("Description");
+            String marketZone = rs.getString("MarketZone");
+            ArrayList<Article> tmp = new ArrayList<>();
+            rs1 = stmt1.executeQuery("SELECT * FROM InventoryArticle WHERE IdHead = " + id + " ;");
+            while (rs1.next()) {
+                int idArticle = rs1.getInt("idArticle");
+                for (Article a : articles) {
+                    if (a.getId() == idArticle) {
+                        tmp.add(a);
+                        break;
+                    }
+                }
+            }
+            inventories.add(new Inventory(tmp, description, marketZone, id));
+        }
+
+        rs = stmt.executeQuery("SELECT * FROM User;");
+        while (rs.next()) {
+            int id = rs.getInt("id");                             //1 agent - 0 administrator
+            String name = rs.getString("Name");
+            String passHash = rs.getString("Password");
+            int type = rs.getInt("Type");
+            int idInventory = rs.getInt("IdInventory");
+            float personalCost = rs.getFloat("PersonalCost");
+            String email = rs.getString("email");
+
+            if (type == 1) {
+                Inventory tmp = null;
+                for (Inventory i : inventories) {
+                    if (i.getId() == idInventory) {
+                        tmp = i;
+                    }
+                }
+
+                if (tmp == null) {
+                    System.err.println("Inventory don't exist!");
+                    break;
+                }
+
+                users.add(new Assistant(name, passHash, personalCost, tmp, email, id));
+            } else {
+                users.add(new Dentist(name, passHash, email, id));
+            }
+        }
+
+        rs = stmt.executeQuery("SELECT * FROM CustomerAssistant;");
+        while (rs.next()) {
+            int id = rs.getInt("idHead");
+            int Assistant = rs.getInt("idAssistant");
+            int idCustomers = rs.getInt("IdCustomer");
+            float total = rs.getFloat("Total");
+            float cost = rs.getFloat("PersonalCost");
+
+            Assistant tmpAssistant = null;
+            for (User i : users) {
+                if (i.getId() == Assistant) {
+                    tmpAssistant = (Assistant) i;
+                    break;
+                }
+            }
+
+            Customer tmpCustomer = null;
+            for (Customer i : customers) {
+                if (i.getId() == idCustomers) {
+                    tmpCustomer = i;
+                    break;
+                }
+            }
+
+            if (tmpCustomer == null) {
+                System.err.println("Customer don't exist!");
+                break;
+            }
+
+            ArrayList<Pair<Article, Integer>> tmp = new ArrayList<>();
+            rs1 = stmt1.executeQuery("SELECT * FROM CustomerAssistantArticle WHERE IdHead = " + id + " ;");
+            while (rs1.next()) {
+                int idArticle = rs1.getInt("idArticle");
+                int qta = rs1.getInt("qta");
+                for (Article a : articles) {
+                    if (a.getId() == idArticle) {
+                        tmp.add(new Pair<>(a, qta));
+                        break;
+                    }
+                }
+            }
+            operations.add(new Operation(total, cost, tmpAssistant, tmp, tmpCustomer, id));
+        }
+
+    }
+
+\end{lstlisting}
+
+Analogamente abbiamo la parte che consente l'operazione opposta che elimina tutte le entry nel DB e inserisce le nuove tuple.
+
+\UseRawInputEncoding
+\begin{lstlisting}[caption={Implementazione Upload},captionpos=b]
+public void upload(Connection c) {
+        String sql;
+        Statement stmt = null;
+        try {
+            stmt = c.createStatement();
+            for (String s : Arrays.asList("DELETE FROM User;", "DELETE FROM CustomerAssistant;", "DELETE FROM CustomerAssistantArticle;", "DELETE FROM Notification;", "DELETE FROM Customer;", "DELETE FROM InventoryArticle;", "DELETE FROM InventoryUser;", "DELETE FROM Article;", "DELETE FROM ArticleCompound;")) {
+                sql = s;
+                stmt.executeUpdate(sql);
+                c.commit();
+            }
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+
+        int type;
+        float perch;
+        for (User user : users) {
+            try {
+                if (!(user instanceof Assistant)) {
+                    type = 0;
+                    perch = 0;
+                    sql = "INSERT INTO User (Id,Name,Password,Type,PersonalCost,email) " + "VALUES (" + user.getId() + ", '" + user.getName() + "', '" + user.getPassword() + "', " + type + ", " + perch + " ,'" + user.getEmail() + "');";
+                } else {
+                    type = 1;
+                    Assistant tmp = (Assistant) user;
+                    perch = tmp.getPersonalCost();
+                    sql = "INSERT INTO User (Id,Name,Password,Type,PersonalCost,idInventory,email) " + "VALUES (" + user.getId() + ", '" + user.getName() + "', '" + user.getPassword() + "', " + type + ", " + perch + " ," + tmp.getInventory().getId() + " ,'" + user.getEmail() + "');";
+                }
+
+                stmt = c.createStatement();
+                stmt.executeUpdate(sql);
+                c.commit();
+            } catch (Exception e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
+
+        for (Customer customer : customers) {
+            try {
+                sql = "INSERT INTO Customer (id,BusinessName,Country,Email) " + "VALUES (" + customer.getId() + ", '" + customer.getBusinessName() + "', '" + customer.getCountry() + "', '" + customer.getEmail() + "');";
+                stmt = c.createStatement();
+                stmt.executeUpdate(sql);
+                c.commit();
+            } catch (Exception e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
+
+        for (Operation operation : operations) {
+            try {
+                if (operation.getAssistant() != null)
+                    sql = "INSERT INTO CustomerAssistant (idHead,idAssistant,IdCustomer,Total,PersonalCost) " + "VALUES (" + operation.getId() + ", '" + operation.getAssistant().getId() + "', " + operation.getCustomer().getId() + " ,'" + operation.getTotal() + "', '" + operation.getOPersonalCost() + "');";
+                else
+                    sql = "INSERT INTO CustomerAssistant (idHead,idAssistant,IdCustomer,Total,PersonalCost) " + "VALUES (" + operation.getId() + ", '" + -1 + "', " + operation.getCustomer().getId() + " ,'" + operation.getTotal() + "', '" + operation.getOPersonalCost() + "');";
+                stmt = c.createStatement();
+                stmt.executeUpdate(sql);
+                c.commit();
+            } catch (Exception e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+            try {
+                for (Pair<Article, Integer> i : operation.getRows()) {
+                    sql = "INSERT INTO CustomerAssistantArticle (idHead,idArticle,qta) " + "VALUES (" + operation.getId() + ", " + i.getValue0().getId() + "," + i.getValue1() + ");";
+                    stmt = c.createStatement();
+                    stmt.executeUpdate(sql);
+                    c.commit();
+                }
+            } catch (Exception e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
+
+        for (Inventory inventory : inventories) {
+            try {
+                sql = "INSERT INTO InventoryUser (idHead,Description,MarketZone) " + "VALUES (" + inventory.getId() + ", '" + inventory.getDescription() + "', '" + inventory.getZone() + "');";
+                stmt = c.createStatement();
+                stmt.executeUpdate(sql);
+                c.commit();
+            } catch (Exception e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+            try {
+                for (Article article : inventory.getArticles()) {
+                    sql = "INSERT INTO InventoryArticle (idHead,idArticle) " + "VALUES (" + inventory.getId() + ", " + article.getId() + ");";
+                    stmt = c.createStatement();
+                    stmt.executeUpdate(sql);
+                    c.commit();
+                }
+            } catch (Exception e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+
+        }
+
+        for (Article article : articles) {
+            if (article instanceof Compound) {
+                Compound tmp = (Compound) article;
+                for (Article a : tmp.getComponents()) {
+                    try {
+                        sql = "INSERT INTO ArticleCompound (IdCompound,IdComponent) " + "VALUES (" + article.getId() + ", " + a.getId() + ");";
+                        stmt = c.createStatement();
+                        stmt.executeUpdate(sql);
+                        c.commit();
+                    } catch (Exception e) {
+                        System.err.println(e.getClass().getName() + ": " + e.getMessage());
+                    }
+                }
+            }
+            try {
+                sql = "INSERT INTO Article (Id,Name,Price) " + "VALUES (" + article.getId() + ", '" + article.getName() + "', '" + article.getPrice() + "');";
+                stmt = c.createStatement();
+                stmt.executeUpdate(sql);
+                c.commit();
+            } catch (Exception e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
+
+        for (String notify : notCenter.getNotification()) {
+            try {
+                sql = "INSERT INTO Notification (Message) " + "VALUES ('" + notify + "');";
+                stmt = c.createStatement();
+                stmt.executeUpdate(sql);
+                c.commit();
+            } catch (Exception e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
+
+        try {
+            stmt.close();
+            c.close();
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
+
+        instance = null;
+    }
+\end{lstlisting}
+
+Il metodo \textit{Run()} rappresenta il loop del sistema. Instaura la connessione col Database tramite la DBConnection, chiede i dati per il login ed effettua il ciclo sulla variabile booleana \textit{WantClose()} da cui si chiama lo \textit{ShowMenu()}. Quando si desidera uscire dal programma questa variabile verrà messa a true interrompendo il loop.
+\UseRawInputEncoding
+\begin{lstlisting}[caption={Implementazione Run()},captionpos=b]
+\end{lstlisting}
+
+ 
+
+\section{UnitTest}
+mettere apposto i db
 
 \end{document}
 
