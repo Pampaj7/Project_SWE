@@ -95,7 +95,7 @@ public final class Program {
 
     public boolean login(String name, String psw) {
         for (User i : users) {
-            if (name.equals(i.getName())) {
+            if (name.equals(i.getName())&&psw.equals(i.getPassword())) {
                 activeUser = i;
                 break;
             }
