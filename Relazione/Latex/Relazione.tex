@@ -4,6 +4,35 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{needspace}
+
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{color}
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{10pt}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{darkOrange}{rgb}{0.8,0.4, 0.0}
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=5mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{darkOrange},
+  commentstyle=\color{mauve},
+  stringstyle=\color{dkgreen},
+  breaklines=true,
+  breakatwhitespace=true,
+  basicstyle=\ttm\linespread{0.6}\selectfont,
+  tabsize=3
+}
+
+
+
 \graphicspath{ {Img/}}
 \title{Dentist management system}
 \author{Leonardo Pampaloni, Filippo di Martino}
@@ -147,12 +176,108 @@ Per avere più chiarezza su come è strutturato il DB abbiamo fatto il diagramma
 \caption{Diagramma E/R della struttura dati}
 \end{figure}
 
+\subsubsection{Compound DB Structure}
+\begin{figure}[h]
+\centerline{\includegraphics[scale=.5]{DBArticle}}
+\caption{Struttura Article}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\includegraphics[scale=.5]{DBArticleCompound}}
+\caption{Struttura Article Compound}
+\end{figure}
 
 
 \section{Implementazione e approfondimento}
 Di seguito riportiamo alcuni dei più importanti metodi utilizzati che necessitano di una spiegazione più approfondita.
 
-\subsection{}
+\subsection{Observer}
+\UseRawInputEncoding
+\begin{lstlisting}[caption={Observer},captionpos=b]
+public final class NotificationCenter implements Observer {
+
+    private ArrayList<String> notification;
+
+ @Override
+    public void update(Object obj) {
+        Operation operation = (Operation)obj;
+        this.notification.add("Una nuova operazione per " + operation.getCustomer().getBusinessName() + " è stata fatta da " + operation.getAssistant().getName());
+    }
+
+}
+\end{lstlisting}
+
+
+\subsubsection{Email Observer}
+\begin{listing}[caption={Email Observer},captionpos=b]
+public final class NotificationEmail implements Observer {
+
+    @Override
+    public void update(Object obj) {
+        Operation o = (Operation) obj;
+        String to = "";
+        for (User u : Program.getInstance().getUsers()) {
+            if (u instanceof Dentist)
+                to += u.getEmail() + ",";
+        }
+        to = to.substring(0, to.length() - 1); //TODO mettere email dell'admin
+
+        String products = "";
+        for (Pair<Article, Integer> a : o.getRows()) {
+            products += "--" + a.getValue0().getName() + " qta: " + a.getValue1() + " <br>"; //TODO WOWOWOWOW
+        }
+
+        String text;
+        text = " ... ";
+
+private void sendEmail(String to, String obj, String text) {
+
+        String test = "pippodima99@gmail.com";
+        String from = "ing.software.dimpa@gmail.com";
+
+        Properties properties = System.getProperties();
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "465");
+        properties.put("mail.smtp.ssl.enable", "true");
+        properties.put("mail.smtp.auth", "true");
+
+        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("ing.software.dimpa@gmail.com", "rkqvtlxwtcaczfjj\n"); //mbvmolrwfpmzcuoq neauczeusvreoesu
+
+            }
+        });
+
+        session.setDebug(true);
+
+        try {
+            MimeMessage message = new MimeMessage(session);
+
+            message.setFrom(new InternetAddress(from));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setSubject(obj);
+            message.setContent(text, "text/html");
+
+            System.out.println("sending...");
+            Transport.send(message);
+            System.out.println("inviato");
+
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+        }
+    }
+
+}
+\end{listing}
+
+
+
+\subsection{User}
+\subsection{Dentist}
+\subsection{Operation}
+\subsection{Program}
+
+
 
 \end{document}
 
