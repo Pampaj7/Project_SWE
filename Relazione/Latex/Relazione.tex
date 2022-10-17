@@ -117,7 +117,7 @@ Questo pattern permette di definire una dipendenza 1$\longrightarrow$N fra ogget
 Il pattern serve per poter trattare un gruppo di oggetti come istanza di un oggetto singolo. Solitamente questo raggruppamento si può vedere come una struttura ad albero, nel progetto però il pattern è stato leggermente modificato per permettere l'annidamento delle classi composte, in questo caso infatti il grafico del pattern potrebbe essere riassunto con un grafo anzichè un albero.
 
 \begin{figure}[h]
-\centerline{\includegraphics[scale=.5]{CompositePattern}}
+\centerline{\includegraphics[scale=.45]{CompositePattern}}
 \caption{Diagramma delle classi (Composite pattern)}
 \end{figure}
 
@@ -133,7 +133,7 @@ Di seguito lo Use Case completo del progetto.
 \end{figure}
 
 
-
+\newpage
 \subsubsection{Dentist's Use Case}
 Si distinguono quattro macro gruppi di casi d'uso:
 \begin{enumerate} 
@@ -152,7 +152,7 @@ Si distinguono quattro macro gruppi di casi d'uso:
 \caption{Diagramma dei casi d'uso del Dentista}
 \end{figure}
 
-
+\newpage
 \subsubsection{Assistent's Use Case}
 Nello \textsl{Use Case Diagram} dell'Assistente invece sono presenti meno funzionalità:
 \begin{enumerate} 
@@ -176,27 +176,28 @@ Per avere più chiarezza su come è strutturato il DB abbiamo fatto il diagramma
 \caption{Diagramma E/R della struttura dati}
 \end{figure}
 
+\newpage
 \subsubsection{Compound DB Structure}
 Di seguito riportiamo una scelta implementativa all'interno del database a nostro dire: 'interessante'. Durante la creazione della logica della struttura dati dovevamo creare un modo per archiviare gli articoli di tipo compound. Essendo questi degli articoli composti da articoli che potevano essere aggiunti ai vari inventari dovevamo travare un modo di creare una composizione all'interno del database. Come possiamo notare la tabella article è composta da un id, un nome e un prezzo.
 \begin{figure}[h]
-\centerline{\includegraphics[scale=.5]{DBArticle}}
+\centerline{\includegraphics[scale=.45]{DBArticle}}
 \caption{Struttura Article}
 \end{figure}
-
+\newpage
 La tabella ArticleCompound è composta da un idCoumpound e un idComponent. Facendo si che entrambe le colonne siano chiave primaria possiamo 'duplicare' i vari idCompound e associarvi diversi idComponent. Questo stratagemma conclude con l'associazione di vari articoli ad un articolo indipendente.
 
 \begin{figure}[h]
-\centerline{\includegraphics[scale=.5]{DBArticleCompound}}
+\centerline{\includegraphics[scale=.45]{DBArticleCompound}}
 \caption{Struttura ArticleCompound}
 \end{figure}
 
-
+\newpage
 \section{Implementazione e approfondimento}
 Di seguito riportiamo alcuni dei più importanti metodi utilizzati che necessitano di una spiegazione più approfondita.
 
 \subsection{Observer}
 
-Il pattern Observer è utilizzato per notificare sia il dentista che i vari assistenti. Il nostro intento era di fornire all'assistente un resoconto dell'operazione con i vari articoli utilizzato e l'importo dei materiali. Per il dentista invece funge da 'allarme' non appena un assistente dichiara di aver utilizzato alcuni articoli. Più nello specifico il nostro subject non è altro che l'assistente in quanto è responsabile di effettuare le operazioni. Appena si logga gli observer verranno legati tramite il metodo \textit{attach()} e \textit{detach()} non appena si slogga. Il pattern observer è implementato attraverso due interfacce ovvero il NotificationEmail e il NotificationCenter. La prioma è responsabile di inviare una mail ai diretti interessati col resoconto delle operazioni. L'altra invece è responsabile di notificare il dentista alla sua entrata con le operazioni effettuate in sua assenza.
+Il pattern Observer è utilizzato per notificare sia il dentista che i vari assistenti. Il nostro intento era di fornire all'assistente un resoconto dell'operazione con i vari articoli utilizzati e l'importo dei materiali. Per il dentista invece funge da 'allarme' non appena un assistente dichiara di aver utilizzato alcuni articoli. Più nello specifico il nostro subject non è altro che l'assistente in quanto è responsabile di effettuare le operazioni. Durante il login gli observer sono legati con il metodo \textit{attach()} e al momento del logout viene chiamato il metodo \textit{detach()}. Il pattern observer è implementato attraverso due interfacce ovvero il NotificationEmail e il NotificationCenter. La prima è responsabile di inviare una mail ai diretti interessati col resoconto delle operazioni. L'altra invece è responsabile di notificare il dentista alla sua entrata con le operazioni effettuate in sua assenza.
 \UseRawInputEncoding
 \begin{lstlisting}[caption={Observer},captionpos=b]
 public final class NotificationCenter implements Observer {
@@ -278,34 +279,37 @@ private void sendEmail(String to, String obj, String text) {
 Una volta che il sistema registra le nuove operazioni queste sono le email inoltrate automaticamente dal sistema.
 
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centerline{\includegraphics[scale=.2]{EmailPerAssist}}
 \caption{Email inoltrata all'assistente che ha effettuato l'operazione}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centerline{\includegraphics[scale=.2]{EmailPerDentista}}
 \caption{Email inoltrata al dentista.}
 \end{figure}
 
+
 \subsubsection{Cursiosita'}
 
-pippo scrivi cosa hai fatto ed il casino successo
+Durante le numerose prove di testing per il funzionamento del sistema di notifica e-mail, siamo andati incontro a un imprevisto. Avendo disattivato tutte le possibili protezioni sull'account per poterci accedere dall'applicazione, pensiamo che il fatto di aver fatto tante prove in poco tempo abbia "attirato l'attenzione" di persone di terze parti che sono entrati nell'account o hanno fatto entrare l'indirizzo email in loop di promozioni  e spam vari. Ce ne siamo accorti quando nel lanciare il metodo per mandare l'email, nel terminale era notificato un errore per aver "finito" le mail giornaliere da poter mandare. Una volta andati sul nostro indirizzo email abbiamo visto che sono state inviate c.a. 300 mail in un minuto, con un testo scritto in arabo a proposito di un costo di spedizione per qualche ordine. Ancora oggi non sappiamo cosa sia successo ma ci faceva piacere condividere questa strana esperienza che ci è capitata.\newline
+Di seguito un esempio delle tante mail arrivate:
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centerline{\includegraphics[scale=.2]{SiamoStatiHackerati}}
 \caption{Email inoltrata al dentista.}
 \end{figure}
 
 
 
+\newpage
 
 \subsection{User}
-La classe User è dichiarata astratta in modo che possa fornire una base di partenza per tutti i tipi di utenti previsti e non nel nostro programma. La classe astratta presenta vari metodi di base come il \textit{viewOperations()} e il \textit{viewInventory()} che sono comuni ai vari tipi di utente previsti.
-Questi due metodi sono implementati nelle classi derivate in due modi diversi in quanto un assistente può visualizzare le operazioni fatte soltanto da loro e non pò vedere quelle degli altri. Il dentista invece è in grado di vedere tutte le operazioni in quanto 'Admin' del sistema. Possiede inoltre un attributo comune quale la password in quanto ogni utente per loggare nel programma avrà bisogno delle sue credenziali d'accesso.
+La classe User è dichiarata astratta in modo che possa fornire una base di partenza per tutti i tipi di utenti previsti e non, nel nostro programma. La classe astratta presenta metodi base come il \textit{viewOperations()} e il \textit{viewInventory()} che sono comuni alle classi derivate di utente (\textit{Assistente} e \textit{Dentista}).
+Questi due metodi sono implementati però in due modi diversi in quanto un assistente può visualizzare le operazioni fatte soltanto da se stesso e non quelle degli altri. Il dentista invece è in grado di vedere tutte le operazioni in quanto '\textit{Admin}' del sistema. La classe User possiede inoltre un attributo comune quale la password in quanto ogni utente per loggare nel programma avrà bisogno delle sue credenziali d'accesso.
 
 \subsubsection{Assistant}
-Come in un vero studio dentistico gli assistenti sono in grado di effettuare le proprie operazioni supervisionati dal dentista effettivo. Sono in grado di aggiungere i clienti, effettuare delle nuove operazioni con l'inventario a loro associato. Possono essere in grado di eliminare anche i clienti nel caso in cui questi vogliano cambiare studio dentistico. Quando gli assistenti effettuano un'operazione l'observer notifica attraverso il sistema di mail sia lui stesso con il resoconto degli articoli utilizzati sia il dentista.
+Come in un vero studio dentistico gli assistenti sono in grado di effettuare le proprie operazioni supervisionati dal dentista effettivo. Sono in grado di aggiungere i clienti, effettuare le operazioni all'interno dell'inventario a loro associato. Sonon inoltre in grado di eliminare clienti nel caso in cui questi vogliano cambiare studio dentistico. Quando gli assistenti effettuano un'operazione l'observer notifica attraverso il sistema di mail sia lui stesso con il resoconto degli articoli utilizzati sia il dentista.
 
 \UseRawInputEncoding
 \begin{lstlisting}[caption={Crezione operazione},captionpos=b]
@@ -328,7 +332,7 @@ Come in un vero studio dentistico gli assistenti sono in grado di effettuare le 
 \end{lstlisting}
 
 \subsubsection{Dentist}
-Il dentista, ovvero l'Admin del sistema è in grado di visualizzare tutto di tutti. E' inoltre il responsabile della creazione di nuovi inventari, aggiunta di articoli e articoli composti. Può inoltre cancellare qualsiasi cosa, persino gli assistenti. Quando assume un nuovo assistente deve associare una mail esistente in modo che il sistema di notifica possa funzionare correttamente.
+Il dentista, ovvero l'Admin del sistema è in grado di visualizzare tutte le informazioni di tutte le classi. E' inoltre il responsabile della creazione di nuovi inventari, aggiunta di articoli e articoli composti. Può inoltre cancellare qualsiasi elemento del sistema, persino gli assistenti. Quando assume un nuovo assistente deve associare una mail esistente in modo che il sistema di notifica possa funzionare correttamente.
 
 
 \UseRawInputEncoding
