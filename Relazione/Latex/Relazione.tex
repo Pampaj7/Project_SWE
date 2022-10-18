@@ -278,17 +278,19 @@ private void sendEmail(String to, String obj, String text) {
 \end{lstlisting}
 Una volta che il sistema registra le nuove operazioni queste sono le email inoltrate automaticamente dal sistema.
 
-
 \begin{figure}[h!]
-\centerline{\includegraphics[scale=.2]{EmailPerAssist}}
-\caption{Email inoltrata all'assistente che ha effettuato l'operazione}
-\end{figure}
-
-\begin{figure}[h!]
-\centerline{\includegraphics[scale=.2]{EmailPerDentista}}
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\centerline{\includegraphics[scale=.15]{EmailPerAssist}}
+\caption{Email inoltrata all'assistente.}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\centerline{\includegraphics[scale=.15]{EmailPerDentista}}
 \caption{Email inoltrata al dentista.}
+\end{subfigure}
 \end{figure}
-
 
 \subsubsection{Cursiosita'}
 
@@ -296,7 +298,7 @@ Durante le numerose prove di testing per il funzionamento del sistema di notific
 Di seguito un esempio delle tante mail arrivate:
 
 \begin{figure}[h!]
-\centerline{\includegraphics[scale=.2]{SiamoStatiHackerati}}
+\centerline{\includegraphics[scale=.18]{SiamoStatiHackerati}}
 \caption{Email inoltrata al dentista.}
 \end{figure}
 
