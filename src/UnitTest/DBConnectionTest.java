@@ -12,7 +12,7 @@ public class DBConnectionTest {
         if (c == null || c.isClosed()) {
             try {
                 Class.forName("org.sqlite.JDBC");
-                c = DriverManager.getConnection("jdbc:sqlite:db/TEST.db");
+                c = DriverManager.getConnection("jdbc:sqlite:db/SWETEST.db");
                 c.setAutoCommit(false);
             } catch (Exception e) {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());

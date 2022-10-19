@@ -53,7 +53,7 @@
         \textbf{Leonardo Pampaloni, Filippo di Martino}
         \vfill
         \vspace{0.8cm}
-        \includegraphics[width=0.4\textwidth]{university.png}        
+        \includegraphics[width=0.4\textwidth]{Img/university}
         \Large
         
         Computer Engineering\\
@@ -89,7 +89,7 @@ La classe \textsl{Program} è il cuore della gestione dell'applicazione: rappres
 \newline
 
 \begin{figure}[h]
-\centerline{\includegraphics[scale=.14]{ClassDiagram}}
+\centerline{\includegraphics[scale=.14]{UMLSWE}}
 \caption{Diagramma delle classi}
 \end{figure}
 
@@ -719,8 +719,416 @@ Il metodo \textit{Run()} rappresenta il loop del sistema. Instaura la connession
  
 
 \section{UnitTest}
-mettere apposto i db
+Prendiamo adesso in analisi la parte dei test effettuati per verificare la correttezza del codice. La base dati utilizzata è semplicemente una copia di quella usata nel programma principale. I test effettuati ricoprono la parte di creazione ed eliminazione di assistenti, inventari, articoli e clienti. La funzione \textit{prepare()} collega il database tramite la DBConnectionTest tramite la libreria Junit5.
+\subsection{Assistant test}
+Vediamo il funzionamento dei test per la classe \textit{Assistant}.
+\subsubsection{Creazione/eliminazione di un'operazione}
+Verifichiamo il corretto funzionamento di creazione di una operazione da parte di un assistente. Creiamo una lista di articoli con la loro relativa quantità e viene creato anche un cliente test a cui assegnare tale operazione. Verifichiamo poi che l'ordine sia stato effettuato correttamente.
+\UseRawInputEncoding
+\begin{lstlisting}[caption={Implementazione creazione operazione},captionpos=b]
+@Test
+    @DisplayName("Create Operation Test")
+    void testOperationCreation() {
 
+        ArrayList<Pair<Article, Integer>> articles = new ArrayList<>();
+
+        articles.add(new Pair<>(assistant.getInventory().getArticles().get(1), 20));
+        articles.add(new Pair<>(assistant.getInventory().getArticles().get(2), 50));
+
+        Customer customer = p.getCustomers().get(2);
+
+        assistant.createOperation(customer, articles);
+
+        Operation createdOperation = p.getOperations().get(p.getOperations().size() - 1);
+
+
+        assertAll("Order's Data",
+                () -> assertEquals(createdOperation.getAssistant(), assistant),
+                () -> assertEquals(createdOperation.getCustomer(), customer),
+                () -> assertEquals(createdOperation.getArticles().get(0), articles.get(0).getValue0()),
+                () -> assertEquals(createdOperation.getArticles().get(1), articles.get(1).getValue0())
+        );
+
+    }
+\end{lstlisting}
+Analogamente adesso vogliamo che l'operazione appena creata venga rimossa dal database.
+\UseRawInputEncoding
+\begin{lstlisting}[caption={Implementazione eliminazione operazione},captionpos=b] @Test
+    @DisplayName("Delete Operation Test")
+    void testDeleteOperation() {
+
+        Operation operation = p.getOperations().get(0);
+
+        for (Operation i : p.getOperations()) {
+            if (i.getAssistant() == assistant) {
+                operation = i;
+            }
+        }
+
+        int operationCountBefore1 = p.getOperations().size();
+
+        assistant.deleteOperation(operation.getId());
+
+        Operation finalOp = operation;
+        assertAll("Operation deleted",
+                () -> assertTrue(p.getOperations().size() < operationCountBefore1),
+                () -> assertFalse(p.getOperations().contains(finalOp))
+        );
+
+    }
+
+\end{lstlisting}
+\subsection{Denstist test}
+Controlliamo adesso il corretto funzionamento della classe dentista, ovvero il nostro amministratore.
+\subsubsection{Creazione/eliminazione di un assistente}
+Inseriamo manualmente un assistente e verifichiamo che effettivamente esista.
+\UseRawInputEncoding
+\begin{lstlisting}[caption={Implementazione creazione assistente},captionpos=b]
+  @Test
+    @DisplayName("Create AssistantTest")
+    void testCreateAssistant() {
+
+        Inventory inventory = p.getInventories().get( (int)((Math.random() * (p.getInventories().size()-1 - 1)) + 1) );
+        admin.createAssistant("UnitTest", "studiomartino",5.5F,inventory,"unitTest@gmail.com");
+        User createUser = p.getUsers().get(p.getUsers().size()-1);
+
+        assertTrue(createUser instanceof Assistant);
+
+        Assistant createAssistant = (Assistant) createUser;
+
+        assertAll("Test create assistant",
+                () -> assertEquals(inventory, createAssistant.getInventory()),
+                () -> assertEquals(createAssistant.getId(), p.getUsers().get(p.getUsers().size()-1).getId())
+        );
+
+    }
+\end{lstlisting}
+Cancelliamo adesso un assistente e verifichiamo che non sia più presente. Abbiamo aggiunto un controllo che ci permette di controllare che all'eliminazione dell'assistente anche il suo inventario associato non sia stato cancellato.
+\begin{lstlisting}[caption={Implementazione eliminazione assistente},captionpos=b]
+ @Test
+    @DisplayName("Delete AssistantTest")
+    void testDeleteAssistant() {
+
+        int id = 0;
+        int id2 = 3;
+
+        for (User u : p.getUsers()) {
+            if (u.getId() == id) {
+                admin.deleteAssistant(id);
+            }
+        }
+
+
+        assertFalse(p.getUsers().contains(id));
+
+
+    }
+
+    private boolean checkInventory(int id){
+        for (Inventory t : p.getInventories()){
+            if(t.getId()==id){
+                for (User u : p.getUsers()){
+                    if(u instanceof Assistant){
+                        if(((Assistant)u).getInventory().equals(t)){
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+\end{lstlisting}
+\subsubsection{Creazione/eliminazione inventario}
+Creiamo manualmente un inventario con relativi articoli e controlliamo che sia stato effettivamente inserito.
+\begin{lstlisting}[caption={Implementazione creazione inventario},captionpos=b]
+ @Test
+    @DisplayName("Create InventoryTest")
+    void testCreateInventory() {
+
+        ArrayList<Article> articles = new ArrayList<>();
+        articles.add(p.getArticles().get(1));
+        articles.add(p.getArticles().get(2));
+        articles.add(p.getArticles().get(3));
+        int preSize = p.getInventories().size();
+        admin.createInventory("description","Italy",articles);
+
+        assertAll("Test create assistant",
+                () -> assertEquals(preSize + 1, p.getInventories().size()),
+                () -> assertEquals(articles, p.getInventories().get(p.getInventories().size()-1).getArticles())
+        );
+
+    }
+\end{lstlisting}
+Adesso lo eliminiamo e verifichiamo che non esista più.
+\begin{lstlisting}[caption={Implementazione eliminazione inventario},captionpos=b]
+@Test
+    @DisplayName("Delete InventoryTest")
+    void testDeleteInventory() {
+
+        int preSize = p.getInventories().size();
+        boolean check;
+
+        ArrayList<Article> articles = new ArrayList<>();
+        articles.add(p.getArticles().get(1));
+        articles.add(p.getArticles().get(2));
+        articles.add(p.getArticles().get(3));
+        admin.createInventory("description","Italy",articles);
+        preSize = p.getInventories().size();
+
+        int lastCat = p.getInventories().get(p.getInventories().size()-1).getId();
+        check = checkInventory(lastCat);
+
+        admin.deleteInventory(lastCat);
+
+        if(check)
+            assertEquals(preSize - 1, p.getInventories().size());
+        else
+            assertEquals(preSize - 1, p.getInventories().size());
+
+    }
+\end{lstlisting}
+\subsubsection{Creazione/Eliminazione di un prodotto}
+Aggiungiamo adesso prima un semplice articolo e verifichiamo che sia stato inserito, poi creiamo un articolo di tipo composto e controlliamo che sia stato generato correttamente.
+\begin{lstlisting}[caption={Implementazione creazione prodotti},captionpos=b]
+ @Test
+    @DisplayName("Create ProductTest")
+    void testCreateProduct() {
+        int preSize = p.getArticles().size();
+        admin.createProduct("ProductTestSingle",3.5F);
+
+        assertAll("Single Article",
+                () -> assertEquals(preSize + 1, p.getArticles().size()),
+                () -> assertTrue(p.getArticles().get(p.getArticles().size()-1) instanceof Product),
+                () -> assertEquals(p.getArticles().get(p.getArticles().size()-1).getPrice(), 3.5F)
+        );
+
+        int preSize2 = p.getArticles().size();
+        ArrayList<Article> articles = new ArrayList<>();
+        articles.add(p.getArticles().get(1));
+        articles.add(p.getArticles().get(2));
+
+        float tmp = 0 ;
+        for (Article a : articles)
+            tmp += a.getPrice();
+        float prePrice = tmp;
+
+        admin.createProduct("Compound article",articles);
+
+        assertAll("Compound Article",
+                () -> assertEquals(preSize2 + 1, p.getArticles().size()),
+                () -> assertTrue(p.getArticles().get(p.getArticles().size()-1) instanceof Compound),
+                () -> assertEquals(p.getArticles().get(p.getArticles().size()-1).getPrice(), prePrice)
+
+        );
+
+    }
+\end{lstlisting}
+Analogamente eliminiamo i prodotti. Controlliamo inoltre che non possa cancellarsi un articolo che è presente in un articolo composto.
+\begin{lstlisting}[caption={Implementazione eliminazione prodotti},captionpos=b]
+ @Test
+    @DisplayName("Delete ArticleTest")
+    void testDeleteArticle() {
+
+        admin.createProduct("testProduct1 - can_delete",5.5F);
+        Article P1 = p.getArticles().get(p.getArticles().size()-1);
+        int A1 = p.getArticles().get(p.getArticles().size()-1).getId();
+        admin.deleteProduct(A1);
+
+        assertFalse(p.getArticles().contains(P1));
+
+        int A2 = 1;
+        Article P2 = null;
+
+        for(Article a : p.getArticles()){
+            if(a.getId()==1) {
+                P2 = a;
+            }
+        }
+        admin.deleteProduct(A2);
+        assertFalse(p.getArticles().contains(P2));
+
+        ArrayList<Article> articles = new ArrayList<>();
+        articles.add(p.getArticles().get(2));
+        articles.add(p.getArticles().get(3));
+        admin.createProduct("testProduct2", articles);
+        Article P3 = p.getArticles().get(2);
+        int A3 = p.getArticles().get(2).getId();
+        admin.deleteProduct(A3);
+
+        assertFalse(p.getArticles().contains(P3));
+
+    }
+
+\end{lstlisting}
+\subsubsection{Eliminazione cliente}
+Verifichiamo che possa essere correttamente rimosso un cliente dello studio.
+\begin{lstlisting}[caption={Implementazione eliminazione cliente},captionpos=b]
+@Test
+    @DisplayName("Delete CustomerTest")
+    void testDeleteCustomer() {
+
+        Customer C1 = null;
+        Customer C2 = null;
+
+        for (Customer cli : p.getCustomers()){
+            if(cli.getId() == 1)
+                C1 = cli;
+            if(cli.getId() == 2)
+                C2 = cli;
+        }
+
+        admin.deleteCustomer(1);
+        assertFalse(p.getCustomers().contains(C1));
+
+    }
+\end{lstlisting}
+
+\subsection{CoreTest}
+Controlliamo che le connessioni tra database si effettuino correttamente.
+\subsubsection{Login test}
+\begin{lstlisting}[caption={Implementazione login },captionpos=b]
+ @Test
+    @DisplayName("Login user Test")
+    void testLoginUser() {
+
+        p.login("Pampa", "studiomartino");
+
+        User user = null;
+
+        for (User i : p.getUsers()) {
+            if (i.getName().equals("Pampa")) {
+                user = i;
+            }
+        }
+
+        User expectedUser1 = user;
+
+        assertAll("Assistant Login",
+                () -> assertEquals(expectedUser1, p.getActiveUser()),
+                () -> assertTrue(p.getActiveUser() instanceof Assistant)
+        );
+
+        p.logout();
+
+        p.login("Nicola", "ilmiostudio");
+
+        user = null;
+
+        for (User i : p.getUsers()) {
+            if (i.getName().equals("Nicola")) {
+                user = i;
+            }
+        }
+
+        User expectedUser2 = user;
+
+        assertAll("Dentist Login",
+                () -> assertEquals(expectedUser2, p.getActiveUser()),
+                () -> assertTrue(p.getActiveUser() instanceof Dentist)
+        );
+    }
+\end{lstlisting}
+\subsection{Test Load/Upload}
+Controlliamo adesso che il collegamento tra database funzioni e che \textit{Upload} e \textit{Load}siano effettive. Si utilizzano delle query manuali dove inseriamo alcuni personaggi di Topolino come test. Attraverso il metodo \textit{load} si verifica che i nuovi dati siano stati inseriti correttamente. Inseriamo poi alcuni articoli in modo che si possa chiamare il metodo 	\textit{upload(Connection)}
+\begin{lstlisting}[caption={Implementazione Load/Upload },captionpos=b]
+ @Test
+    @DisplayName("Upload/Load data Test")
+    void testUploadLoadData() throws SQLException {
+        String sql;
+        Statement stmt;
+        ResultSet rs;
+
+        Connection c = DBConnectionTest.getInstance();
+        p.upload(c);
+        p = Program.getInstance();
+
+        c = DBConnectionTest.getInstance();
+
+        String customerName = "Paperino";
+        String customerCountry = "Paperinolandia";
+        String customerEmail = "paperino.senzacognome@gmail.com";
+
+        sql = "INSERT INTO Customer (BusinessName,Country,Email) " + "VALUES ('" + customerName + "', '" + customerCountry + "', '" + customerEmail + "');";
+
+        stmt = c.createStatement();
+        stmt.executeUpdate(sql);
+        c.commit();
+
+        String articleName = "Penny";
+        float articlePrice = 10.2F;
+
+        sql = "INSERT INTO Article (Name,Price) " + "VALUES ('" + articleName + "', '" + articlePrice + "');";
+        stmt = c.createStatement();
+        stmt.executeUpdate(sql);
+        c.commit();
+
+        p.load(c);
+
+        Customer newCustomer = null;
+        Article newArticle = null;
+
+        for (Customer i : p.getCustomers()) {
+            if (i.getBusinessName().equals(customerName) && i.getCountry().equals(customerCountry) && i.getEmail().equals(customerEmail)) {
+                newCustomer = i;
+            }
+        }
+
+        for (Article i : p.getArticles()) {
+            if (i.getName().equals(articleName) && i.getPrice() == articlePrice) {
+                newArticle = i;
+            }
+        }
+
+        Customer finalNewCustomer = newCustomer;
+        Article finalNewArticle = newArticle;
+        assertAll("Load From DB",
+                () -> assertNotNull(finalNewCustomer),
+                () -> assertNotNull(finalNewArticle)
+        );
+
+        p.login("Nicola", "ilmiostudio");
+        Dentist admin = (Dentist) p.getActiveUser();
+
+        admin.createProduct("Berretto", 12.2F);
+        admin.createCustomer("Minnie", "paperinolandiaSud", "minnie.senzacognome@gmail.com");
+
+        p.upload(c);
+
+        c = DBConnectionTest.getInstance();
+        stmt = c.createStatement();
+
+        int risArticle = 0;
+        rs = stmt.executeQuery("SELECT COUNT(*) as ris FROM Article WHERE name='Berretto';");
+        while (rs.next()) {
+            risArticle = rs.getInt("ris");
+        }
+
+        int risCustomer = 0;
+        rs = stmt.executeQuery("SELECT COUNT(*) as ris FROM Customer WHERE businessname='Minnie' AND country='paperinolandiaSud' AND email='minnie.senzacognome@gmail.com';");
+        while (rs.next()) {
+            risCustomer = rs.getInt("ris");
+        }
+
+        int finalRisArticle = risArticle;
+        int finalRisCustomer = risCustomer;
+        assertAll("Upload To DB",
+                () -> assertTrue(finalRisArticle >= 1),
+                () -> assertTrue(finalRisCustomer >= 1)
+        );
+
+        sql = "DELETE FROM Customer WHERE LOWER(businessname) LIKE '%test%';";
+        stmt.executeUpdate(sql);
+        c.commit();
+
+        sql = "DELETE FROM Article WHERE LOWER(name) LIKE '%test%';";
+        stmt.executeUpdate(sql);
+        c.commit();
+    }
+\end{lstlisting}
+
+\section{Conclusione}
+Siamo partiti con questo progetto circa 1 anno prima della sua conclusione. Durante la sua stesura non avevamo molto chiaro cosa effettivamente fare ma durante questo tempo con ulteriore esperienza abbiamo trovato la via. Inizialmente pensavamo di fare una gestione di un magazzino ma successivamente il mio collega mi ha accennato al fatto che suo padre avesse uno studio dentistico e abbiamo deciso di adattare la struttura già esistente a questa situazione. Pensavamo di fare un interfaccia grafica affinch+ si potesse navigare nel menu, adesso semplice console, in modo più 'attuale'. Tuttavia abbiamo dovuto ridimensionare il tutto in quanto ci avrebbe portato via molto tempo ulteriore.
 \end{document}
 
 \maketitle

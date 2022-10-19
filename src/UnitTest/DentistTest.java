@@ -26,7 +26,7 @@ public class DentistTest {
             fail();
         }
 
-        Program.getInstance().login("Admin","111");
+        Program.getInstance().login("Nicola","ilmiostudio");
         admin = (Dentist) Program.getInstance().getActiveUser();
         assertNotNull(admin);
 
@@ -37,16 +37,16 @@ public class DentistTest {
     void testCreateAssistant() {
 
         Inventory inventory = p.getInventories().get( (int)((Math.random() * (p.getInventories().size()-1 - 1)) + 1) );
-        admin.createAssistant("UnitTest", "111",5.5F,inventory,"unitTest@gmail.com");
+        admin.createAssistant("UnitTest", "studiomartino",5.5F,inventory,"unitTest@gmail.com");
         User createUser = p.getUsers().get(p.getUsers().size()-1);
 
         assertTrue(createUser instanceof Assistant);
 
-        Assistant createAgent = (Assistant) createUser;
+        Assistant createAssistant = (Assistant) createUser;
 
-        assertAll("Test create agent",
-                () -> assertEquals(inventory, createAgent.getInventory()),
-                () -> assertEquals(createAgent.getId(), p.getUsers().get(p.getUsers().size()-1).getId())
+        assertAll("Test create assistant",
+                () -> assertEquals(inventory, createAssistant.getInventory()),
+                () -> assertEquals(createAssistant.getId(), p.getUsers().get(p.getUsers().size()-1).getId())
         );
 
     }
@@ -62,7 +62,7 @@ public class DentistTest {
         int preSize = p.getInventories().size();
         admin.createInventory("description","Italy",articles);
 
-        assertAll("Test create agent",
+        assertAll("Test create assistant",
                 () -> assertEquals(preSize + 1, p.getInventories().size()),
                 () -> assertEquals(articles, p.getInventories().get(p.getInventories().size()-1).getArticles())
         );
@@ -108,14 +108,6 @@ public class DentistTest {
 
         int preSize = p.getInventories().size();
         boolean check;
-
-        check = checkInventory(1);
-        admin.deleteInventory(1);
-
-        if(check)
-            assertEquals(preSize - 1, p.getInventories().size());
-        else
-            assertEquals(preSize - 1, p.getInventories().size());
 
         ArrayList<Article> articles = new ArrayList<>();
         articles.add(p.getArticles().get(1));
@@ -184,7 +176,7 @@ public class DentistTest {
                 C2 = cli;
         }
 
-        admin.deleteCustomer(1); // SAFE DELETE
+        admin.deleteCustomer(1);
         assertFalse(p.getCustomers().contains(C1));
 
     }

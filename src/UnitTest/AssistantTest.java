@@ -4,7 +4,6 @@ import operationsManager.*;
 import org.javatuples.Pair;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -26,15 +25,15 @@ public class AssistantTest {
             fail();
         }
 
-        p.login("Agent1", "111");
+        p.login("Pampa", "studiomartino");
         assistant = (Assistant) p.getActiveUser();
 
         assertNotNull(assistant);
     }
 
     @Test
-    @DisplayName("Create Order Test")
-    void testOrderCreation() {
+    @DisplayName("Create Operation Test")
+    void testOperationCreation() {
 
         ArrayList<Pair<Article, Integer>> articles = new ArrayList<>();
 
@@ -45,40 +44,38 @@ public class AssistantTest {
 
         assistant.createOperation(customer, articles);
 
-        Operation createdOrder = p.getOperations().get(p.getOperations().size() - 1);
+        Operation createdOperation = p.getOperations().get(p.getOperations().size() - 1);
 
-        //String messageNotification = Program.getInstance().getNotificationCenter().getNotification().get(Program.getInstance().getNotificationCenter().getNotification().size() - 1);
 
         assertAll("Order's Data",
-                () -> assertEquals(createdOrder.getAssistant(), assistant),
-                () -> assertEquals(createdOrder.getCustomer(), customer),
-                () -> assertEquals(createdOrder.getArticles().get(0), articles.get(0).getValue0()),
-                () -> assertEquals(createdOrder.getArticles().get(1), articles.get(1).getValue0())
-                //() -> assertTrue(messageNotification.contains(assistant.getName()))
+                () -> assertEquals(createdOperation.getAssistant(), assistant),
+                () -> assertEquals(createdOperation.getCustomer(), customer),
+                () -> assertEquals(createdOperation.getArticles().get(0), articles.get(0).getValue0()),
+                () -> assertEquals(createdOperation.getArticles().get(1), articles.get(1).getValue0())
         );
 
     }
 
     @Test
-    @DisplayName("Delete Order Test")
-    void testDeleteOrder() {
+    @DisplayName("Delete Operation Test")
+    void testDeleteOperation() {
 
-        Operation order = p.getOperations().get(0);
+        Operation operation = p.getOperations().get(0);
 
         for (Operation i : p.getOperations()) {
             if (i.getAssistant() == assistant) {
-                order = i;
+                operation = i;
             }
         }
 
-        int orderCountBefore1 = p.getOperations().size();
+        int operationCountBefore1 = p.getOperations().size();
 
-        assistant.deleteOperation(order.getId());
+        assistant.deleteOperation(operation.getId());
 
-        Operation finalOrder1 = order;
-        assertAll("Order deleted",
-                () -> assertTrue(p.getOperations().size() < orderCountBefore1),
-                () -> assertFalse(p.getOperations().contains(finalOrder1))
+        Operation finalOp = operation;
+        assertAll("Operation deleted",
+                () -> assertTrue(p.getOperations().size() < operationCountBefore1),
+                () -> assertFalse(p.getOperations().contains(finalOp))
         );
 
     }

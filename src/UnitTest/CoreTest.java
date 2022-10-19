@@ -80,7 +80,7 @@ public class CoreTest {
                 () -> assertNotNull(finalNewArticle)
         );
 
-        p.login("Admin", "111");
+        p.login("Nicola", "ilmiostudio");
         Dentist admin = (Dentist) p.getActiveUser();
 
         admin.createProduct("Berretto", 12.2F);
@@ -123,38 +123,38 @@ public class CoreTest {
     @DisplayName("Login user Test")
     void testLoginUser() {
 
-        p.login("Agent1", "111");
+        p.login("Pampa", "studiomartino");
 
         User user = null;
 
         for (User i : p.getUsers()) {
-            if (i.getName().equals("Agent1")) {
+            if (i.getName().equals("Pampa")) {
                 user = i;
             }
         }
 
         User expectedUser1 = user;
 
-        assertAll("Agent Login",
+        assertAll("Assistant Login",
                 () -> assertEquals(expectedUser1, p.getActiveUser()),
                 () -> assertTrue(p.getActiveUser() instanceof Assistant)
         );
 
         p.logout();
 
-        p.login("Admin", "111");
+        p.login("Nicola", "ilmiostudio");
 
         user = null;
 
         for (User i : p.getUsers()) {
-            if (i.getName().equals("Admin")) {
+            if (i.getName().equals("Nicola")) {
                 user = i;
             }
         }
 
         User expectedUser2 = user;
 
-        assertAll("Admin Login",
+        assertAll("Dentist Login",
                 () -> assertEquals(expectedUser2, p.getActiveUser()),
                 () -> assertTrue(p.getActiveUser() instanceof Dentist)
         );
