@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12) (preloaded format=pdflatex 2022.1.23)  19 OCT 2022 14:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12) (preloaded format=pdflatex 2022.1.23)  5 NOV 2022 17:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -257,18 +257,6 @@ Package pdftex.def Info: Img/university.png  used on input line 56.
 
 {C:/Users/uffa/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./Img/univers
 ity.png>]
-Overfull \hbox (6.75066pt too wide) in paragraph at lines 78--79
-\OT1/cmr/m/n/10 nell'applicazione il sal-vatag-gio dei cli-enti, degli ar-ti-co
-li e degli in-ter-venti all'interno
- []
-
-
-Overfull \hbox (3.38036pt too wide) in paragraph at lines 78--79
-\OT1/cmr/m/n/10 di un database. Sono pre-senti due tipolo-gie di no-ti-fica per
- l'admin, uno all'interno
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 86--90
 
  []
@@ -535,7 +523,7 @@ b><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Miktex/fonts/type1/pub
 lic/amsfonts/cm/cmr9.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmsl10.pfb><
 C:/Miktex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Miktex/fonts/type1/publ
 ic/amsfonts/cm/cmti10.pfb>
-Output written on Relazione.pdf (32 pages, 1742938 bytes).
+Output written on Relazione.pdf (32 pages, 1742969 bytes).
 PDF statistics:
  186 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

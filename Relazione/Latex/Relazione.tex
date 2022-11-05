@@ -69,13 +69,13 @@ L'idea del progetto nasce come applicazione per la gestione di interventi fatti 
 
 \begin{enumerate} 
 	\item \textbf{\textsl{Dentista}}: 
-			Il dentista ha la possibilità di controllare tutte le informazioni riguardanti i clienti, gli assistenti e i set di interventi 					assegnati agli Assistenti.
+			Il dentista ha la possibilità di controllare tutte le informazioni riguardanti i clienti, gli assistenti e i set di interventi 					assegnati agli assistenti.
 	\item \textbf{\textsl{Assistenti}}:
-			Ogni assistente ha a sua disposizione un set predefinito di interventi da poter fare, oltre che poter vedere le 							informazioni sui clienti.
+			Ogni assistente ha a sua disposizione un set predefinito di operazioni da poter fare, oltre che poter vedere le informazioni sui clienti.
 	\item \textbf{\textsl{Clienti}}
-	\item \textbf{\textsl{Interventi}}
+	\item \textbf{\textsl{Operazioni}}
 \end{enumerate}
-L'applicazione ha come obiettivo quello di gestire e notificare l'admin, ovvero il dentista, ti tutti gli interventi effettuati dagli assistenti, inoltre è compresa nell'applicazione il salvataggio dei clienti, degli articoli e degli interventi all'interno di un database. Sono presenti due tipologie di notifica per l'admin, uno all'interno dell'applicazione, che tiene traccia dello storico delle operazioni fatte da tutti gli assistenti mentre l'altro è esterno all'applicazione e viene notificato l'admin tramite email ogni volta che un assistente effettua un intervento su un cliente.
+L'applicazione ha come obiettivo quello di gestire e notificare l'admin, ovvero il dentista, di tutte le operazioni effettuate dagli assistenti, inoltre è compresa nell'applicazione il salvataggio dei clienti, degli articoli e delle operazioni all'interno di un database. Sono presenti due tipologie di notifica per l'admin, uno all'interno dell'applicazione, che tiene traccia dello storico delle operazioni fatte da tutti gli assistenti mentre l'altro è esterno all'applicazione e viene notificato l'admin tramite email ogni volta che un assistente effettua un intervento su un cliente.
 
 \section{Diagrammi UML}
 Abbiamo scelto di presentare tre diversi diagrammi UML, il diagramma delle classi (\textsl{Class Diagram}), il diagramma dei casi d'uso (\textsl{Use Case Diagram}), e il diagramma E/R (\textsl{Entity Relationship} del progetto.
@@ -85,7 +85,7 @@ Abbiamo scelto di presentare tre diversi diagrammi UML, il diagramma delle class
 
 Dal \textsl{Class Diagram} possiamo vedere come effettivamente sono legate le varie classi del programma. Si può notare infatti che le operazioni di notifica sono effettuate da un \textsl{Observer pattern}, suddiviso in due diverse classi per le due tipologie differenti di notifica. Sono presenti anche altri due pattern: lo \textsl{State pattern} e il \textsl{Composite pattern}, rispettivamente per la gestione delle classi dei vari menù e per la gestione delle classi per le operazioni/interventi.\newline
 Il Dentista (\textsl{Admin},ha il compito di creare Clienti, Articoli, e set di Operazioni/Interventi. Per le operazioni abbiamo incluso la possibilità di raccogliere più interventi in uno (creandolo tramite il \textsl{Composite pattern}), oltre ovviamente a poter selezionare l'uso di più articoli e strumenti (E.g. Creazione di un kit-monouso (Guanti,Bicchiere,Tovaglietta), e includerlo in tutte le operazioni).\newline
-La classe \textsl{Program} è il cuore della gestione dell'applicazione: rappresenta il nodo centrale del sistema. \textsl{Program} è una classe \textsl{\textbf{Singleone}} in quanto si necessita di avere una singola istanza di essa e deve essere necessariamente reperibile, al suo interno sono presenti inoltre metodi come \textsl{load(Connection c} e \textsl{upload(Connection c)} che permettono la comunicazione con il DB esterno e \textsl{run()} per poter gestire il loop di sistema.
+La classe \textsl{Program} è il cuore della gestione dell'applicazione: rappresenta il nodo centrale del sistema. \textsl{Program} è una classe \textsl{\textbf{Singleone}} in quanto si necessita di avere una singola istanza di essa e deve essere necessariamente reperibile, al suo interno sono presenti inoltre metodi come \textsl{load(Connection c)} e \textsl{upload(Connection c)} che permettono la comunicazione con il DB esterno e \textsl{run()} per poter gestire il loop di sistema.
 \newline
 
 \begin{figure}[h]
@@ -114,7 +114,7 @@ Questo pattern permette di definire una dipendenza 1$\longrightarrow$N fra ogget
 
 
 \subsubsection{Composite Pattern}
-Il pattern serve per poter trattare un gruppo di oggetti come istanza di un oggetto singolo. Solitamente questo raggruppamento si può vedere come una struttura ad albero, nel progetto però il pattern è stato leggermente modificato per permettere l'annidamento delle classi composte, in questo caso infatti il grafico del pattern potrebbe essere riassunto con un grafo anzichè un albero.
+Il pattern serve per poter trattare un gruppo di oggetti come istanza di un oggetto singolo. Solitamente questo raggruppamento si può vedere come una struttura ad albero, nel progetto però il pattern è stato leggermente modificato per permettere l'annidamento delle classi composte, in questo caso infatti il grafico del pattern potrebbe essere riassunto con un grafo invece di un albero.
 
 \begin{figure}[h]
 \centerline{\includegraphics[scale=.45]{CompositePattern}}
@@ -142,7 +142,7 @@ Si distinguono quattro macro gruppi di casi d'uso:
 	\item \textbf{\textsl{Inventari}}:
 			Solo il Dentista ha la possibilità di aggiungere e rimuovere eventuali Inventari contenenti i Set di Operazioni assegnati ai vari 						assistenti.
 	\item \textbf{\textsl{Assistenti}}:
-			Il Dentista ha la possibilità di gestire anchegli Assistenti, può infatti scegliere se aggiungere, eliminare o visualizzare gli Inveentari 					dei vari Assistenti.
+			Il Dentista ha la possibilità di gestire anche gli Assistenti, può infatti scegliere se aggiungere, eliminare o visualizzare gli Inventari 					dei vari Assistenti.
 	\item \textbf{\textsl{Clienti}}:
 			Il Dentista ha la possibilità di gestire i Clienti, può infatti creare, eliminare o visualizzare lo storico delle operazioni avvenute su quel 			Cliente.
 \end{enumerate}
@@ -154,7 +154,7 @@ Si distinguono quattro macro gruppi di casi d'uso:
 
 \newpage
 \subsubsection{Assistent's Use Case}
-Nello \textsl{Use Case Diagram} dell'Assistente invece sono presenti meno funzionalità:
+Nello \textsl{Use Case Diagram} dell'Assistente invece sono presenti meno funzionalità, questo perchè è nostro intento dare maggior controllo all'admin del sistema, mentre un controllo limitato ai vari assistenti che hanno accesso al programma. Di seguito le seguenti funzionalità:
 \begin{enumerate} 
 	\item \textbf{\textsl{Operazioni}}: 
 			Tramite la creazione di una nuova operazione è possibile creare o selezionare il cliente alla quale verrà fatto l'intervento. Inoltre è 			possibile vedere lo storico delle operazioni fatte dall'Assistente stesso.
@@ -227,11 +227,11 @@ public final class NotificationEmail implements Observer {
             if (u instanceof Dentist)
                 to += u.getEmail() + ",";
         }
-        to = to.substring(0, to.length() - 1); //TODO mettere email dell'admin
+        to = to.substring(0, to.length() - 1); 
 
         String products = "";
         for (Pair<Article, Integer> a : o.getRows()) {
-            products += "--" + a.getValue0().getName() + " qta: " + a.getValue1() + " <br>"; //TODO WOWOWOWOW
+            products += "--" + a.getValue0().getName() + " qta: " + a.getValue1() + " <br>"; 
         }
 
         String text;
@@ -250,7 +250,7 @@ private void sendEmail(String to, String obj, String text) {
 
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("ing.software.dimpa@gmail.com", "rkqvtlxwtcaczfjj\n"); //mbvmolrwfpmzcuoq neauczeusvreoesu
+                return new PasswordAuthentication("ing.software.dimpa@gmail.com", "rkqvtlxwtcaczfjj\n"); 
 
             }
         });
