@@ -214,6 +214,11 @@ public final class NotificationCenter implements Observer {
 \end{lstlisting}
 
 
+\begin{figure}[h!]
+\centerline{\includegraphics[scale=.55]{MenuNotificaDentista}}
+\caption{Notifica per il dentista all'interno del programma}
+\end{figure}
+
 \subsubsection{Email Observer}
 \UseRawInputEncoding
 \begin{lstlisting}[caption={Email Observer},captionpos=b]
@@ -298,8 +303,8 @@ Durante le numerose prove di testing per il funzionamento del sistema di notific
 Di seguito un esempio delle tante mail arrivate:
 
 \begin{figure}[h!]
-\centerline{\includegraphics[scale=.18]{SiamoStatiHackerati}}
-\caption{Email inoltrata al dentista.}
+\centerline{\includegraphics[scale=.15]{SiamoStatiHackerati}}
+\caption{Email hackerate.}
 \end{figure}
 
 
@@ -312,6 +317,14 @@ Questi due metodi sono implementati però in due modi diversi in quanto un assis
 
 \subsubsection{Assistant}
 Come in un vero studio dentistico gli assistenti sono in grado di effettuare le proprie operazioni supervisionati dal dentista effettivo. Sono in grado di aggiungere i clienti, effettuare le operazioni all'interno dell'inventario a loro associato. Sonon inoltre in grado di eliminare clienti nel caso in cui questi vogliano cambiare studio dentistico. Quando gli assistenti effettuano un'operazione l'observer notifica attraverso il sistema di mail sia lui stesso con il resoconto degli articoli utilizzati sia il dentista.
+
+
+\begin{figure}[h!]
+\centerline{\includegraphics[scale=.5]{OperazioneTipoAssistente}}
+\caption{Esempio operazione assistente}
+\end{figure}
+
+
 
 \UseRawInputEncoding
 \begin{lstlisting}[caption={Crezione operazione},captionpos=b]
