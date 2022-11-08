@@ -4,7 +4,6 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{needspace}
-
 \usepackage[utf8]{inputenc}
 \usepackage{listings}
 \usepackage{color}
@@ -78,13 +77,13 @@ L'idea del progetto nasce come applicazione per la gestione di interventi fatti 
 L'applicazione ha come obiettivo quello di gestire e notificare l'admin, ovvero il dentista, di tutte le operazioni effettuate dagli assistenti, inoltre è compresa nell'applicazione il salvataggio dei clienti, degli articoli e delle operazioni all'interno di un database. Sono presenti due tipologie di notifica per l'admin, uno all'interno dell'applicazione, che tiene traccia dello storico delle operazioni fatte da tutti gli assistenti mentre l'altro è esterno all'applicazione e viene notificato l'admin tramite email ogni volta che un assistente effettua un intervento su un cliente.
 
 \section{Diagrammi UML}
-Abbiamo scelto di presentare tre diversi diagrammi UML, il diagramma delle classi (\textsl{Class Diagram}), il diagramma dei casi d'uso (\textsl{Use Case Diagram}), e il diagramma E/R (\textsl{Entity Relationship} del progetto.
+Abbiamo scelto di presentare tre diversi diagrammi UML, il diagramma delle classi (\textsl{Class Diagram}), il diagramma dei casi d'uso (\textsl{Use Case Diagram}), e il diagramma E/R (\textsl{Entity Relationship}) del progetto.
 
 
 \subsection{Class Diagram}
 
 Dal \textsl{Class Diagram} possiamo vedere come effettivamente sono legate le varie classi del programma. Si può notare infatti che le operazioni di notifica sono effettuate da un \textsl{Observer pattern}, suddiviso in due diverse classi per le due tipologie differenti di notifica. Sono presenti anche altri due pattern: lo \textsl{State pattern} e il \textsl{Composite pattern}, rispettivamente per la gestione delle classi dei vari menù e per la gestione delle classi per le operazioni/interventi.\newline
-Il Dentista (\textsl{Admin},ha il compito di creare Clienti, Articoli, e set di Operazioni/Interventi. Per le operazioni abbiamo incluso la possibilità di raccogliere più interventi in uno (creandolo tramite il \textsl{Composite pattern}), oltre ovviamente a poter selezionare l'uso di più articoli e strumenti (E.g. Creazione di un kit-monouso (Guanti,Bicchiere,Tovaglietta), e includerlo in tutte le operazioni).\newline
+Il Dentista (\textsl{Admin}) ha il compito di creare Clienti, Articoli, e set di Operazioni/Interventi. Per le operazioni abbiamo incluso la possibilità di raccogliere più interventi in uno (creandolo tramite il \textsl{Composite pattern}), oltre ovviamente a poter selezionare l'uso di più articoli e strumenti (E.g. Creazione di un kit-monouso (Guanti,Bicchiere,Tovaglietta), e includerlo in tutte le operazioni).\newline
 La classe \textsl{Program} è il cuore della gestione dell'applicazione: rappresenta il nodo centrale del sistema. \textsl{Program} è una classe \textsl{\textbf{Singleone}} in quanto si necessita di avere una singola istanza di essa e deve essere necessariamente reperibile, al suo interno sono presenti inoltre metodi come \textsl{load(Connection c)} e \textsl{upload(Connection c)} che permettono la comunicazione con il DB esterno e \textsl{run()} per poter gestire il loop di sistema.
 \newline
 
@@ -312,11 +311,11 @@ Di seguito un esempio delle tante mail arrivate:
 \newpage
 
 \subsection{User}
-La classe User è dichiarata astratta in modo che possa fornire una base di partenza per tutti i tipi di utenti previsti e non, nel nostro programma. La classe astratta presenta metodi base come il \textit{viewOperations()} e il \textit{viewInventory()} che sono comuni alle classi derivate di utente (\textit{Assistente} e \textit{Dentista}).
-Questi due metodi sono implementati però in due modi diversi in quanto un assistente può visualizzare le operazioni fatte soltanto da se stesso e non quelle degli altri. Il dentista invece è in grado di vedere tutte le operazioni in quanto '\textit{Admin}' del sistema. La classe User possiede inoltre un attributo comune quale la password in quanto ogni utente per loggare nel programma avrà bisogno delle sue credenziali d'accesso.
+La classe User  \'{e} dichiarata astratta in modo che possa fornire una base di partenza per tutti i tipi di utenti previsti e non, nel nostro programma. La classe astratta presenta metodi base come il \textit{viewOperations()} e il \textit{viewInventory()} che sono comuni alle classi derivate di utente (\textit{Assistente} e \textit{Dentista}).
+Questi due metodi sono implementati per\'{o} in due modi diversi in quanto un assistente può visualizzare le operazioni fatte soltanto da se stesso e non quelle degli altri. Il dentista invece \'{e} in grado di vedere tutte le operazioni in quanto \'{e} '\textit{Admin}' del sistema. La classe User possiede inoltre un attributo comune quale la password in quanto ogni utente per loggare nel programma avr\'{a} bisogno delle sue credenziali d'accesso.
 
 \subsubsection{Assistant}
-Come in un vero studio dentistico gli assistenti sono in grado di effettuare le proprie operazioni supervisionati dal dentista effettivo. Sono in grado di aggiungere i clienti, effettuare le operazioni all'interno dell'inventario a loro associato. Sonon inoltre in grado di eliminare clienti nel caso in cui questi vogliano cambiare studio dentistico. Quando gli assistenti effettuano un'operazione l'observer notifica attraverso il sistema di mail sia lui stesso con il resoconto degli articoli utilizzati sia il dentista.
+Come in un vero studio dentistico gli assistenti sono in grado di effettuare le proprie operazioni supervisionati dal dentista. Sono in grado di aggiungere i clienti, effettuare le operazioni all'interno dell'inventario a loro associato. Sono inoltre in grado di eliminare clienti nel caso in cui questi vogliano cambiare studio dentistico. Quando gli assistenti effettuano un'operazione l'observer notifica attraverso il sistema di mail sia lui stesso con il resoconto degli articoli utilizzati sia il dentista.
 
 
 \begin{figure}[h!]
@@ -347,7 +346,7 @@ Come in un vero studio dentistico gli assistenti sono in grado di effettuare le 
 \end{lstlisting}
 
 \subsubsection{Dentist}
-Il dentista, ovvero l'Admin del sistema è in grado di visualizzare tutte le informazioni di tutte le classi. E' inoltre il responsabile della creazione di nuovi inventari, aggiunta di articoli e articoli composti. Può inoltre cancellare qualsiasi elemento del sistema, persino gli assistenti. Quando assume un nuovo assistente deve associare una mail esistente in modo che il sistema di notifica possa funzionare correttamente.
+Il dentista, ovvero l'Admin del sistema \'{e} in grado di visualizzare tutte le informazioni di tutte le classi. \'{E} inoltre il responsabile della creazione di nuovi inventari, aggiunta di articoli e articoli composti. Pu\'{o} inoltre cancellare qualsiasi elemento del sistema, persino gli assistenti. Quando assume un nuovo assistente deve associare una mail esistente in modo che il sistema di notifica possa funzionare correttamente.
 
 
 \UseRawInputEncoding
@@ -358,7 +357,7 @@ Il dentista, ovvero l'Admin del sistema è in grado di visualizzare tutte le inf
     }
 \end{lstlisting}
 
-Come vediamo nel seguente esempio può vedere tutte le operazioni di uno specifico cliente.
+Come vediamo nel seguente esempio pu\'{o} vedere tutte le operazioni di uno specifico cliente.
 
 \UseRawInputEncoding
 \begin{lstlisting}[caption={Controllo operazioni di un cliente specifico},captionpos=b]
@@ -393,7 +392,7 @@ public void viewCustomerOperations(int idCustomer){
         }
 \end{lstlisting}
 
-Durante l'eliminazione di un relativo inventario ci siamo trovati davanti ad una difficile scelta implementativa. La problematica era che eliminando un inventario si eliminava pure lo storico delle operazioni di un assistente che ha attinto a quei vari articoli. Inizialmente avevamo creato dei controlli affinchè non si potesse eliminare un inventario se un assistente avesse usato delle componenti proprie. Successivamente però, anche da un confronto con la realtà, abbiamo deciso di ignorare il problema perchè se scegliamo di eliminare un determinato inventario è perchè decidiamo di effettuare una ristrutturazione della gestione delle risorse in quanto possono cambiare prezzi e disponibilità.
+Durante l'eliminazione di un relativo inventario ci siamo trovati davanti ad una difficile scelta implementativa. La problematica era che eliminando un inventario si eliminava pure lo storico delle operazioni di un assistente che ha attinto a quei vari articoli. Inizialmente avevamo creato dei controlli affinch\'{e} non si potesse eliminare un inventario se un assistente avesse usato delle componenti proprie. Successivamente per\'{o}, anche da un confronto con la realt\'{a}, abbiamo deciso di ignorare il problema perch\'{e} se scegliamo di eliminare un determinato inventario \'{e} perch\'{e} decidiamo di effettuare una ristrutturazione della gestione delle risorse in quanto possono cambiare prezzi e disponibilit\'{a}.
 
 \UseRawInputEncoding
 \begin{lstlisting}[caption={Eliminazione di un inventario},captionpos=b]
@@ -419,19 +418,8 @@ Durante l'eliminazione di un relativo inventario ci siamo trovati davanti ad una
 \end{lstlisting}
 
 
-
-\UseRawInputEncoding
-\begin{lstlisting}[caption={Controllo operazioni di un cliente specifico},captionpos=b]
-\end{lstlisting}
-
-
-\UseRawInputEncoding
-\begin{lstlisting}[caption={Controllo operazioni di un cliente specifico},captionpos=b]
-\end{lstlisting}
-
-
 \subsection{Program}
-La classe Program è responsabile del download e upload dei dati attraverso la funzione \textit{load(Connection c)}, i dati vengono recuperati attraverso delle query al database indicato nella connection e caricati allinterno degli ArrayList della classe. Durante questa fase di sviluppo, StackOverflow si è rivelato il nostro migliore amico.
+La classe Program \'{e} responsabile del download e upload dei dati attraverso la funzione \textit{load(Connection c)}, i dati vengono recuperati attraverso delle query al database indicato nella connection e caricati allìinterno degli ArrayList della classe. Durante questa fase di sviluppo, StackOverflow si \'{e} rivelato il nostro migliore amico.
 
 
 \UseRawInputEncoding
@@ -724,7 +712,7 @@ public void upload(Connection c) {
     }
 \end{lstlisting}
 
-Il metodo \textit{Run()} rappresenta il loop del sistema. Instaura la connessione col Database tramite la DBConnection, chiede i dati per il login ed effettua il ciclo sulla variabile booleana \textit{WantClose()} da cui si chiama lo \textit{ShowMenu()}. Quando si desidera uscire dal programma questa variabile verrà messa a true interrompendo il loop.
+Il metodo \textit{Run()} rappresenta il loop del sistema. Instaura la connessione col Database tramite la DBConnection, chiede i dati per il login ed effettua il ciclo sulla variabile booleana \textit{WantClose()} da cui si chiama lo \textit{ShowMenu()}. Quando si desidera uscire dal programma questa variabile verr\'{a} messa a true interrompendo il loop.
 \UseRawInputEncoding
 \begin{lstlisting}[caption={Implementazione Run()},captionpos=b]
 \end{lstlisting}
@@ -732,11 +720,11 @@ Il metodo \textit{Run()} rappresenta il loop del sistema. Instaura la connession
  
 
 \section{UnitTest}
-Prendiamo adesso in analisi la parte dei test effettuati per verificare la correttezza del codice. La base dati utilizzata è semplicemente una copia di quella usata nel programma principale. I test effettuati ricoprono la parte di creazione ed eliminazione di assistenti, inventari, articoli e clienti. La funzione \textit{prepare()} collega il database tramite la DBConnectionTest tramite la libreria Junit5.
+Prendiamo adesso in analisi la parte dei test effettuati per verificare la correttezza del codice. La base dati utilizzata \'{e} semplicemente una copia di quella usata nel programma principale. I test effettuati ricoprono la parte di creazione ed eliminazione di assistenti, inventari, articoli e clienti. La funzione \textit{prepare()} collega il database tramite la DBConnectionTest tramite la libreria Junit5.
 \subsection{Assistant test}
 Vediamo il funzionamento dei test per la classe \textit{Assistant}.
 \subsubsection{Creazione/eliminazione di un'operazione}
-Verifichiamo il corretto funzionamento di creazione di una operazione da parte di un assistente. Creiamo una lista di articoli con la loro relativa quantità e viene creato anche un cliente test a cui assegnare tale operazione. Verifichiamo poi che l'ordine sia stato effettuato correttamente.
+Verifichiamo il corretto funzionamento di creazione di una operazione da parte di un assistente. Creiamo una lista di articoli con la loro relativa quantit\'{a} e viene creato anche un cliente test a cui assegnare tale operazione. Verifichiamo poi che l'ordine sia stato effettuato correttamente.
 \UseRawInputEncoding
 \begin{lstlisting}[caption={Implementazione creazione operazione},captionpos=b]
 @Test
@@ -816,7 +804,7 @@ Inseriamo manualmente un assistente e verifichiamo che effettivamente esista.
 
     }
 \end{lstlisting}
-Cancelliamo adesso un assistente e verifichiamo che non sia più presente. Abbiamo aggiunto un controllo che ci permette di controllare che all'eliminazione dell'assistente anche il suo inventario associato non sia stato cancellato.
+Cancelliamo adesso un assistente e verifichiamo che non sia pi\'{u} presente. Abbiamo aggiunto un controllo che ci permette di controllare che all'eliminazione dell'assistente anche il suo inventario associato non sia stato cancellato.
 \begin{lstlisting}[caption={Implementazione eliminazione assistente},captionpos=b]
  @Test
     @DisplayName("Delete AssistantTest")
@@ -873,7 +861,7 @@ Creiamo manualmente un inventario con relativi articoli e controlliamo che sia s
 
     }
 \end{lstlisting}
-Adesso lo eliminiamo e verifichiamo che non esista più.
+Adesso lo eliminiamo e verifichiamo che non esista pi\'{u}.
 \begin{lstlisting}[caption={Implementazione eliminazione inventario},captionpos=b]
 @Test
     @DisplayName("Delete InventoryTest")
@@ -1043,7 +1031,7 @@ Controlliamo che le connessioni tra database si effettuino correttamente.
     }
 \end{lstlisting}
 \subsection{Test Load/Upload}
-Controlliamo adesso che il collegamento tra database funzioni e che \textit{Upload} e \textit{Load}siano effettive. Si utilizzano delle query manuali dove inseriamo alcuni personaggi di Topolino come test. Attraverso il metodo \textit{load} si verifica che i nuovi dati siano stati inseriti correttamente. Inseriamo poi alcuni articoli in modo che si possa chiamare il metodo 	\textit{upload(Connection)}
+Controlliamo adesso che il collegamento tra database funzioni e che \textit{Upload} e \textit{Load} siano effettive. Si utilizzano delle query manuali dove inseriamo alcuni personaggi di Topolino come Test. Attraverso il metodo \textit{load} si verifica che i nuovi dati siano stati inseriti correttamente. Inseriamo poi alcuni articoli in modo che si possa chiamare il metodo 	\textit{upload(Connection)}
 \begin{lstlisting}[caption={Implementazione Load/Upload },captionpos=b]
  @Test
     @DisplayName("Upload/Load data Test")
@@ -1141,7 +1129,7 @@ Controlliamo adesso che il collegamento tra database funzioni e che \textit{Uplo
 \end{lstlisting}
 
 \section{Conclusione}
-Siamo partiti con questo progetto circa 1 anno prima della sua conclusione. Durante la sua stesura non avevamo molto chiaro cosa effettivamente fare ma durante questo tempo con ulteriore esperienza abbiamo trovato la via. Inizialmente pensavamo di fare una gestione di un magazzino ma successivamente il mio collega mi ha accennato al fatto che suo padre avesse uno studio dentistico e abbiamo deciso di adattare la struttura già esistente a questa situazione. Pensavamo di fare un interfaccia grafica affinch+ si potesse navigare nel menu, adesso semplice console, in modo più 'attuale'. Tuttavia abbiamo dovuto ridimensionare il tutto in quanto ci avrebbe portato via molto tempo ulteriore.
+Siamo partiti con questo progetto circa 1 anno prima della sua conclusione. Durante la sua stesura non avevamo molto chiaro cosa effettivamente fare ma durante questo tempo con ulteriore esperienza abbiamo trovato la via. Inizialmente pensavamo di fare una gestione di un magazzino ma successivamente il mio collega mi ha accennato al fatto che suo padre avesse uno studio dentistico e abbiamo deciso di adattare la struttura gi\'{a} esistente a questa situazione. Pensavamo di fare un interfaccia grafica affinch\'{e} si potesse navigare nel men\'{u}, adesso semplice console, in modo pi\'{u} 'attuale'. Tuttavia abbiamo dovuto ridimensionare il tutto in quanto ci avrebbe portato via molto tempo ulteriore.
 \end{document}
 
 \maketitle
