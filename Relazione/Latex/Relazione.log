@@ -1,14 +1,13 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12) (preloaded format=pdflatex 2022.2.14)  8 NOV 2022 11:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12) (preloaded format=pdflatex 2022.1.23)  8 NOV 2022 22:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **./Relazione.tex
 (Relazione.tex
 LaTeX2e <2021-11-15> patch level 1
-L3 programming layer <2021-11-22>
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+L3 programming layer <2021-11-22> (C:\Miktex\tex/latex/base\article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
+(C:\Miktex\tex/latex/base\size10.clo
 File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count183
@@ -23,7 +22,7 @@ File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
 \belowcaptionskip=\skip48
 \bibindent=\dimen138
 )
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+(C:\Miktex\tex/latex/amsfonts\amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \@emptytoks=\toks16
 \symAMSa=\mathgroup4
@@ -32,24 +31,24 @@ LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+(C:\Miktex\tex/latex/amsmath\amsmath.sty
 Package: amsmath 2021/10/15 v2.17l AMS math features
 \@mathmargin=\skip49
 
 For additional information on amsmath, use the `?' option.
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+(C:\Miktex\tex/latex/amsmath\amstext.sty
 Package: amstext 2021/08/26 v2.01 AMS text
 
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+(C:\Miktex\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks17
 \ex@=\dimen139
 ))
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+(C:\Miktex\tex/latex/amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen140
 )
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+(C:\Miktex\tex/latex/amsmath\amsopn.sty
 Package: amsopn 2021/08/26 v2.02 operator names
 )
 \inf@bad=\count191
@@ -90,7 +89,7 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
 LaTeX Info: Redefining \[ on input line 2938.
 LaTeX Info: Redefining \] on input line 2939.
 )
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/amscls\amsthm.sty
+(C:\Miktex\tex/latex/amscls\amsthm.sty
 Package: amsthm 2020/05/29 v2.20.6
 \thm@style=\toks22
 \thm@bodyfont=\toks23
@@ -102,36 +101,37 @@ Package: amsthm 2020/05/29 v2.20.6
 \thm@headsep=\skip54
 \dth@everypar=\toks27
 )
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+(C:\Miktex\tex/latex/amsfonts\amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 )
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+(C:\Miktex\tex/latex/graphics\graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
 
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+(C:\Miktex\tex/latex/graphics\keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks28
 )
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+(C:\Miktex\tex/latex/graphics\graphics.sty
 Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
 
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+(C:\Miktex\tex/latex/graphics\trig.sty
 Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
 )
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.c
-fg
+(C:\Miktex\tex/latex/graphics-cfg\graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 107.
 
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+(C:\Miktex\tex/latex/graphics-def\pdftex.def
 File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen148
 \Gin@req@width=\dimen149
-) (C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+)
+(C:\Miktex\tex/latex/caption\caption.sty
 Package: caption 2022/03/01 v3.6b Customizing captions (AR)
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+
+(C:\Miktex\tex/latex/caption\caption3.sty
 Package: caption3 2022/03/17 v2.3b caption3 kernel (AR)
 \caption@tempdima=\dimen150
 \captionmargin=\dimen151
@@ -146,19 +146,20 @@ Package caption Info: Standard document class detected.
 \c@caption@flags=\count269
 \c@continuedfloat=\count270
 )
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.sty
+(C:\Miktex\tex/latex/caption\subcaption.sty
 Package: subcaption 2022/01/07 v1.5 Sub-captions (AR)
 \c@subfigure=\count271
 \c@subtable=\count272
 )
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/needspace\needspace.sty
+(C:\Miktex\tex/latex/needspace\needspace.sty
 Package: needspace 2010/09/12 v1.3d reserve vertical space
-) (C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
+)
+(C:\Miktex\tex/latex/base\inputenc.sty
 Package: inputenc 2021/02/14 v1.3d Input encoding file
 \inpenc@prehook=\toks29
 \inpenc@posthook=\toks30
 )
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
+(C:\Miktex\tex/latex/listings\listings.sty
 \lst@mode=\count273
 \lst@gtempboxa=\box52
 \lst@token=\toks31
@@ -172,34 +173,35 @@ Package: inputenc 2021/02/14 v1.3d Input encoding file
 \lst@lineno=\count278
 \lst@maxwidth=\dimen161
 
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
+(C:\Miktex\tex/latex/listings\lstmisc.sty
 File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
 \c@lstnumber=\count279
 \lst@skipnumbers=\count280
 \lst@framebox=\box53
 )
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
+(C:\Miktex\tex/latex/listings\listings.cfg
 File: listings.cfg 2020/03/24 1.8d listings configuration
 ))
 Package: listings 2020/03/24 1.8d (Carsten Heinz)
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/graphics\color.sty
+
+(C:\Miktex\tex/latex/graphics\color.sty
 Package: color 2021/10/11 v1.3b Standard LaTeX Color (DPC)
 
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+(C:\Miktex\tex/latex/graphics-cfg\color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 149.
 )
 LaTeX Font Info:    Trying to load font information for T1+txtt on input line 1
 0.
- (C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/txfonts\t1txtt.fd
+
+(C:\Miktex\tex/latex/txfonts\t1txtt.fd
 File: t1txtt.fd 2000/12/15 v3.1
 )
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+(C:\Miktex\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
-tex.def
+(C:\Miktex\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2021-10-18 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count281
 \l__pdf_internal_box=\box54
@@ -221,8 +223,7 @@ LaTeX Font Info:    ... okay on input line 40.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
 LaTeX Font Info:    ... okay on input line 40.
 
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
-ii
+(C:\Miktex\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count282
 \scratchdimen=\dimen162
@@ -235,15 +236,12 @@ ii
 \MPnumerator=\count286
 \makeMPintoPDFobject=\count287
 \everyMPtoPDFconversion=\toks33
-)
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
-ase.sty
+) (C:\Miktex\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
 
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.c
-fg
+(C:\Miktex\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 Package caption Info: Begin \AtBeginDocument code.
@@ -257,164 +255,165 @@ Package pdftex.def Info: Img/university.png  used on input line 55.
 (pdftex.def)             Requested size: 137.9979pt x 71.88495pt.
  [1
 
-{C:/Users/leona/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./Img/univer
-sity.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 85--89
+{C:/Users/uffa/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./Img/univers
+ity.png>] (Relazione.toc
+LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
+
+(C:\Miktex\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
+ (C:\Miktex\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+))
+\tf@toc=\write3
+\openout3 = `Relazione.toc'.
+
+
+[1]
+Underfull \hbox (badness 10000) in paragraph at lines 86--90
 
  []
 
-[1]
-<Img//UMLSWE.jpg, id=16, 2595.6975pt x 2211.26125pt>
+[2]
+<Img//UMLSWE.jpg, id=20, 2595.6975pt x 2211.26125pt>
 File: Img//UMLSWE.jpg Graphic file (type jpg)
 <use Img//UMLSWE.jpg>
-Package pdftex.def Info: Img//UMLSWE.jpg  used on input line 91.
+Package pdftex.def Info: Img//UMLSWE.jpg  used on input line 92.
 (pdftex.def)             Requested size: 363.39517pt x 309.57446pt.
-<Img//StatePattern.png, id=17, 1050.92625pt x 393.72093pt>
+<Img//StatePattern.png, id=21, 880.79062pt x 338.76563pt>
 File: Img//StatePattern.png Graphic file (type png)
 <use Img//StatePattern.png>
-Package pdftex.def Info: Img//StatePattern.png  used on input line 101.
-(pdftex.def)             Requested size: 367.8297pt x 137.80438pt.
+Package pdftex.def Info: Img//StatePattern.png  used on input line 102.
+(pdftex.def)             Requested size: 308.28133pt x 118.56973pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 107
-.
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 107
-.
-
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-[2 <./Img//UMLSWE.jpg>]
-<Img//ObserverPattern.png, id=22, 912.40875pt x 434.37282pt>
+[3 <./Img//UMLSWE.jpg>]
+<Img//ObserverPattern.png, id=26, 912.40875pt x 434.37282pt>
 File: Img//ObserverPattern.png Graphic file (type png)
 <use Img//ObserverPattern.png>
-Package pdftex.def Info: Img//ObserverPattern.png  used on input line 110.
+Package pdftex.def Info: Img//ObserverPattern.png  used on input line 111.
 (pdftex.def)             Requested size: 333.03339pt x 158.54807pt.
-<Img//CompositePattern.png, id=23, 700.11563pt x 403.5075pt>
+<Img//CompositePattern.png, id=27, 700.11563pt x 403.5075pt>
 File: Img//CompositePattern.png Graphic file (type png)
 <use Img//CompositePattern.png>
-Package pdftex.def Info: Img//CompositePattern.png  used on input line 119.
+Package pdftex.def Info: Img//CompositePattern.png  used on input line 120.
 (pdftex.def)             Requested size: 315.04912pt x 181.57669pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[3 <./Img//StatePattern.png> <./Img//ObserverPattern.png>]
-<Img//UseCaseDiagram.png, id=28, 1259.4553pt x 584.93532pt>
+[4 <./Img//StatePattern.png> <./Img//ObserverPattern.png>]
+<Img//UseCaseDiagram.png, id=33, 1259.4553pt x 584.93532pt>
 File: Img//UseCaseDiagram.png Graphic file (type png)
 <use Img//UseCaseDiagram.png>
-Package pdftex.def Info: Img//UseCaseDiagram.png  used on input line 130.
+Package pdftex.def Info: Img//UseCaseDiagram.png  used on input line 131.
 (pdftex.def)             Requested size: 377.83951pt x 175.48195pt.
- [4 <./Img//CompositePattern.png> <./Img//UseCaseDiagram.png>]
-<Img//OwnerUseCaseDiagram.png, id=32, 971.88094pt x 581.17125pt>
+ [5 <./Img//CompositePattern.png> <./Img//UseCaseDiagram.png>]
+<Img//OwnerUseCaseDiagram.png, id=37, 971.88094pt x 581.17125pt>
 File: Img//OwnerUseCaseDiagram.png Graphic file (type png)
 <use Img//OwnerUseCaseDiagram.png>
-Package pdftex.def Info: Img//OwnerUseCaseDiagram.png  used on input line 150.
+Package pdftex.def Info: Img//OwnerUseCaseDiagram.png  used on input line 151.
 (pdftex.def)             Requested size: 388.74548pt x 232.46437pt.
- [5 <./Img//OwnerUseCaseDiagram.png>]
-<Img//AssistentUseCaseDiagram.png, id=36, 685.8122pt x 483.30562pt>
+ [6 <./Img//OwnerUseCaseDiagram.png>]
+<Img//AssistentUseCaseDiagram.png, id=42, 685.8122pt x 483.30562pt>
 File: Img//AssistentUseCaseDiagram.png Graphic file (type png)
 <use Img//AssistentUseCaseDiagram.png>
 Package pdftex.def Info: Img//AssistentUseCaseDiagram.png  used on input line 1
-66.
+67.
 (pdftex.def)             Requested size: 342.90526pt x 241.65222pt.
-<Img//DiagramER.png, id=37, 838.63312pt x 563.85657pt>
+<Img//DiagramER.png, id=43, 838.63312pt x 563.85657pt>
 File: Img//DiagramER.png Graphic file (type png)
 <use Img//DiagramER.png>
-Package pdftex.def Info: Img//DiagramER.png  used on input line 174.
+Package pdftex.def Info: Img//DiagramER.png  used on input line 175.
 (pdftex.def)             Requested size: 419.31552pt x 281.9276pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[6 <./Img//AssistentUseCaseDiagram.png>]
-<Img//DBArticle.jpg, id=42, 318.43968pt x 374.90062pt>
+[7 <./Img//AssistentUseCaseDiagram.png>]
+<Img//DBArticle.jpg, id=47, 318.43968pt x 374.90062pt>
 File: Img//DBArticle.jpg Graphic file (type jpg)
 <use Img//DBArticle.jpg>
-Package pdftex.def Info: Img//DBArticle.jpg  used on input line 182.
+Package pdftex.def Info: Img//DBArticle.jpg  used on input line 183.
 (pdftex.def)             Requested size: 143.29652pt x 168.70372pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[7 <./Img//DiagramER.png>]
-<Img//DBArticleCompound.jpg, id=46, 295.85532pt x 360.59718pt>
+[8 <./Img//DiagramER.png>]
+<Img//DBArticleCompound.jpg, id=51, 295.85532pt x 360.59718pt>
 File: Img//DBArticleCompound.jpg Graphic file (type jpg)
 <use Img//DBArticleCompound.jpg>
-Package pdftex.def Info: Img//DBArticleCompound.jpg  used on input line 189.
+Package pdftex.def Info: Img//DBArticleCompound.jpg  used on input line 190.
 (pdftex.def)             Requested size: 133.13365pt x 162.26723pt.
- [8 <./Img//DBArticle.jpg> <./Img//DBArticleCompound.jpg>]
+ [9 <./Img//DBArticle.jpg> <./Img//DBArticleCompound.jpg>]
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 2
-02.
- (C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
+03.
+ (C:\Miktex\tex/latex/base\omscmr.fd
 File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 202.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 203.
 LaTeX Font Info:    Trying to load font information for OML+cmr on input line 2
-04.
-
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/base\omlcmr.fd
+05.
+ (C:\Miktex\tex/latex/base\omlcmr.fd
 File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 204.
-
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 205.
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¨ in font cmr10!
-<Img//MenuNotificaDentista.png, id=50, 367.3725pt x 234.8775pt>
+<Img//MenuNotificaDentista.png, id=55, 367.3725pt x 234.8775pt>
 File: Img//MenuNotificaDentista.png Graphic file (type png)
 <use Img//MenuNotificaDentista.png>
-Package pdftex.def Info: Img//MenuNotificaDentista.png  used on input line 217.
+Package pdftex.def Info: Img//MenuNotificaDentista.png  used on input line 218.
 
 (pdftex.def)             Requested size: 202.05548pt x 129.18301pt.
-[9 <./Img//MenuNotificaDentista.png>]
-Overfull \hbox (7.63899pt too wide) in paragraph at lines 257--259
+[10 <./Img//MenuNotificaDentista.png>]
+Overfull \hbox (7.63899pt too wide) in paragraph at lines 258--260
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[10]
-<Img//EmailPerAssist.jpg, id=61, 1084.05pt x 2348.775pt>
+[11]
+<Img//EmailPerAssist.jpg, id=66, 1084.05pt x 2348.775pt>
 File: Img//EmailPerAssist.jpg Graphic file (type jpg)
 <use Img//EmailPerAssist.jpg>
-Package pdftex.def Info: Img//EmailPerAssist.jpg  used on input line 289.
+Package pdftex.def Info: Img//EmailPerAssist.jpg  used on input line 290.
 (pdftex.def)             Requested size: 162.60048pt x 352.30106pt.
-<Img//EmailPerDentista.jpg, id=62, 1084.05pt x 2348.775pt>
+<Img//EmailPerDentista.jpg, id=67, 1084.05pt x 2348.775pt>
 File: Img//EmailPerDentista.jpg Graphic file (type jpg)
 <use Img//EmailPerDentista.jpg>
-Package pdftex.def Info: Img//EmailPerDentista.jpg  used on input line 294.
+Package pdftex.def Info: Img//EmailPerDentista.jpg  used on input line 295.
 (pdftex.def)             Requested size: 162.60048pt x 352.30106pt.
 
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¨ in font cmr10!
-[11 <./Img//EmailPerAssist.jpg> <./Img//EmailPerDentista.jpg>]
-<Img//SiamoStatiHackerati.jpeg, id=67, 948.54375pt x 2055.68pt>
+[12 <./Img//EmailPerAssist.jpg> <./Img//EmailPerDentista.jpg>]
+<Img//SiamoStatiHackerati.jpeg, id=73, 948.54375pt x 2055.68pt>
 File: Img//SiamoStatiHackerati.jpeg Graphic file (type jpg)
 <use Img//SiamoStatiHackerati.jpeg>
-Package pdftex.def Info: Img//SiamoStatiHackerati.jpeg  used on input line 305.
+Package pdftex.def Info: Img//SiamoStatiHackerati.jpeg  used on input line 306.
 
 (pdftex.def)             Requested size: 142.27542pt x 308.3387pt.
- [12 <./Img//SiamoStatiHackerati.jpeg>]
+ [13 <./Img//SiamoStatiHackerati.jpeg>]
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ² in font cmr10!
-<Img//OperazioneTipoAssistente.png, id=72, 596.98032pt x 233.37187pt>
+<Img//OperazioneTipoAssistente.png, id=77, 596.98032pt x 233.37187pt>
 File: Img//OperazioneTipoAssistente.png Graphic file (type png)
 <use Img//OperazioneTipoAssistente.png>
 Package pdftex.def Info: Img//OperazioneTipoAssistente.png  used on input line 
-322.
+323.
 (pdftex.def)             Requested size: 298.48943pt x 116.68564pt.
-[13 <./Img//OperazioneTipoAssistente.png>]
-Overfull \hbox (57.54578pt too wide) in paragraph at lines 366--367
+[14 <./Img//OperazioneTipoAssistente.png>]
+Overfull \hbox (57.54578pt too wide) in paragraph at lines 367--368
 [][][][][][][][][][][][][][][][][][][][][][]  
  []
 
 
-Overfull \hbox (22.91489pt too wide) in paragraph at lines 369--370
+Overfull \hbox (22.91489pt too wide) in paragraph at lines 370--371
 [][][][][][][][][][][][][][][][][][][][][][] 
  []
 
@@ -425,78 +424,73 @@ Missing character: There is no â in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no ¬ in font cmr10!
 
-Overfull \hbox (57.54578pt too wide) in paragraph at lines 377--379
+Overfull \hbox (57.54578pt too wide) in paragraph at lines 378--380
 [][][][][][][][][][][][][][][][][][][][][][]  
  []
 
-[14]
+[15]
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¬ in font cmr10!
-[15] [16] [17] [18]
-Overfull \hbox (21.1388pt too wide) in paragraph at lines 601--602
+[16] [17] [18] [19]
+Overfull \hbox (21.1388pt too wide) in paragraph at lines 602--603
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][] 
  []
 
-[19] [20] [21] [22]
+[20] [21] [22] [23]
 
-Package Listings Warning: Text dropped after begin of listing on input line 757
+Package Listings Warning: Text dropped after begin of listing on input line 758
 .
 
-[23] [24]
-Overfull \hbox (43.99736pt too wide) in paragraph at lines 859--860
+[24] [25]
+Overfull \hbox (43.99736pt too wide) in paragraph at lines 860--861
 [][][][][][][][][][][][][][][][][][][][]  
  []
 
-[25]
-Overfull \hbox (0.10883pt too wide) in paragraph at lines 903--904
+[26]
+Overfull \hbox (0.10883pt too wide) in paragraph at lines 904--905
 [][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (61.11012pt too wide) in paragraph at lines 904--905
+Overfull \hbox (61.11012pt too wide) in paragraph at lines 905--906
 [][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[26]
-Overfull \hbox (0.10883pt too wide) in paragraph at lines 921--922
+[27]
+Overfull \hbox (0.10883pt too wide) in paragraph at lines 922--923
 [][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (61.11012pt too wide) in paragraph at lines 922--924
+Overfull \hbox (61.11012pt too wide) in paragraph at lines 923--925
 [][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¨ in font cmr10!
-[27] [28] [29] [30] [31] (Relazione.aux) ) 
+[28] [29] [30] [31] [32] (Relazione.aux) ) 
 Here is how much of TeX's memory you used:
- 6119 strings out of 478659
- 100525 string characters out of 2845920
+ 6125 strings out of 478659
+ 97640 string characters out of 2862408
  690207 words of memory out of 3000000
- 24170 multiletter control sequences out of 15000+600000
+ 24173 multiletter control sequences out of 15000+600000
  409873 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,9n,63p,983b,1678s stack positions out of 5000i,500n,10000p,200000b,80000s
- <C:\Users\leona\AppData\Local\MiKTeX
-\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/leona/AppData/Local/P
-rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/leona/AppDat
-a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/leo
-na/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxsl10.pfb><C
-:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi
-10.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
-s/cm/cmr10.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/type1/public
-/amsfonts/cm/cmr12.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/type
-1/public/amsfonts/cm/cmr17.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX/fo
-nts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/leona/AppData/Local/Programs/Mi
-KTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/leona/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Users/leona/AppData/L
-ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/leona/
-AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on Relazione.pdf (32 pages, 1784445 bytes).
+ <C:\Users\uffa\AppData\Local\MiKTeX\
+fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Miktex/fonts/type1/public/am
+sfonts/cm/cmbx10.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/M
+iktex/fonts/type1/public/amsfonts/cm/cmbxsl10.pfb><C:/Miktex/fonts/type1/public
+/amsfonts/cm/cmmi10.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:
+/Miktex/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Miktex/fonts/type1/public/
+amsfonts/cm/cmr17.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Mi
+ktex/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Miktex/fonts/type1/public/amsf
+onts/cm/cmsl10.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Mik
+tex/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on Relazione.pdf (33 pages, 1789821 bytes).
 PDF statistics:
- 188 PDF objects out of 1000 (max. 8388607)
+ 193 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  81 words of extra memory for PDF output out of 10000 (max. 10000000)
 
