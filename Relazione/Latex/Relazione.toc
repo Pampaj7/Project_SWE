@@ -12,20 +12,20 @@
 \contentsline {section}{\numberline {3}Implementazione e approfondimento}{10}{}%
 \contentsline {subsection}{\numberline {3.1}Observer}{10}{}%
 \contentsline {subsubsection}{\numberline {3.1.1}Email Observer}{11}{}%
-\contentsline {subsubsection}{\numberline {3.1.2}Cursiosita'}{13}{}%
-\contentsline {subsection}{\numberline {3.2}User}{14}{}%
+\contentsline {subsubsection}{\numberline {3.1.2}Cursiosita'}{12}{}%
+\contentsline {subsection}{\numberline {3.2}User}{13}{}%
 \contentsline {subsubsection}{\numberline {3.2.1}Assistant}{14}{}%
 \contentsline {subsubsection}{\numberline {3.2.2}Dentist}{15}{}%
-\contentsline {subsection}{\numberline {3.3}Program}{16}{}%
+\contentsline {subsection}{\numberline {3.3}Program}{17}{}%
 \contentsline {section}{\numberline {4}UnitTest}{23}{}%
-\contentsline {subsection}{\numberline {4.1}Assistant test}{23}{}%
-\contentsline {subsubsection}{\numberline {4.1.1}Creazione/eliminazione di un'operazione}{23}{}%
+\contentsline {subsection}{\numberline {4.1}Assistant test}{24}{}%
+\contentsline {subsubsection}{\numberline {4.1.1}Creazione/eliminazione di un'operazione}{24}{}%
 \contentsline {subsection}{\numberline {4.2}Denstist test}{25}{}%
 \contentsline {subsubsection}{\numberline {4.2.1}Creazione/eliminazione di un assistente}{25}{}%
 \contentsline {subsubsection}{\numberline {4.2.2}Creazione/eliminazione inventario}{26}{}%
 \contentsline {subsubsection}{\numberline {4.2.3}Creazione/Eliminazione di un prodotto}{27}{}%
 \contentsline {subsubsection}{\numberline {4.2.4}Eliminazione cliente}{29}{}%
-\contentsline {subsection}{\numberline {4.3}CoreTest}{29}{}%
+\contentsline {subsection}{\numberline {4.3}ProgramTest}{29}{}%
 \contentsline {subsubsection}{\numberline {4.3.1}Login test}{29}{}%
 \contentsline {subsection}{\numberline {4.4}Test Load/Upload}{30}{}%
 \contentsline {section}{\numberline {5}Conclusione}{32}{}%

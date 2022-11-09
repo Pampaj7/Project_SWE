@@ -20,7 +20,7 @@ public final class NotificationEmail implements Observer {
 
         String products = "";
         for (Pair<Article, Integer> a : o.getRows()) {
-            products += "--" + a.getValue0().getName() + " qta: " + a.getValue1() + " <br>"; //TODO WOWOWOWOW
+            products += "--" + a.getValue0().getName() + " qta: " + a.getValue1() + " <br>";
         }
 
         String text;

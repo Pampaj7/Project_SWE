@@ -241,6 +241,16 @@ public final class NotificationEmail implements Observer {
 
         String text;
         text = " ... ";
+        sendEmail(o.getAssistant().getEmail(), "Riepilogo del tuo intervento", text);
+
+        text ="...";
+        
+        sendEmail(o.getAssistant().getEmail(), "Riepilogo del tuo intervento", text);
+        
+        text = "...";
+
+        sendEmail(to, "Nuovo intervento effettuato", text);
+
 
 private void sendEmail(String to, String obj, String text) {
 
@@ -986,7 +996,7 @@ Verifichiamo che possa essere correttamente rimosso un cliente dello studio.
     }
 \end{lstlisting}
 
-\subsection{CoreTest}
+\subsection{ProgramTest}
 Controlliamo che le connessioni tra database si effettuino correttamente.
 \subsubsection{Login test}
 \begin{lstlisting}[caption={Implementazione login },captionpos=b]
